@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/first_letter"
+        android:text="A"
+        android:textAllCaps="true"
+         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="gone"
+        android:padding="4dp"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/gray"
+        android:textSize="15dp" />
+    <RelativeLayout
+        android:layout_below="@id/first_letter"
+        android:id="@+id/relativeLayout"
+        android:background="@drawable/rectangle_outer_gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:padding="2dp">
+        <RelativeLayout
+            android:id="@+id/layout_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:buttonTint="@color/n_org"
+                android:gravity="center" />
+
+            <LinearLayout
+                android:layout_toLeftOf="@id/back_arrow"
+                android:layout_toRightOf="@id/checkbox"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_weight="1.7"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/name_details"
+                                android:text="Anbu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="5dp"
+                                android:padding="4dp"
+                                android:fontFamily="@font/inter_18pt_semibold"
+                                android:textColor="@color/black"
+                                android:textSize="13dp" />
+                            <TextView
+                                android:id="@+id/employee_id"
+                                android:text="Anbu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:padding="4dp"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/inter_18pt_medium"
+                                android:textColor="@color/n_org"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/status"
+                        android:text="Approved"
+                        android:backgroundTint="@color/d_clr_1_1"
+                        android:background="@drawable/rectiangle_padding"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:fontFamily="@font/inter_18pt_medium"
+                        android:textColor="@color/success_color"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/back_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:rotation="180"
+                android:src="@drawable/pbackarrow"
+                app:tint="@color/n_org" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/layout_1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                 android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/gray_50"
+                android:layout_width="match_parent"
+                android:layout_height="0.66dp"/>
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/leave_type"
+                    android:text="Anbu"
+                     android:layout_marginBottom="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:fontFamily="@font/inter_18pt_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+                <TextView
+                    android:visibility="gone"
+                    android:layout_toRightOf="@id/leave_type"
+                    android:id="@+id/date_leave"
+                    android:layout_toLeftOf="@id/day_type"
+                    android:text="Anbu"
+                     android:layout_marginBottom="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="2dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:fontFamily="@font/inter_18pt_semibold"
+                    android:textColor="@color/n_org"
+                    android:textSize="12dp" />
+                <TextView
+                    android:layout_marginRight="5dp"
+                    android:layout_alignParentRight="true"
+                     android:id="@+id/day_type"
+                    android:text="Anbu"
+                    android:visibility="gone"
+                    android:backgroundTint="@color/gray_50"
+                    android:background="@drawable/rectiangle_padding"
+                    android:layout_marginBottom="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:fontFamily="@font/inter_18pt_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="11dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/reason"
+                android:visibility="gone"
+                android:layout_marginBottom="10dp"
+                android:text="Anbu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/inter_18pt_semibold"
+                android:textColor="@color/black"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

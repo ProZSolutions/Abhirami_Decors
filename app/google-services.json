@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "769448371509",
+    "project_id": "apms-payroll",
+    "storage_bucket": "apms-payroll.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769448371509:android:85413aa8bd7c53ff05987c",
+        "android_client_info": {
+          "package_name": "in.proz.adamd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVnAeWMy8corlL4YI8aJ_TDRoIzwyEQXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

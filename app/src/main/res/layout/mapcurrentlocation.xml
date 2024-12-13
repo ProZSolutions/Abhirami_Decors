@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/n_blue"
+    android:layout_height="match_parent">
+        <include
+            android:id="@+id/linear"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            layout="@layout/new_header_layout"/>
+
+
+        <LinearLayout
+            android:layout_above="@+id/bottom_nv"
+            android:layout_below="@id/linear"
+            android:backgroundTint="@color/n_bg"
+            android:background="@drawable/rect_top_only"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_margin="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/back_arrow"
+                            android:layout_marginRight="17dp"
+                            android:src="@drawable/n_leftarrow"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"/>
+                        <TextView
+                            android:id="@+id/title"
+                            android:text="Location"
+                            android:textSize="16dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:textColor="@color/n_blue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <LinearLayout
+                            android:layout_gravity="right"
+                            android:gravity="right"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                                <ImageView
+                                    android:id="@+id/search"
+                                    android:visibility="gone"
+                                    android:layout_marginRight="17dp"
+                                    android:src="@drawable/n_search"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"/>
+                                <ImageView
+                                    android:id="@+id/img1"
+                                    android:visibility="gone"
+                                    android:src="@drawable/n_filter"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"/>
+                        </LinearLayout>
+                </LinearLayout>
+                <!--android:scrollbars="horizontal"
+               android:scrollbarStyle="outsideOverlay"
+               android:scrollbarThumbHorizontal="@drawable/scrollbar"-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    >
+                        <RelativeLayout
+                            android:id="@+id/header_relative"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:orientation="horizontal"
+                            >
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+                                        <LinearLayout
+                                            android:backgroundTint="@color/n_org"
+                                            android:background="@drawable/rectangle_border"
+                                            android:id="@+id/office_layout"
+                                            android:layout_width="0dp"
+                                            android:layout_weight="1"
+                                            android:layout_height="40dp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:id="@+id/ofz_icon"
+                                                    app:tint="@color/white"
+                                                    android:layout_width="20dp"
+                                                    android:layout_height="20dp"
+                                                    android:src="@drawable/att_ofz_icon" />
+
+                                                <TextView
+                                                    android:fontFamily="@font/inter_18pt_medium"
+                                                    android:id="@+id/ofz_text"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/white"
+                                                    android:textAllCaps="true"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="5dp"
+                                                    android:text="Office"
+                                                    android:textSize="12dp" />
+                                        </LinearLayout>
+
+
+
+                                        <LinearLayout
+                                            android:visibility="gone"
+                                            android:layout_marginLeft="1dp"
+                                            android:layout_marginRight="1dp"
+                                            android:paddingLeft="10dp"
+                                            android:paddingRight="10dp"
+                                            android:id="@+id/home_layout"
+                                            android:background="@drawable/rectangle_border"
+                                            android:backgroundTint="@color/n_blue"
+                                            android:layout_width="0dp"
+                                            android:layout_weight="1"
+                                            android:layout_height="40dp"
+                                            android:layout_gravity="center"
+                                            android:layout_toRightOf="@id/office_layout"
+                                            android:gravity="center"
+                                            android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:id="@+id/home_icon"
+                                                    android:layout_width="20dp"
+                                                    app:tint="@color/white"
+                                                    android:layout_height="20dp"
+                                                    android:src="@drawable/att_home_icon" />
+
+                                                <TextView
+                                                    android:fontFamily="@font/inter_18pt_medium"
+
+                                                    android:id="@+id/home_text"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/white"
+                                                    android:textAllCaps="true"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="5dp"
+                                                    android:text="Home"
+                                                    android:textSize="12dp" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/client_layout"
+                                            android:paddingLeft="10dp"
+                                            android:background="@drawable/rectangle_border"
+                                            android:backgroundTint="@color/n_blue"
+                                            android:paddingRight="10dp"
+                                            android:layout_width="0dp"
+                                            android:layout_weight="1"
+                                            android:layout_height="40dp"
+                                            android:layout_gravity="center"
+                                            android:layout_toRightOf="@id/home_layout"
+                                            android:gravity="center"
+                                            android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:id="@+id/client_icon"
+                                                    android:layout_width="20dp"
+                                                    app:tint="@color/white"
+                                                    android:layout_height="20dp"
+                                                    android:src="@drawable/att_client1" />
+
+                                                <TextView
+                                                    android:fontFamily="@font/inter_18pt_medium"
+
+                                                    android:id="@+id/client_text"
+                                                    android:layout_marginRight="5dp"
+                                                    android:textColor="@color/white"
+                                                    android:textAllCaps="true"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="5dp"
+                                                    android:text="CLIENT"
+                                                    android:textSize="12dp" />
+                                        </LinearLayout>
+                                </LinearLayout>
+                        </RelativeLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/padding_overlap"
+                    android:padding="10dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/profile_img"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/profile_user_icon"></de.hdodenhof.circleimageview.CircleImageView>
+
+                        <LinearLayout
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/profile_img"
+                            android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:gravity="left"
+                                    android:text=""
+                                    android:textColor="@color/white"
+                                    android:textSize="17dp" />
+
+                                <TextView
+                                    android:id="@+id/designation"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:gravity="left"
+                                    android:text="Admin"
+                                    android:textColor="@color/white"
+                                    android:textSize="13dp" />
+
+                        </LinearLayout>
+
+                </RelativeLayout>
+                <androidx.camera.view.PreviewView
+                    android:layout_margin="10dp"
+                    android:id="@+id/previewView"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="4.5"
+                    android:layout_height="0dp">
+
+                </androidx.camera.view.PreviewView>
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
+                    android:visibility="gone"
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4.5"
+                    />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                        <TextView
+                            android:fontFamily="@font/inter_18pt_medium"
+                            android:drawableLeft="@drawable/icons_verify__1_"
+                            android:drawableTint="@color/white"
+                            android:id="@+id/button3"
+                            android:visibility="gone"
+                            android:text="  Retry "
+                            android:textSize="15dp"
+                            android:padding="7dp"
+                            android:layout_marginTop="25dp"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:textAllCaps="true"
+                            android:backgroundTint="@color/n_green"
+                            android:background="@drawable/rectangle_outer_gray"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                        <LinearLayout
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                                <TextView
+                                    android:drawableLeft="@drawable/location_icon"
+                                    android:textColor="@color/n_blue"
+                                    android:fontFamily="@font/inter_18pt_medium"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="  Location is Verified" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:id="@+id/check_in"
+                                    android:backgroundTint="@color/n_org"
+                                    android:background="@drawable/rectiangle_padding"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:paddingLeft="10dp"
+                                    android:layout_marginRight="30dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                        <ImageView
+                                            app:tint="@color/white"
+                                            android:id="@+id/checkin_icon"
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:src="@drawable/att_checkin" />
+
+                                        <TextView
+                                            android:fontFamily="@font/inter_18pt_medium"
+                                            android:layout_marginRight="10dp"
+                                            android:textColor="@color/white"
+                                            android:textAllCaps="true"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="5dp"
+                                            android:text="Check In"
+                                            android:textSize="13dp" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:id="@+id/checkout"
+                                    android:layout_marginLeft="30dp"
+                                    android:backgroundTint="@color/n_blue"
+                                    android:background="@drawable/rectiangle_padding"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:paddingLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                        <ImageView
+                                            app:tint="@color/white"
+                                            android:id="@+id/checkout_icon"
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:src="@drawable/check_out" />
+
+                                        <TextView
+                                            android:fontFamily="@font/inter_18pt_medium"
+                                            android:layout_marginRight="10dp"
+                                            android:textColor="@color/white"
+                                            android:textAllCaps="true"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="5dp"
+                                            android:text="Check Out"
+                                            android:textSize="13dp" />
+                                </LinearLayout>
+
+                        </LinearLayout>
+
+                </LinearLayout>
+
+        </LinearLayout>
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:id="@+id/loader"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:mk_type="Whirlpool"
+            app:mk_color="@color/n_org"
+            />
+
+
+        <include
+            android:id="@+id/bottom_nv"
+            layout="@layout/new_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true" />
+
+
+</RelativeLayout>

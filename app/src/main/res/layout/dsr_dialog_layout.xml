@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/rectiangle_padding"
+    android:layout_gravity="center"
+    android:backgroundTint="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+         android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/pbackarrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Today Work"
+            android:layout_toRightOf="@id/back_arrow"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter_18pt_medium"
+            android:textSize="14dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/skipp_laypput"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:fontFamily="@font/inter_18pt_medium"
+             android:text="Skip"
+            android:backgroundTint="@color/n_blue"
+            android:background="@drawable/rectangle_outer_gray"
+            android:textSize="15dp"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:textSize="13dp"
+                android:text="@string/pro_name"
+                android:fontFamily="@font/inter_18pt_medium"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <RelativeLayout
+                android:id="@+id/projectnameRL"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rectangle_outer_gray"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--   <com.hootsuite.nachos.NachoTextView
+                   android:background="@null"
+                   android:id="@+id/nacho_text_view"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+
+                   />-->
+                <TextView
+                    android:id="@+id/project_name"
+                    android:visibility="gone"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:hint="Project Name"
+                    android:textSize="13dp"
+                    android:fontFamily="@font/inter_18pt_medium"
+                    android:padding="8dp" />
+
+            </RelativeLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/oth_layout"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:textSize="15dp"
+                    android:text="@string/other"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/edt_others"
+                    android:hint="Work"
+                    android:lines="3"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:textColorHint="@color/gray"
+                    android:paddingTop="7dp"
+                    android:paddingLeft="3dp"
+                    android:paddingBottom="7dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingRight="7dp"
+                    android:textSize="14dp"
+                    android:background="@drawable/rectangle_border"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/gray_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+<LinearLayout
+    android:id="@+id/planned_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+            <TextView
+
+                android:layout_marginTop="10dp"
+                android:textSize="13dp"
+                android:text="Planned Work"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:background="@drawable/rectangle_outer_gray"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:background="@null"
+                    android:id="@+id/edt_planned_work"
+                    android:hint="Work"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:textColorHint="@color/gray"
+                    android:paddingTop="7dp"
+                    android:paddingLeft="3dp"
+                    android:minLines="5"
+                    android:paddingBottom="7dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingRight="7dp"
+                    android:textSize="13dp"
+                    android:fontFamily="@font/inter_18pt_medium"
+                    android:textColor="@color/gray_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:id="@+id/mike"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/microphone"
+                    />
+            </LinearLayout>
+</LinearLayout>
+            <com.tuyenmonkey.mkloader.MKLoader
+                android:layout_marginTop="10dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/loader"
+                android:layout_width="60dp"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:layout_height="60dp"
+                app:mk_type="Whirlpool"
+                app:mk_color="@color/n_org"
+                />
+            <LinearLayout
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/bottom_request_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/n_green"
+                    android:background="@drawable/rectangle_outer_gray"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <LinearLayout
+                        android:id="@+id/request_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            app:tint="@color/white"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/requesst_icon_new" />
+
+                        <TextView
+                            android:fontFamily="@font/inter_18pt_medium"
+                            android:id="@+id/submit_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="Submit"
+                            android:textColor="@color/white"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

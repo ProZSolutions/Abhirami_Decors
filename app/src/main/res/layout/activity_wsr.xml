@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/shade_yellow"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/n_org"
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+        <include layout="@layout/activity_network"/>
+
+        <include layout="@layout/activity_common_header"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_above="@id/bottomLayout"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/padding_overlap"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="115dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/apply_leave_layout"
+            android:orientation="vertical"
+             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/dsr_txt"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="20dp"
+                android:text="Send Mail"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:id="@+id/add_layout"
+                android:layout_below="@+id/view"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ScrollView
+                    android:scrollbars="none"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+
+
+                        <TextView
+                            android:layout_marginTop="15dp"
+                            android:textSize="15dp"
+                            android:text="Blocking Factors*"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                        <LinearLayout
+                            android:background="@drawable/rectangle_border"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <EditText
+                                android:background="@null"
+                                android:id="@+id/edt_blocking_factor"
+                                android:layout_gravity="start"
+                                android:gravity="start"
+                                android:textColorHint="@color/gray"
+                                android:paddingTop="7dp"
+                                android:paddingLeft="3dp"
+                                android:lines="5"
+                                android:paddingBottom="7dp"
+                                android:layout_marginRight="10dp"
+                                android:paddingRight="7dp"
+                                android:textSize="14dp"
+                                android:fontFamily="@font/roboto_regular"
+                                android:textColor="@color/gray_dark"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                            <ImageView
+                                android:id="@+id/mike"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="right"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="8dp"
+                                android:src="@drawable/microphone"
+                                />
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_marginTop="8dp"
+                            android:textSize="15dp"
+                            android:text="Next Week Plan *"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                        <LinearLayout
+                            android:background="@drawable/rectangle_border"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:background="@null"
+                                android:id="@+id/edt_next_week"
+                                android:paddingLeft="3dp"
+                                android:layout_gravity="start"
+                                android:gravity="start"
+                                android:textColorHint="@color/gray"
+                                android:paddingTop="7dp"
+                                android:lines="5"
+                                android:paddingBottom="7dp"
+                                android:layout_marginRight="10dp"
+                                android:paddingRight="7dp"
+                                android:textSize="14dp"
+                                android:fontFamily="@font/roboto_regular"
+                                android:textColor="@color/gray_dark"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                            <ImageView
+                                android:id="@+id/mike1"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="right"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="8dp"
+                                android:src="@drawable/microphone"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/oth_layout"
+                            android:orientation="vertical"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_marginTop="8dp"
+                                android:textSize="15dp"
+                                android:text="Other Request / Feedback"
+                                android:fontFamily="@font/roboto_regular"
+                                android:textColor="@color/black"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                            <LinearLayout
+                                android:background="@drawable/rectangle_border"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <EditText
+                                    android:id="@+id/edt_others"
+                                    android:hint="others"
+                                    android:lines="3"
+                                    android:background="@null"
+                                    android:layout_gravity="start"
+                                    android:gravity="start"
+                                    android:textColorHint="@color/gray"
+                                    android:paddingTop="7dp"
+                                    android:paddingLeft="3dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginRight="10dp"
+                                    android:paddingRight="7dp"
+                                    android:textSize="14dp"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textColor="@color/gray_dark"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+                                <ImageView
+                                    android:id="@+id/mike2"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_gravity="right"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="8dp"
+                                    android:src="@drawable/microphone"
+                                    />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_marginTop="8dp"
+                            android:textSize="15dp"
+                            android:text="Send To*"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                        <LinearLayout
+                            android:id="@+id/spinner_layout"
+                            android:layout_marginTop="5dp"
+                            android:padding="3dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/rectangle_border"
+                            android:layout_marginRight="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:text="Select"
+                                android:textSize="13dp"
+                                 android:id="@+id/send_to_text"
+                                android:padding="3dp"
+                                android:textColor="@color/black"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                            <Spinner
+                                android:visibility="gone"
+                                android:id="@+id/send_to_spinner"
+                                android:padding="3dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                        <TextView
+                            android:layout_marginTop="20dp"
+                            android:textSize="15dp"
+                            android:text="Send CC*"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                        <RelativeLayout
+                            android:id="@+id/gitnameRL"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="7dp"
+                            android:background="@drawable/rectangle_border"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <!--    <com.hootsuite.nachos.NachoTextView
+                                    android:background="@null"
+                                    android:id="@+id/git_url_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+
+                                    />-->
+                            <TextView
+                                android:id="@+id/send_cc"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/gray"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:hint="Send CC"
+                                android:padding="8dp" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/bottom_request_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="15dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/reactangle_padding_with_border"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:id="@+id/request_layout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:src="@drawable/requesst_icon_new" />
+
+                                <TextView
+                                    android:id="@+id/submit_txt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="Send"
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp" />
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </ScrollView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:id="@+id/loader"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:mk_type="Whirlpool"
+        app:mk_color="@color/n_org"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/bottom_navigation_bar"/>
+
+        <!-- <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+             android:layout_width="match_parent"
+             android:id="@+id/btm_nav"
+             android:layout_gravity="bottom"
+             app:mbn_backgroundBottomColor="@color/purple_200"
+             app:mbn_circleColor="@color/black"
+             app:mbn_selectedIconColor="@color/white"
+             app:mbn_defaultIconColor="@color/white"
+             android:layout_height="wrap_content"/>
+         <View
+             android:background="@color/n_org"
+             android:layout_width="match_parent"
+             android:layout_height="10dp"/>-->
+    </LinearLayout>
+</RelativeLayout>

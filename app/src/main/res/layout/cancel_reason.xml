@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+     android:layout_gravity="center"
+    android:layout_margin="5dp"
+    android:gravity="center"
+    android:backgroundTint="@color/white"
+    android:background="@drawable/elevation"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <LinearLayout
+
+        android:layout_gravity="center"
+        android:gravity="center"
+
+         android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:id="@+id/back_arrow"
+            android:layout_gravity="left"
+            android:src="@drawable/pbackarrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Cancel Reason"
+            android:fontFamily="@font/inter_18pt_medium"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:background="@drawable/rectangle_outer_gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+             android:lines="7"
+              android:layout_gravity="left|start"
+            android:gravity="start|left"
+            android:fontFamily="@font/inter_18pt_medium"
+            android:id="@+id/msg_text"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:backgroundTint="@color/n_blue"
+            android:padding="10dp"
+            android:background="@drawable/rectangle_padding"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:id="@+id/cancel_meeting"
+            android:textColor="@color/white"
+            android:text="Cancel Meeting"
+            android:fontFamily="@font/inter_18pt_medium"
+             android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,70 @@
+in.proz.apms.app-jetified-lifecycle-runtime-ktx-2.6.1-0 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\0098341f5ea2142ba6174103372e5ba7\transformed\jetified-lifecycle-runtime-ktx-2.6.1\res
+in.proz.apms.app-jetified-emoji2-views-helper-1.2.0-1 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\026e30e9c61bfc4816a45af0b31fcbec\transformed\jetified-emoji2-views-helper-1.2.0\res
+in.proz.apms.app-biometric-1.0.0-rc01-2 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\0409098b16670ecf563d755976ebfab2\transformed\biometric-1.0.0-rc01\res
+in.proz.apms.app-jetified-library-1.0.1-3 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\08b23722cc5730809c211aa2aabde014\transformed\jetified-library-1.0.1\res
+in.proz.apms.app-jetified-activity-ktx-1.8.0-4 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\122e58ad5b857e52d6c704fa5d4273e1\transformed\jetified-activity-ktx-1.8.0\res
+in.proz.apms.app-jetified-lifecycle-process-2.6.1-5 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\1a17c2a49d53bdb3ae8554dd47476015\transformed\jetified-lifecycle-process-2.6.1\res
+in.proz.apms.app-recyclerview-1.1.0-6 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\21b73b5d164569e70d38955cb69082b4\transformed\recyclerview-1.1.0\res
+in.proz.apms.app-jetified-savedstate-ktx-1.2.1-7 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\2575f4609e2757679bde861ca30aab73\transformed\jetified-savedstate-ktx-1.2.1\res
+in.proz.apms.app-jetified-powerspinner-1.1.7-8 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\2576a75315a6ca74aad540c739efa425\transformed\jetified-powerspinner-1.1.7\res
+in.proz.apms.app-jetified-circleimageview-3.1.0-9 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\2599806899699ef7b01f861ff2bb306c\transformed\jetified-circleimageview-3.1.0\res
+in.proz.apms.app-jetified-viewpager2-1.0.0-10 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\28adcafbc832adbcdb092730bc9554e9\transformed\jetified-viewpager2-1.0.0\res
+in.proz.apms.app-jetified-ZoomableImageView-1.1.1-11 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\29112740cf83fc3c20c240149210c08b\transformed\jetified-ZoomableImageView-1.1.1\res
+in.proz.apms.app-jetified-meow-bottom-navigation-1.2.0-12 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\2c9b7701301518721ce24f2f2e9003a2\transformed\jetified-meow-bottom-navigation-1.2.0\res
+in.proz.apms.app-jetified-firebase-common-20.1.2-13 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\2f1c5697ad61e783826d6b77cb5e999e\transformed\jetified-firebase-common-20.1.2\res
+in.proz.apms.app-lifecycle-runtime-2.6.1-14 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\381b7fd40f427329a6febecd0982d856\transformed\lifecycle-runtime-2.6.1\res
+in.proz.apms.app-jetified-googlemapsrippleeffect-1.0.2-15 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\3c65e576a66249ae70f62f66558459f9\transformed\jetified-googlemapsrippleeffect-1.0.2\res
+in.proz.apms.app-jetified-annotation-experimental-1.3.0-16 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\448c63ce4bfb8263cf89daa7397b6c7b\transformed\jetified-annotation-experimental-1.3.0\res
+in.proz.apms.app-jetified-emoji2-1.2.0-17 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\462abe189c92e929de017b36d412659d\transformed\jetified-emoji2-1.2.0\res
+in.proz.apms.app-core-1.12.0-18 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\4d8bc82b0d8e4fe9a5f03974d694ee4a\transformed\core-1.12.0\res
+in.proz.apms.app-jetified-lifecycle-viewmodel-savedstate-2.6.1-19 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\4e1d08f448e0d7ee507791a70ad3f2b5\transformed\jetified-lifecycle-viewmodel-savedstate-2.6.1\res
+in.proz.apms.app-appcompat-1.6.1-20 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\51af5b1b8c1bbd7dfc0ce3a964658b60\transformed\appcompat-1.6.1\res
+in.proz.apms.app-jetified-activity-1.8.0-21 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\55645157b5a7ea7f611ab427e4d7c5d2\transformed\jetified-activity-1.8.0\res
+in.proz.apms.app-jetified-zcustomcalendar-1.0.1-22 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\5df3617da4d8be9af4cc5c95f5010a12\transformed\jetified-zcustomcalendar-1.0.1\res
+in.proz.apms.app-drawerlayout-1.1.1-23 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\6134eb023aa2e06f4a5993d1ccc72996\transformed\drawerlayout-1.1.1\res
+in.proz.apms.app-jetified-lifecycle-viewmodel-ktx-2.6.1-24 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\61fe1fe819137bc73d526cddd6568aa4\transformed\jetified-lifecycle-viewmodel-ktx-2.6.1\res
+in.proz.apms.app-jetified-core-ktx-1.12.0-25 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\65c5b3be9b9409d2344fbf647503da17\transformed\jetified-core-ktx-1.12.0\res
+in.proz.apms.app-jetified-android-pdf-viewer-2.8.2-26 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\6edf0c7012bd6ec79d08e64e3ef181cf\transformed\jetified-android-pdf-viewer-2.8.2\res
+in.proz.apms.app-coordinatorlayout-1.1.0-27 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\740330c30418665d78aafe9988c446c5\transformed\coordinatorlayout-1.1.0\res
+in.proz.apms.app-jetified-simple-pie-chart-android-e7d9622aa9-28 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\75110b4276b42e6ce6c435966bc3ee72\transformed\jetified-simple-pie-chart-android-e7d9622aa9\res
+in.proz.apms.app-jetified-mkloader-1.4.0-29 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\76eb6c99b9ed8150b6a2c2693b51288e\transformed\jetified-mkloader-1.4.0\res
+in.proz.apms.app-jetified-nachos-1.1.1-30 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\7874ea8d9f13637e5852d400ef404493\transformed\jetified-nachos-1.1.1\res
+in.proz.apms.app-preference-1.2.1-31 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\79af0aa238cba14358091f61c6f808b6\transformed\preference-1.2.1\res
+in.proz.apms.app-jetified-library-1.0.0-32 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\79c8a2a1ffa3d51b4112cbae58f88578\transformed\jetified-library-1.0.0\res
+in.proz.apms.app-fragment-1.5.7-33 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\7db005670f7f6b34c0ea4e24e6e66cb2\transformed\fragment-1.5.7\res
+in.proz.apms.app-jetified-lifecycle-livedata-core-ktx-2.6.1-34 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\7f3f9d5537ecb3e9c4b84cb3226e2ffb\transformed\jetified-lifecycle-livedata-core-ktx-2.6.1\res
+in.proz.apms.app-media-1.0.0-35 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\8320631ebb202b52bbfbe9280a3bf6bf\transformed\media-1.0.0\res
+in.proz.apms.app-slidingpanelayout-1.2.0-36 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\85fd723ac41929a0a1ebdc71184b22f7\transformed\slidingpanelayout-1.2.0\res
+in.proz.apms.app-transition-1.4.1-37 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\8ce43483f704fe01e91e9e7ada6110c8\transformed\transition-1.4.1\res
+in.proz.apms.app-lifecycle-viewmodel-2.6.1-38 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\8e31510ed2d3d613ce999e5c5ee5a2ab\transformed\lifecycle-viewmodel-2.6.1\res
+in.proz.apms.app-constraintlayout-2.0.1-39 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\91036002978d623448167474d4a1d234\transformed\constraintlayout-2.0.1\res
+in.proz.apms.app-jetified-dexter-6.2.3-40 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\9415376e216bea25adcc231d1ecc0c51\transformed\jetified-dexter-6.2.3\res
+in.proz.apms.app-jetified-lottie-3.6.1-41 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\94ffd15cf98d7fa36e62c33c13214d4b\transformed\jetified-lottie-3.6.1\res
+in.proz.apms.app-jetified-profileinstaller-1.3.0-42 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\res
+in.proz.apms.app-jetified-glide-4.12.0-43 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\9acd10ba6bbdc4605f6816fb5428a792\transformed\jetified-glide-4.12.0\res
+in.proz.apms.app-jetified-play-services-auth-21.0.0-44 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a1d4bde079fb8e0eda74774902aaa910\transformed\jetified-play-services-auth-21.0.0\res
+in.proz.apms.app-jetified-play-services-base-18.3.0-45 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\aa7d1f6afc46a11b83ba06181a77d2b0\transformed\jetified-play-services-base-18.3.0\res
+in.proz.apms.app-cardview-1.0.0-46 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\ac8da4b51f01d86764c296dc1745fad4\transformed\cardview-1.0.0\res
+in.proz.apms.app-jetified-cookiebar2-1.1.5-47 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\af329cb05cbf944e33f3253f04747548\transformed\jetified-cookiebar2-1.1.5\res
+in.proz.apms.app-jetified-play-services-maps-18.2.0-48 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b5724c0655d757412a75d4f38f9768cd\transformed\jetified-play-services-maps-18.2.0\res
+in.proz.apms.app-jetified-android-gif-drawable-1.2.17-49 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\bdc2723d905a507853daea95f52896ed\transformed\jetified-android-gif-drawable-1.2.17\res
+in.proz.apms.app-material-1.11.0-50 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\bfb6453803f4f299b5171ffc31de34ed\transformed\material-1.11.0\res
+in.proz.apms.app-jetified-FancyToast-Android-0.1.8-51 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\cde11f50ca052be713c8af9f5ebea490\transformed\jetified-FancyToast-Android-0.1.8\res
+in.proz.apms.app-swiperefreshlayout-1.1.0-52 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\dbb8d2f39b41827da0ed977b30c8eba0\transformed\swiperefreshlayout-1.1.0\res
+in.proz.apms.app-jetified-window-1.0.0-53 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\dddfca3a96e2d7947e6556d4952dd37f\transformed\jetified-window-1.0.0\res
+in.proz.apms.app-jetified-appcompat-resources-1.6.1-54 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\deae155ae8b813e49f9769c7f12924b6\transformed\jetified-appcompat-resources-1.6.1\res
+in.proz.apms.app-jetified-File-Loader-1.2-55 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\df8d6b32a467eb0c8b7b7a7ee46c5c94\transformed\jetified-File-Loader-1.2\res
+in.proz.apms.app-jetified-play-services-basement-18.3.0-56 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\e1f64310e06d900fc04f88e6c9516901\transformed\jetified-play-services-basement-18.3.0\res
+in.proz.apms.app-lifecycle-livedata-core-2.6.1-57 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\e246c4b835c18414d7a42e86b3743c0a\transformed\lifecycle-livedata-core-2.6.1\res
+in.proz.apms.app-core-runtime-2.2.0-58 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\ec74c3493e7375d959385805a0db9766\transformed\core-runtime-2.2.0\res
+in.proz.apms.app-jetified-startup-runtime-1.1.1-59 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\edd90f82b63c7800ee6fbac101ec320d\transformed\jetified-startup-runtime-1.1.1\res
+in.proz.apms.app-jetified-savedstate-1.2.1-60 C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\f35fa8fa6cacb36cdb63730742ae2546\transformed\jetified-savedstate-1.2.1\res
+in.proz.apms.app-pngs-61 D:\Projects\Proz-Payroll\app\build\generated\res\pngs\debug
+in.proz.apms.app-res-62 D:\Projects\Proz-Payroll\app\build\generated\res\processDebugGoogleServices
+in.proz.apms.app-resValues-63 D:\Projects\Proz-Payroll\app\build\generated\res\resValues\debug
+in.proz.apms.app-rs-64 D:\Projects\Proz-Payroll\app\build\generated\res\rs\debug
+in.proz.apms.app-mergeDebugResources-65 D:\Projects\Proz-Payroll\app\build\intermediates\incremental\debug\mergeDebugResources\merged.dir
+in.proz.apms.app-mergeDebugResources-66 D:\Projects\Proz-Payroll\app\build\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+in.proz.apms.app-merged_res-67 D:\Projects\Proz-Payroll\app\build\intermediates\merged_res\debug
+in.proz.apms.app-debug-68 D:\Projects\Proz-Payroll\app\src\debug\res
+in.proz.apms.app-main-69 D:\Projects\Proz-Payroll\app\src\main\res

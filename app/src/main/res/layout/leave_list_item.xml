@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="5dp"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:padding="8dp"
+        android:background="@drawable/reactangle_padding_with_border"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      <TextView
+          android:id="@+id/date"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentTop="true"
+          android:text="Jan 04-2024 to Mar 05-2024"
+          android:textColor="@color/black"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/leave_status"
+            android:layout_alignParentRight="true"
+        android:text="Approved"
+            android:padding="5dp"
+            android:backgroundTint="@color/pink_50"
+            android:background="@drawable/item_view_padding"
+            android:textColor="@color/pink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/leave_type"
+            android:layout_below="@id/date"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+             android:text="Casual Leave"
+            android:textColor="@color/gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:rotation="90"
+            android:layout_below="@id/leave_status"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/read_more_icon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"/>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="in.proz.adamd">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission
+        android:name="android.permission.MANAGE_DOCUMENTS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.ACCESS_MOCK_LOCATION"
+        tools:ignore="MockLocation,ProtectedPermissions" />
+
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyBKd134aL6vOuUnxjE6JdMh-gY9yA7cYnA" />
+    <!-- <permission
+        android:name="permissionOne"
+        tools:node="remove"
+        tools:strict="com.yanzhenjie.permission"/>-->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/proz_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/proz_logo"
+        android:supportsRtl="true"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:theme="@style/Theme.PayRoll"
+        android:hardwareAccelerated="false"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="S">
+        <activity
+            android:name="in.proz.adamd.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize|stateVisible">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name="in.proz.adamd.DashboardNewActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:exported="true">
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="adams.proz.in"   />
+
+
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name="in.proz.adamd.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.ConstrctionClass"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.DashboardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Languag.LanguageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.FingerPrintSample"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.Leave.LeaveActivity"
+            android:screenOrientation="portrait"
+
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Attendance.AttendanceActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.FingerIDActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.FaceIdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.Profile.RegisterFace"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.Map.MapCurrentLocation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.Profile.ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.Claim.ClaimActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Loan.LoanActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Profile.PersonalInformation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.DSR.WSRLayout"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.AdminModule.AdminCommon.CommonPageActivityNew"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.AdminModule.AdminEmployee.AdminEmpActivityNew"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.OverTime.OverTime"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+
+        <activity
+            android:name="in.proz.adamd.Profile.ShiftActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Profile.CertificationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+
+        <activity
+            android:name="in.proz.adamd.AboutActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.NotesActivity.NotesActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Calendar.CalendarActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.DSR.DSRActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Ticket.TicketActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.SampleFingerActivitty"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.Biometric.BiometricActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.Face.FaceAuthActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.Request.RequestActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.OnDuty.OnDuty"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.DocumentView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.AdminModule.AdminWSRLayout"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.AdminModule.PDFViewerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.AdminModule.AdminNewDashboard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.AdminModule.AdminNewApprovals"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible"
+            android:exported="true">
+
+
+        </activity>
+
+
+        <!--
+        admin module start
+-->
+
+        <!--
+        admin module end
+-->
+
+
+        <activity
+            android:name="in.proz.adamd.FaceAuth.FaceDetectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="in.proz.adamd.FaceAuth.SampleMainFace"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name="in.proz.adamd.Meeting.MeetingActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Sample.SampleImageUpload"
+            android:screenOrientation="portrait"
+
+            />
+        <activity android:name="in.proz.adamd.BackgroundTask.BackgoundActivity" />
+        <activity android:name="in.proz.adamd.SampleFaceID" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/api" />
+
+
+        <receiver
+            android:name="in.proz.adamd.BackgroundTask.Restarter"
+            android:enabled="true"
+            tools:ignore="Instantiatable"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="restartservice" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="in.proz.adamd.BackgroundTask.YourService"
+            android:foregroundServiceType="location"
+            android:enabled="true"
+
+            tools:ignore="ForegroundServicePermission">
+
+        </service>
+        <service
+            android:name="in.proz.adamd.BackgroundTask.LocationUpdateService"
+            android:enabled="true"></service>
+
+    </application>
+</manifest>

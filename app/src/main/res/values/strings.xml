@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">ADAMS App</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+<!--    <string name="serverUrl">http://tnwda.proz.in/api/</string>-->
+    <!--<string name="serverUrl">http://tnapi.proz.in/api/</string>-->
+    <!-- should change the url in commonclass also -->
+    <string name="build_no">Build No : 2</string>
+    <string name="version_Code">1.0.1</string>
+    <string name="n_org">#f5b24a</string>
+    <string name="nleave">#F44336</string>
+    <string name="npresnet">#4CAF50</string>
+    <string name="nabsent">#E91E63</string>
+    <string name="nlate">#CDDC39</string>
+    <string name="white">#FFF</string>
+
+
+
+
+    <string name="serverUrl">http://tnwda.proz.in/api/</string>
+    <string name="view_photos"><u>View Gallery</u></string>
+    <string name="view_lat_amp_longit"><![CDATA[View Map]]></string>
+    <string name="permission_denied">Permission wanted</string>
+    <string name="see_less"><u>See Less</u></string>
+    <string name="see_more"><u>See More</u></string>
+    <string name="attendance_show"><u>Show Tracking</u></string>
+    <string name="attendance_hide"><u>Hide Tracking</u></string>
+    <string name="view_wsr"><u><b>View WSR</b></u></string>
+    <string name="titlenote">Title <font fgcolor="#F49D12">*</font></string>
+    <string name="descnotes">Description  <font fgcolor="#F49D12">*</font></string>
+    <string name="sche">Schedule  For   <font fgcolor="#F49D12">*</font></string>
+    <string name="meti">Meeting Title  <font fgcolor="#F49D12">*</font></string>
+    <string name="date">Date  <font fgcolor="#F49D12">*</font></string>
+    <string name="date_to">Select To Date <font fgcolor="#F49D12">*</font></string>
+    <string name="planned">Planned Task  <font fgcolor="#F49D12">*</font></string>
+    <string name="completed">Completed Task  <font fgcolor="#F49D12">*</font></string>
+    <string name="url">Project URL <font fgcolor="#F49D12">*</font></string>
+    <string name="pro_name">Project Name  <font fgcolor="#F49D12">*</font></string>
+    <string name="ft">From Time  <font fgcolor="#F49D12">*</font></string>
+    <string name="tot">To Time  <font fgcolor="#F49D12">*</font></string>
+    <string name="addt">Add Team Members  <font fgcolor="#F49D12">*</font></string>
+    <string name="letyp">Select Leave Type  <font fgcolor="#F49D12">*</font></string>
+    <string name="type">Select Type  <font fgcolor="#F49D12">*</font></string>
+    <string name="desc">Description  <font fgcolor="#F49D12">*</font></string>
+    <string name="reason">Reason  <font fgcolor="#F49D12">*</font></string>
+    <string name="amount">Amount  <font fgcolor="#F49D12">*</font></string>
+    <string name="issue">Issue Details  <font fgcolor="#F49D12">*</font></string>
+    <string name="upload_image">Upload Image  <font fgcolor="#F49D12">*</font></string>
+    <string name="send_to">Send To <font fgcolor="#F49D12">*</font></string>
+    <string name="send_cc">Send CC <font fgcolor="#F49D12">*</font></string>
+    <string name="tty">Ticket Type   <font fgcolor="#F49D12">*</font></string>
+    <string name="loc">Location Details  <font fgcolor="#F49D12">*</font></string>
+    <string name="meeting">Meeting Link <font fgcolor="#F49D12">*</font></string>
+    <string name="other">Other Project Name   <font fgcolor="#F49D12">*</font></string>
+    <string name="alter">Select Alternative Type <font fgcolor="#F49D12">*</font></string>
+    <string name="nxt_wk">Next Week Plan  <font fgcolor="#F49D12">*</font></string>
+    <string name="sess">Select Session <font fgcolor="#F49D12">*</font></string>
+    <string name="block">Blocking Factors   <font fgcolor="#F49D12">*</font></string>
+    <string name="as">Asset Category  <font fgcolor="#F49D12">*</font></string>
+    <string name="asc">Asset Sub Category  <font fgcolor="#F49D12">*</font></string>
+    <string name="asc_n">Asset Name <font fgcolor="#F49D12">*</font></string>
+    <string name="no_of">No.Of Quantities <font fgcolor="#F49D12">*</font></string>
+    <string name="pri">Priority   <font fgcolor="#F49D12">*</font></string>
+    <string name="api">AIzaSyCrApjyWZC_vOi-Vw6_5uDVOuX_yieZ02k</string>
+    <string name="header_1">Proz Solutions LLP is a dynamic and innovative technology company decided to delivering cutting edge  solutions that empower  businesses to thrive in the digital era.Estabilished with a passion  for innovation. Proz Solutions LLP has been at the  forefront  of revolutionzing industried through its comprehensive suite of services and expertise.</string>
+    <string name="header_2">At Proz Solutions LLP , we see a future  where technology harmonizes seamlessly  across every aspect  of business,Sparking efficiency ,Productivity,and growth.Our mission is cutting edge, using innovation to craft solutions that align with the rhythm of progress.</string>
+
+
+    <string name="notifications_channel_description">Payroll App Tracking Your Live Location</string>
+    <string name="title">Payroll</string>
+    <string name="content">Live Tracking </string>
+
+</resources>

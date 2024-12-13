@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "in.proz.apms.app-mergeDebugResources-65:/values-h320dp-port-v13/values-h320dp-port-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\DELL LATITUDE 5400\\.gradle\\caches\\transforms-3\\bfb6453803f4f299b5171ffc31de34ed\\transformed\\material-1.11.0\\res\\values-h320dp-port-v13\\values-h320dp-port-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "63",
+                        "endOffsets": "114"
+                    }
+                }
+            ]
+        }
+    ]
+}

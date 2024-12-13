@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="design_navigation_padding_top_default" tools:override="true">0dp</dimen>
+    <dimen name="design_navigation_separator_vertical_padding" tools:override="true">0dp</dimen>
+    <dimen name="design_navigation_padding_bottom" tools:override="true">0dp</dimen>
+    <dimen name="action_button_padding">4dp</dimen>
+    <dimen name="icon_size">35dp</dimen>
+    <dimen name="txt_header_size">18dp</dimen>
+    <dimen name="inner_icon_size">30dp</dimen>
+    <dimen name="inner_layout_size">70dp</dimen>
+    <dimen name="outer_1">420dp</dimen>
+    <dimen name="outer_2">350dp</dimen>
+    <dimen name="outer_3">270dp</dimen>
+    <dimen name="outer_4">180dp</dimen>
+    <dimen name="outer_logo">90dp</dimen>
+    <dimen name="title_width">180dp</dimen>
+    <dimen name="title_height">50dp</dimen>
+
+
+    <dimen name="faceouter_1">200dp</dimen>
+    <dimen name="faceouter_2">150dp</dimen>
+    <dimen name="faceouter_3">100dp</dimen>
+    <dimen name="faceouter_31">88dp</dimen>
+    <dimen name="faceouter_4">50dp</dimen>
+    <dimen name="faceouter_logo">50dp</dimen>
+    <!--<dimen name="design_bottom_navigation_text_size" tools:override="true">15sp</dimen>-->
+    <!--<dimen name="design_bottom_navigation_active_text_size" tools:override="true">15sp</dimen>-->
+</resources>

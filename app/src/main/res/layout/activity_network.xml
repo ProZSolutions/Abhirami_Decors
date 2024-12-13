@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:background="#4CAF50"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:padding="2dp"
+        android:id="@+id/online_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/online_icon"
+            android:src="@drawable/online"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
+        <TextView
+            android:id="@+id/online_text"
+            android:layout_marginRight="15dp"
+            android:text="Online"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

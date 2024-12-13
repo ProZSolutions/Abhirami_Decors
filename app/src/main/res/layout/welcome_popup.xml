@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="15dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+     android:orientation="vertical"
+    android:background="@drawable/elevation"
+    android:backgroundTint="@color/white"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/image_welcome"
+        android:layout_width="90dp"
+        android:layout_height="80dp"/>
+    <TextView
+        android:id="@+id/username"
+         android:textColor="@color/n_blue"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:textSize="16dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Logged in Successfully!!!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+         android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:padding="5dp"
+         android:layout_height="wrap_content">
+        <TextView
+             android:text="Nice to have you back"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/green"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

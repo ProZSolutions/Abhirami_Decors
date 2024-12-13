@@ -1,0 +1,1070 @@
+[
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_mapcurrentlocation.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/mapcurrentlocation.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_claim_icon_new.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/claim_icon_new.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_medium.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_medium.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_read_more_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/read_more_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/xml_provider_paths1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/xml/provider_paths1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_mediumitalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_mediumitalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_custom_thumb.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/custom_thumb.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_leave_holiday.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/leave_holiday.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_baseline_account_circle_24.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/baseline_account_circle_24.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_nunito_italic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/nunito_italic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_network.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_network.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_success_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/success_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_sample.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/sample.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_pvector_main.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/pvector_main.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_about_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/about_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_shifthistory.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_shifthistory.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_login_page.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_login_page.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_line_primary_color.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/line_primary_color.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_item_view_padding.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/item_view_padding.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_active_top_corner_1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/active_top_corner_1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash4.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash4.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_pactivity_faceid.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/pactivity_faceid.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash3.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash3.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_att_clock1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/att_clock1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_spinner_textview.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/spinner_textview.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_active_bottom_corner_1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/active_bottom_corner_1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_bold.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_bold.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_maintenance.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/maintenance.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_ptitle_1.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/ptitle_1.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_common_header.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_common_header.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_proz_logo.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/proz_logo.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_bold.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_bold.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_online.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/online.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_extrabolditalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_extrabolditalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_custom_claim_radio.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/custom_claim_radio.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_request_layout.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_request_layout.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_warning_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/warning_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_ic_launcher_background.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_extralightitalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_extralightitalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_att_ofz_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/att_ofz_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_semibold.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_semibold.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_leave_list_item.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/leave_list_item.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash2.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash2.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_att_client1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/att_client1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/raw_campus.kml.flat",
+        "source": "in.proz.apms.app-main-69:/raw/campus.kml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_transfer_history.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/transfer_history.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_mediumitalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_mediumitalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_att_home_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/att_home_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_rectangle_outer_color.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/rectangle_outer_color.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_circle_shape.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/circle_shape.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_padding_two_side.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/padding_two_side.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_sample_upload.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_sample_upload.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash7__.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash7__.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_leave_row.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_leave_row.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_attendance.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_attendance.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_att_clock.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/att_clock.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_bank_details.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/bank_details.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_warning_background.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/warning_background.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_bolditalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_bolditalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_personal_info_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/personal_info_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_dsr.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_dsr.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_eye_hide.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/eye_hide.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash5.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash5.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_header_icon_1.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/header_icon_1.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_per_blood.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/per_blood.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_calendar.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_calendar.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_rectangle_thick_border.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/rectangle_thick_border.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_dlg_success.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/dlg_success.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_assests_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/assests_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash8_1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash8_1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash4_1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash4_1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_pdashboard_activity.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/pdashboard_activity.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-hdpi_ic_launcher_tn.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-hdpi/ic_launcher_tn.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_pface_id.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/pface_id.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_offline.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/offline.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_plogo.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/plogo.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dashboarg_bg.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dashboarg_bg.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash2_1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash2_1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_quicksand_regular.otf.flat",
+        "source": "in.proz.apms.app-main-69:/font/quicksand_regular.otf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_acc_blc.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/acc_blc.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_about.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_about.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_logout.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/logout.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_loan_new.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/loan_new.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_calendar_icon_new.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/calendar_icon_new.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_dlg_error.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/dlg_error.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_padding_with_outer.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/padding_with_outer.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/raw_survey.json.flat",
+        "source": "in.proz.apms.app-main-69:/raw/survey.json"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_bottom_navigation_bar.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/bottom_navigation_bar.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_custom_asset_radio.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/custom_asset_radio.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_add_a_photo.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/add_a_photo.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_extralightitalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_extralightitalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_asset_row_item.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/asset_row_item.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_sample_fingerprint.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/sample_fingerprint.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/anim_fade.xml.flat",
+        "source": "in.proz.apms.app-main-69:/anim/fade.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_leave_normal.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/leave_normal.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_pfinger.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/pfinger.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_header_icon_3.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/header_icon_3.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash7.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash7.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_notification.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/notification.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_attendance_row_teim.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/attendance_row_teim.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_light.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_light.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_ticket.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_ticket.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_main_page.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_main_page.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_per_aadhar.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/per_aadhar.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_profile.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_profile.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_eye_show.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/eye_show.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_att_office_icon1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/att_office_icon1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_claim.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_claim.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/anim_pulse_animation1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/anim/pulse_animation1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash6_1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash6_1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_certification.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_certification.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_line_white.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/line_white.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_asset_row.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_asset_row.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_light.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_light.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_thin.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_thin.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_ptitle.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/ptitle.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash6.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash6.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_normal_top_corner_1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/normal_top_corner_1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_profile_edit_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/profile_edit_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_header_icon_2.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/header_icon_2.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_photo_zoom.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/photo_zoom.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_notepad_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/notepad_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_per_gender.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/per_gender.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_color_shadow.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/color_shadow.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_roboto_light.otf.flat",
+        "source": "in.proz.apms.app-main-69:/font/roboto_light.otf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_asset.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_asset.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_notes_row.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_notes_row.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_att_client.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/att_client.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_location_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/location_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_roboto_bold.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/roboto_bold.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_per_marital.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/per_marital.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_image_gallery.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/image_gallery.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_finger_print_sample.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/finger_print_sample.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_padding_overlap.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/padding_overlap.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_thinitalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_thinitalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_dsr_row_item.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/dsr_row_item.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_pvector_sub.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/pvector_sub.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_sample_faceid.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/sample_faceid.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-xhdpi_ic_launcher_tn.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-xhdpi/ic_launcher_tn.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_font.xml.flat",
+        "source": "in.proz.apms.app-main-69:/font/font.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_rectangle_border.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/rectangle_border.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_shape_4_white.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/shape_4_white.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_lightitalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_lightitalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_shape_3.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/shape_3.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_trajanpro_regular.otf.flat",
+        "source": "in.proz.apms.app-main-69:/font/trajanpro_regular.otf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_extralight.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_extralight.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_play_bold.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/play_bold.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_lightitalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_lightitalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_black.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_black.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_onduty.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_onduty.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_per_address.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/per_address.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_shape_2.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/shape_2.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_semibolditalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_semibolditalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_reset_icon_new.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/reset_icon_new.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/anim_ade.xml.flat",
+        "source": "in.proz.apms.app-main-69:/anim/ade.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-xxhdpi_ic_launcher_tn.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-xxhdpi/ic_launcher_tn.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_pattaya_regular_1.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/pattaya_regular_1.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_medium.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_medium.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_leave_present.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/leave_present.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_black.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_black.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_oneside_curve.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/oneside_curve.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/xml_provider_paths.xml.flat",
+        "source": "in.proz.apms.app-main-69:/xml/provider_paths.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_roboto_regular.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/roboto_regular.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_per_pincode.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/per_pincode.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_p_logo.jpg.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/p_logo.jpg"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_user_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/user_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_home__con.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/home__con.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_shape_1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/shape_1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_per_dob.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/per_dob.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_requesst_icon_new.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/requesst_icon_new.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_per_spouse.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/per_spouse.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_normal_bottom_corner_1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/normal_bottom_corner_1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_rectangle_shape.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/rectangle_shape.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_add_circle_white.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/add_circle_white.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_certifications.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/certifications.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_semibolditalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_semibolditalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_active_home_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/active_home_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_regular.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_regular.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_reactangle_padding_with_border.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/reactangle_padding_with_border.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_extrabold.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_extrabold.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_pattaya_regular.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/pattaya_regular.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_loan.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_loan.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_ticket_row_item.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/ticket_row_item.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_shape_4.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/shape_4.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_alert.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/alert.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_failure_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/failure_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/anim_pulse_animation.xml.flat",
+        "source": "in.proz.apms.app-main-69:/anim/pulse_animation.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_document_layout.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/document_layout.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_leave.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_leave.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash8.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash8.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_shift_row.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_shift_row.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_changepass.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_changepass.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_extralight.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_extralight.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_leave_active.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/leave_active.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_semibold.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_semibold.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_regular.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_regular.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash9_1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash9_1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_extrabolditalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_extrabolditalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_leave_weekend.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/leave_weekend.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_under_maintenance.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/under_maintenance.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash3_1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash3_1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_roboto_medium.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/roboto_medium.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_clock_icon_new.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/clock_icon_new.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_att_checkin.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/att_checkin.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/anim_pulse_animation2.xml.flat",
+        "source": "in.proz.apms.app-main-69:/anim/pulse_animation2.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_leave.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/leave.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_edit.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/edit.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_bolditalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_bolditalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_dlg_warning.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/dlg_warning.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/raw_surveydata.kml.flat",
+        "source": "in.proz.apms.app-main-69:/raw/surveydata.kml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-mdpi_ic_launcher_tn.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-mdpi/ic_launcher_tn.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_extrabold.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_extrabold.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_custom_track.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/custom_track.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_tickets_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/tickets_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_thin.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_thin.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_plocal_toast.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/plocal_toast.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_rectangle_padding.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/rectangle_padding.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash5_1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash5_1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_claim_new.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/claim_new.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_thinitalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_thinitalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_claim_row_item.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_claim_row_item.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_blackitalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_blackitalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_pdrawable_rectange.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/pdrawable_rectange.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_finger_id.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_finger_id.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_att_home_icon1.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/att_home_icon1.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_more_icon.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/more_icon.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_profile_user_icon.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/profile_user_icon.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_blackitalic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_blackitalic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_pbackarrow.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/pbackarrow.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_notes.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_notes.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_dancing.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/dancing.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dash9.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dash9.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_back_icon_profile.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/back_icon_profile.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_pserver_toast.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/pserver_toast.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_montserrat_italic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/montserrat_italic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_poppins_italic.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/poppins_italic.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_attendance_today.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/attendance_today.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_dashboard_padding.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/dashboard_padding.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_nunito_black.ttf.flat",
+        "source": "in.proz.apms.app-main-69:/font/nunito_black.ttf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_personalinfo.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_personalinfo.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/layout_activity_onduty_row.xml.flat",
+        "source": "in.proz.apms.app-main-69:/layout/activity_onduty_row.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/font_trajanpro_bold.otf.flat",
+        "source": "in.proz.apms.app-main-69:/font/trajanpro_bold.otf"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-xxxhdpi_ic_launcher_tn.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-xxxhdpi/ic_launcher_tn.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/raw_latitude.json.flat",
+        "source": "in.proz.apms.app-main-69:/raw/latitude.json"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/anim_zoom.xml.flat",
+        "source": "in.proz.apms.app-main-69:/anim/zoom.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_doubleside_curve.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/doubleside_curve.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_delete.png.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/delete.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_att_check_in_.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/att_check_in_.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/drawable_leave_icon_new.xml.flat",
+        "source": "in.proz.apms.app-main-69:/drawable/leave_icon_new.xml"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "in.proz.apms.app-merged_res-67:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "in.proz.apms.app-main-69:/mipmap-xhdpi/ic_launcher_foreground.png"
+    }
+]

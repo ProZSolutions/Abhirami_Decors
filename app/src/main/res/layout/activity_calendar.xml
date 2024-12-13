@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/n_blue"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/linear"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/new_header_layout"/>
+
+
+    <LinearLayout
+        android:layout_above="@+id/bottom_nv"
+        android:layout_below="@id/linear"
+        android:backgroundTint="@color/n_bg"
+        android:background="@drawable/rect_top_only"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/back_arrow"
+                android:layout_marginRight="17dp"
+                android:src="@drawable/n_leftarrow"
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
+            <TextView
+                android:id="@+id/title"
+                android:text="Calendar"
+                android:textSize="16dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/n_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/search"
+                    android:visibility="gone"
+                    android:layout_marginRight="17dp"
+                    android:src="@drawable/n_search"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"/>
+                <ImageView
+                    android:id="@+id/img1"
+                    android:visibility="gone"
+                    android:src="@drawable/n_filter"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <!--android:scrollbars="horizontal"
+       android:scrollbarStyle="outsideOverlay"
+       android:scrollbarThumbHorizontal="@drawable/scrollbar"-->
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:textSize="13dp"
+                android:text="Select Calendar Type"
+                android:fontFamily="@font/inter_18pt_medium"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <RelativeLayout
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:padding="7dp"
+                android:background="@drawable/rectangle_outer_gray"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Spinner
+                    android:id="@+id/spinnerCalendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                android:id="@+id/custom_calendar"
+                app:mcv_weekDayTextAppearance="@style/CustomDayTextStyle"
+                android:layout_gravity="center"
+                app:mcv_headerTextAppearance="@style/CustomMonthTextStyle"
+                app:mcv_selectionColor="@color/gray_50"
+                android:layout_width="match_parent"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content"
+                app:mcv_showOtherDates="other_months"
+                app:mcv_selectionMode="single"
+                android:layout_marginTop="30dp"
+                />
+            <com.tuyenmonkey.mkloader.MKLoader
+            android:id="@+id/loader"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:mk_type="Whirlpool"
+            app:mk_color="@color/n_org"
+            />
+
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/bottom_nv"
+        layout="@layout/new_bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true" />
+
+
+</RelativeLayout>

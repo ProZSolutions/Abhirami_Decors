@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/shade_yellow"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/n_org"
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+        <include layout="@layout/activity_network"/>
+
+        <include layout="@layout/activity_common_header"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_above="@id/bottomLayout"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/padding_overlap"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="115dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:visibility="gone"
+            android:drawableLeft="@drawable/calendar_icon_new"
+            android:drawableTint="@color/white"
+            android:id="@+id/change_layout"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"
+            android:text=" Claim List"
+            android:textColor="@color/white"
+            android:padding="5dp"
+            android:backgroundTint="@color/n_org"
+            android:background="@drawable/rectangle_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_gravity="right"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/clear_filters"
+            android:text="Clear Filters"
+            android:textColor="@color/n_org"
+            android:textSize="12dp"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:id="@+id/search_layout"
+            android:padding="4dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/rectiangle_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/search"
+                android:layout_centerVertical="true"
+                android:src="@drawable/user_search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:layout_toRightOf="@id/search"
+                android:id="@+id/searchText"
+                android:layout_marginLeft="10dp"
+                android:padding="7dp"
+                android:textSize="13dp"
+                android:layout_toLeftOf="@id/img1"
+                android:background="@null"
+                android:hint="Search..."
+                android:textColor="@color/black"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+
+                android:id="@+id/img1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:rotation="90"
+                android:src="@drawable/filter_icon" />
+
+            <ImageView
+
+                android:id="@+id/clear"
+                android:visibility="gone"
+                android:layout_width="15dp"
+                android:layout_marginRight="10dp"
+                app:tint="@color/n_org"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:rotation="90"
+                android:src="@drawable/close_icon" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:id="@+id/listLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/no_data"
+                    android:visibility="gone"
+                    android:text=""
+                    android:drawableTop="@drawable/no_data"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/war1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:layout_centerInParent="true"
+        android:id="@+id/loader"
+        android:visibility="gone"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:mk_type="Whirlpool"
+        app:mk_color="@color/n_org"
+        />
+
+
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/bottom_navigation_bar"/>
+
+        <!-- <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+             android:layout_width="match_parent"
+             android:id="@+id/btm_nav"
+             android:layout_gravity="bottom"
+             app:mbn_backgroundBottomColor="@color/purple_200"
+             app:mbn_circleColor="@color/black"
+             app:mbn_selectedIconColor="@color/white"
+             app:mbn_defaultIconColor="@color/white"
+             android:layout_height="wrap_content"/>
+         <View
+             android:background="@color/n_org"
+             android:layout_width="match_parent"
+             android:layout_height="10dp"/>-->
+    </LinearLayout>
+</RelativeLayout>

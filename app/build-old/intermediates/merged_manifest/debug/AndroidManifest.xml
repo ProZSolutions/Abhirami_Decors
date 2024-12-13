@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="in.proz.adamd"
+    android:versionCode="1"
+    android:versionName="1.2.1" >
+
+    <uses-sdk
+        android:minSdkVersion="24"
+        android:targetSdkVersion="33" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyC3cGLzfGQGbFLaxHlaGAomB_Udtq2_QxQ" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <queries>
+
+        <!-- Needs to be explicitly declared on Android R+ -->
+        <package android:name="com.google.android.apps.maps" />
+    </queries>
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+
+    <permission
+        android:name="in.proz.adamd.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="in.proz.apms.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <!--
+ <permission
+        android:name="permissionOne"
+        tools:node="remove"
+        tools:strict="com.yanzhenjie.permission"/>
+    -->
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:extractNativeLibs="false"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/proz_logo"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/proz_logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PayRoll"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name="in.proz.adamd.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="in.proz.adamd.LoginActivity" />
+        <activity android:name="in.proz.adamd.ConstrctionClass" />
+        <activity android:name="in.proz.adamd.DashboardActivity" />
+        <activity android:name="in.proz.adamd.FingerPrintSample" />
+        <activity
+            android:name="in.proz.adamd.Leave.LeaveActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Attendance.AttendanceActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity android:name="in.proz.adamd.FingerIDActivity" />
+        <activity android:name="in.proz.adamd.FaceIdActivity" />
+        <activity android:name="in.proz.adamd.Map.MapCurrentLocation" />
+        <activity android:name="in.proz.adamd.Profile.ProfileActivity" />
+        <activity
+            android:name="in.proz.adamd.Claim.ClaimActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Loan.LoanActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Profile.PersonalInformation"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Profile.ChangePassword"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Profile.ShiftActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Profile.CertificationActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Asset.AssetActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.AboutActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.NotesActivity.NotesActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Calendar.CalendarActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.DSR.DSRActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.Ticket.TicketActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity android:name="in.proz.adamd.SampleFingerActivitty" />
+        <activity
+            android:name="in.proz.adamd.Request.RequestActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name="in.proz.adamd.OnDuty.OnDuty"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity android:name="in.proz.adamd.DocumentView" />
+        <activity android:name="in.proz.adamd.Sample.SampleImageUpload" />
+        <activity android:name="in.proz.adamd.SampleFaceID" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/api" />
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="face" />
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="face" />
+
+        <activity
+            android:name="com.karumi.dexter.DexterActivity"
+            android:theme="@style/Dexter.Internal.Theme.Transparent" />
+        <activity
+            android:name="androidx.biometric.DeviceCredentialHandlerActivity"
+            android:exported="true"
+            android:theme="@style/DeviceCredentialHandlerTheme" />
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="in.proz.adamd.androidx-startup"
+            android:exported="false" >
+            <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+                android:value="androidx.startup" />
+        </provider> <!-- Needs to be explicitly declared on P+ -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--
+            Service handling Google Sign-In user revocation. For apps that do not integrate with
+            Google Sign-In, this service will never be started.
+        -->
+        <service
+            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+            android:exported="true"
+            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+            android:visibleToInstantApps="true" />
+        <service
+            android:name="com.google.firebase.components.ComponentDiscoveryService"
+            android:directBootAware="true"
+            android:exported="false" >
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.ml.vision.VisionRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.ml.common.CommonComponentRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+        </service>
+
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <provider
+            android:name="com.google.firebase.provider.FirebaseInitProvider"
+            android:authorities="in.proz.adamd.firebaseinitprovider"
+            android:directBootAware="true"
+            android:exported="false"
+            android:initOrder="100" />
+
+        <receiver
+            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.measurement.AppMeasurementService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <uses-library
+            android:name="androidx.window.extensions"
+            android:required="false" />
+        <uses-library
+            android:name="androidx.window.sidecar"
+            android:required="false" />
+
+        <receiver
+            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+            android:directBootAware="false"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.DUMP" >
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

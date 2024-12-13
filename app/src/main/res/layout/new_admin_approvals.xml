@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/n_blue"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/linear"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/new_header_layout"/>
+
+
+        <LinearLayout
+            android:layout_above="@+id/bottom_nv"
+            android:layout_below="@id/linear"
+            android:backgroundTint="@color/n_bg"
+            android:background="@drawable/rect_top_only"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_margin="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/back_arrow"
+                    android:layout_marginRight="17dp"
+                    android:src="@drawable/n_leftarrow"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"/>
+                <TextView
+                    android:id="@+id/title"
+                    android:text="Approval List"
+                    android:textSize="16dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/n_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/search"
+                        android:visibility="gone"
+                        android:layout_marginRight="17dp"
+                        android:src="@drawable/n_search"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/filter_text"
+                        android:layout_marginLeft="-5dp"
+                        android:backgroundTint="@color/failure_color"
+                        android:background="@drawable/circle_shape"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <!--android:scrollbars="horizontal"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarThumbHorizontal="@drawable/scrollbar"-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/horizontal_rv"
+                android:layout_toRightOf="@id/prev"
+                android:fadeScrollbars="false"
+                android:layout_toLeftOf="@id/next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/dateText"
+                  android:textSize="12dp"
+                android:fontFamily="@font/inter_18pt_medium"
+                android:textColor="@color/n_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                     android:background="@drawable/elevation"
+                    android:orientation="horizontal"
+                     android:layout_weight="1"
+                    android:layout_marginRight="15dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_toLeftOf="@id/pendingcount"
+                        android:fontFamily="@font/inter_18pt_medium"
+                        android:gravity="center"
+                        android:text="Pending Request"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+                    <TextView
+                        android:id="@+id/pendingcount"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="0"
+                        android:padding="10dp"
+                        android:layout_marginRight="5dp"
+                         android:background="@drawable/circle_shape"
+                        android:backgroundTint="@color/n_org_shade"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="@color/n_org"
+                        android:textSize="14dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:id="@+id/tagLayout"
+                    android:background="@drawable/elevation"
+                    android:orientation="horizontal"
+                     android:layout_weight="1"
+                    android:layout_marginRight="15dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/texttag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_toLeftOf="@id/image"
+                        android:fontFamily="@font/inter_18pt_medium"
+                        android:gravity="center"
+                        android:text="My Leave"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="0"
+                        android:layout_marginRight="5dp"
+                        android:padding="10dp"
+                        android:src="@drawable/profi"
+                        android:background="@drawable/circle_shape"
+                        android:backgroundTint="@color/n_org_shade"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="@color/n_org"
+                        android:textSize="14dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:layout_marginLeft="17dp"
+                    android:id="@+id/check_all"
+                    android:text="Check All"
+                    android:fontFamily="@font/inter_18pt_medium"
+                    android:textColor="@color/n_blue"
+                    android:buttonTint="@color/n_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_toLeftOf="@id/img1"
+                    android:id="@+id/approve_layout"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_marginRight="3dp"
+                        android:fontFamily="@font/inter_18pt_medium"
+
+                        android:id="@+id/approve"
+                        android:text=" Approve "
+                        android:padding="2dp"
+                        android:drawablePadding="3dp"
+
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:drawableTint="@color/white"
+                        android:drawableLeft="@drawable/approve_icon"
+                        android:textColor="@color/white"
+                        android:background="@drawable/rectangle_5"
+                        android:backgroundTint="@color/success_color"
+                        android:textSize="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/decline"
+                        android:fontFamily="@font/inter_18pt_medium"
+
+                        android:text=" Decline "
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:padding="2dp"
+                        android:drawablePadding="3dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="12dp"
+                        android:drawableTint="@color/white"
+                        android:drawableLeft="@drawable/decline_icon"
+                        android:textColor="@color/white"
+                        android:background="@drawable/rectangle_5"
+                        android:backgroundTint="@color/war1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <ImageView
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/img1"
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/n_filter" />
+
+            </RelativeLayout>
+
+            <com.tuyenmonkey.mkloader.MKLoader
+                android:id="@+id/loader"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:mk_type="Whirlpool"
+                app:mk_color="@color/n_org"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="5dp"
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/no_data"
+                android:visibility="gone"
+                android:drawableTop="@drawable/no_data"
+                 android:layout_marginTop="50dp"
+                android:fontFamily="@font/inter_18pt_medium"
+                android:text=""
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/war1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+     <include
+        layout="@layout/new_bottom_layout"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom_nv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>

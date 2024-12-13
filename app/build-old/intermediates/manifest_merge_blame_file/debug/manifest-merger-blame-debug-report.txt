@@ -1,0 +1,544 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="in.proz.apms"
+4    android:versionCode="1"
+5    android:versionName="1.2.1" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+8-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml
+10
+11    <uses-feature
+11-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:6:2-8:35
+12        android:name="android.hardware.camera"
+12-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:7:9-47
+13        android:required="true" />
+13-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:8:9-32
+14    <uses-feature
+14-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:9:5-11:36
+15        android:name="android.hardware.camera.autofocus"
+15-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:10:9-57
+16        android:required="false" />
+16-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:11:9-33
+17    <uses-feature
+17-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:12:5-14:36
+18        android:name="android.hardware.camera.flash"
+18-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:13:9-53
+19        android:required="false" />
+19-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:14:9-33
+20
+21    <uses-permission android:name="android.permission.VIBRATE" />
+21-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:15:5-66
+21-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:15:22-63
+22    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+22-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:18:5-79
+22-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:18:22-76
+23    <uses-permission android:name="android.permission.INTERNET" />
+23-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:19:5-67
+23-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:19:22-64
+24    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+24-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:20:5-74
+24-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:20:22-71
+25    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+25-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:21:5-71
+25-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:21:22-69
+26    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+26-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:22:5-23:47
+26-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:22:22-72
+27    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+27-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:24:5-75
+27-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:24:22-73
+28    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+28-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:28:5-79
+28-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:28:22-76
+29    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+29-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:29:5-81
+29-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:29:22-78
+30    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+30-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:31:5-77
+30-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:31:22-74
+31    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+31-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:32:5-75
+31-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:32:22-72
+32    <uses-permission
+32-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:33:5-34:38
+33        android:name="android.permission.READ_EXTERNAL_STORAGE"
+33-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:33:22-77
+34        android:maxSdkVersion="32" />
+34-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:34:9-35
+35    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+35-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:35:5-81
+35-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:35:22-78
+36    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+36-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:36:5-81
+36-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:36:22-79
+37    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+37-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:37:4-39:60
+37-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:38:9-63
+38
+39    <meta-data
+39-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:40:5-42:66
+40        android:name="com.google.android.geo.API_KEY"
+40-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:41:9-54
+41        android:value="AIzaSyC3cGLzfGQGbFLaxHlaGAomB_Udtq2_QxQ" />
+41-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:42:9-64
+42
+43    <uses-feature
+43-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b5724c0655d757412a75d4f38f9768cd\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:26:5-28:35
+44        android:glEsVersion="0x00020000"
+44-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b5724c0655d757412a75d4f38f9768cd\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:27:9-41
+45        android:required="true" />
+45-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b5724c0655d757412a75d4f38f9768cd\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:28:9-32
+46
+47    <queries>
+47-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b5724c0655d757412a75d4f38f9768cd\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:30:5-34:15
+48
+49        <!-- Needs to be explicitly declared on Android R+ -->
+50        <package android:name="com.google.android.apps.maps" />
+50-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b5724c0655d757412a75d4f38f9768cd\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:33:9-64
+50-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b5724c0655d757412a75d4f38f9768cd\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:33:18-61
+51    </queries>
+52
+53    <uses-permission android:name="android.permission.WAKE_LOCK" />
+53-->[com.google.android.gms:play-services-measurement-api:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\e44d39f7b0648fd67dc8b4519a12e8cf\transformed\jetified-play-services-measurement-api-21.1.1\AndroidManifest.xml:24:5-68
+53-->[com.google.android.gms:play-services-measurement-api:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\e44d39f7b0648fd67dc8b4519a12e8cf\transformed\jetified-play-services-measurement-api-21.1.1\AndroidManifest.xml:24:22-65
+54    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+54-->[com.google.android.gms:play-services-measurement-api:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\e44d39f7b0648fd67dc8b4519a12e8cf\transformed\jetified-play-services-measurement-api-21.1.1\AndroidManifest.xml:25:5-79
+54-->[com.google.android.gms:play-services-measurement-api:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\e44d39f7b0648fd67dc8b4519a12e8cf\transformed\jetified-play-services-measurement-api-21.1.1\AndroidManifest.xml:25:22-76
+55    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+55-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:26:5-110
+55-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:26:22-107
+56
+57    <permission
+57-->[androidx.core:core:1.12.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\4d8bc82b0d8e4fe9a5f03974d694ee4a\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+58        android:name="in.proz.apms.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+58-->[androidx.core:core:1.12.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\4d8bc82b0d8e4fe9a5f03974d694ee4a\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+59        android:protectionLevel="signature" />
+59-->[androidx.core:core:1.12.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\4d8bc82b0d8e4fe9a5f03974d694ee4a\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+60
+61    <uses-permission android:name="in.proz.apms.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+61-->[androidx.core:core:1.12.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\4d8bc82b0d8e4fe9a5f03974d694ee4a\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+61-->[androidx.core:core:1.12.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\4d8bc82b0d8e4fe9a5f03974d694ee4a\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+62    <!--
+63 <permission
+64        android:name="permissionOne"
+65        tools:node="remove"
+66        tools:strict="com.yanzhenjie.permission"/>
+67    -->
+68    <application
+68-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:48:5-129:19
+69        android:allowBackup="true"
+69-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:49:9-35
+70        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+70-->[androidx.core:core:1.12.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\4d8bc82b0d8e4fe9a5f03974d694ee4a\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+71        android:debuggable="true"
+72        android:extractNativeLibs="false"
+73        android:hardwareAccelerated="false"
+73-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:57:9-44
+74        android:icon="@drawable/proz_logo"
+74-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:50:9-43
+75        android:label="@string/app_name"
+75-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:51:9-41
+76        android:largeHeap="true"
+76-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:54:10-34
+77        android:requestLegacyExternalStorage="true"
+77-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:55:9-52
+78        android:roundIcon="@drawable/proz_logo"
+78-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:52:9-48
+79        android:supportsRtl="true"
+79-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:53:9-35
+80        android:theme="@style/Theme.PayRoll"
+80-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:56:9-45
+81        android:usesCleartextTraffic="true" >
+81-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:58:9-44
+82        <activity
+82-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:60:9-68:20
+83            android:name="in.proz.apms.MainActivity"
+83-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:61:13-53
+84            android:exported="true"
+84-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:62:13-36
+85            android:windowSoftInputMode="adjustResize|stateVisible" >
+85-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:63:13-68
+86            <intent-filter>
+86-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:64:13-67:29
+87                <action android:name="android.intent.action.MAIN" />
+87-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:65:17-69
+87-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:65:25-66
+88
+89                <category android:name="android.intent.category.LAUNCHER" />
+89-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:66:17-77
+89-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:66:27-74
+90            </intent-filter>
+91        </activity>
+92        <activity android:name="in.proz.apms.LoginActivity" />
+92-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:69:9-62
+92-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:69:19-60
+93        <activity android:name="in.proz.apms.ConstrctionClass" />
+93-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:70:9-65
+93-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:70:19-63
+94        <activity android:name="in.proz.apms.DashboardActivity" />
+94-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:71:10-67
+94-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:71:20-65
+95        <activity android:name="in.proz.apms.FingerPrintSample" />
+95-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:72:10-67
+95-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:72:20-65
+96        <activity
+96-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:73:9-74:70
+97            android:name="in.proz.apms.Leave.LeaveActivity"
+97-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:73:19-66
+98            android:windowSoftInputMode="adjustResize|stateVisible" />
+98-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:74:13-68
+99        <activity
+99-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:75:9-76:70
+100            android:name="in.proz.apms.Attendance.AttendanceActivity"
+100-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:75:19-76
+101            android:windowSoftInputMode="adjustResize|stateVisible" />
+101-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:76:13-68
+102        <activity android:name="in.proz.apms.FingerIDActivity" />
+102-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:77:9-65
+102-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:77:19-63
+103        <activity android:name="in.proz.apms.FaceIdActivity" />
+103-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:78:9-63
+103-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:78:19-61
+104        <activity android:name="in.proz.apms.Map.MapCurrentLocation" />
+104-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:79:9-71
+104-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:79:19-69
+105        <activity android:name="in.proz.apms.Profile.ProfileActivity" />
+105-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:80:9-72
+105-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:80:19-70
+106        <activity
+106-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:81:9-82:70
+107            android:name="in.proz.apms.Claim.ClaimActivity"
+107-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:81:19-66
+108            android:windowSoftInputMode="adjustResize|stateVisible" />
+108-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:82:13-68
+109        <activity
+109-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:83:9-84:70
+110            android:name="in.proz.apms.Loan.LoanActivity"
+110-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:83:19-64
+111            android:windowSoftInputMode="adjustResize|stateVisible" />
+111-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:84:13-68
+112        <activity
+112-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:85:9-86:70
+113            android:name="in.proz.apms.Profile.PersonalInformation"
+113-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:85:19-74
+114            android:windowSoftInputMode="adjustResize|stateVisible" />
+114-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:86:13-68
+115        <activity
+115-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:87:9-88:70
+116            android:name="in.proz.apms.Profile.ChangePassword"
+116-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:87:19-69
+117            android:windowSoftInputMode="adjustResize|stateVisible" />
+117-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:88:13-68
+118        <activity
+118-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:90:9-91:70
+119            android:name="in.proz.apms.Profile.ShiftActivity"
+119-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:90:19-68
+120            android:windowSoftInputMode="adjustResize|stateVisible" />
+120-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:91:13-68
+121        <activity
+121-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:92:9-93:70
+122            android:name="in.proz.apms.Profile.CertificationActivity"
+122-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:92:19-76
+123            android:windowSoftInputMode="adjustResize|stateVisible" />
+123-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:93:13-68
+124        <activity
+124-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:94:9-95:70
+125            android:name="in.proz.apms.Asset.AssetActivity"
+125-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:94:19-66
+126            android:windowSoftInputMode="adjustResize|stateVisible" />
+126-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:95:13-68
+127        <activity
+127-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:96:9-97:70
+128            android:name="in.proz.apms.AboutActivity"
+128-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:96:19-60
+129            android:windowSoftInputMode="adjustResize|stateVisible" />
+129-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:97:13-68
+130        <activity
+130-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:98:9-99:70
+131            android:name="in.proz.apms.NotesActivity.NotesActivity"
+131-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:98:19-74
+132            android:windowSoftInputMode="adjustResize|stateVisible" />
+132-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:99:13-68
+133        <activity
+133-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:100:9-101:71
+134            android:name="in.proz.apms.Calendar.CalendarActivity"
+134-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:100:19-72
+135            android:windowSoftInputMode="adjustResize|stateVisible" />
+135-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:101:13-68
+136        <activity
+136-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:102:9-103:71
+137            android:name="in.proz.apms.DSR.DSRActivity"
+137-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:102:19-62
+138            android:windowSoftInputMode="adjustResize|stateVisible" />
+138-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:103:13-68
+139        <activity
+139-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:104:9-105:71
+140            android:name="in.proz.apms.Ticket.TicketActivity"
+140-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:104:19-68
+141            android:windowSoftInputMode="adjustResize|stateVisible" />
+141-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:105:13-68
+142        <activity android:name="in.proz.apms.SampleFingerActivitty" />
+142-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:106:9-107:3
+142-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:106:19-68
+143        <activity
+143-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:108:9-109:71
+144            android:name="in.proz.apms.Request.RequestActivity"
+144-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:108:19-70
+145            android:windowSoftInputMode="adjustResize|stateVisible" />
+145-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:109:13-68
+146        <activity
+146-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:110:9-111:71
+147            android:name="in.proz.apms.OnDuty.OnDuty"
+147-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:110:19-60
+148            android:windowSoftInputMode="adjustResize|stateVisible" />
+148-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:111:13-68
+149        <activity android:name="in.proz.apms.DocumentView" />
+149-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:112:9-113:15
+149-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:112:19-59
+150        <activity android:name="in.proz.apms.Sample.SampleImageUpload" />
+150-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:114:1-115:3
+150-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:114:11-63
+151        <activity android:name="in.proz.apms.SampleFaceID" />
+151-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:116:9-61
+151-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:116:19-59
+152
+153        <meta-data
+153-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:40:5-42:66
+154            android:name="com.google.android.geo.API_KEY"
+154-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:41:9-54
+155            android:value="@string/api" />
+155-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:42:9-64
+156        <meta-data
+156-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:120:9-122:35
+157            android:name="com.google.android.gms.vision.DEPENDENCIES"
+157-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:121:13-70
+158            android:value="face" />
+158-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:122:13-33
+159        <meta-data
+159-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:123:9-125:36
+160            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+160-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:124:13-70
+161            android:value="face" />
+161-->D:\Projects\Proz-Payroll\app\src\main\AndroidManifest.xml:125:13-33
+162
+163        <activity
+163-->[com.karumi:dexter:6.2.3] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\9415376e216bea25adcc231d1ecc0c51\transformed\jetified-dexter-6.2.3\AndroidManifest.xml:27:9-29:72
+164            android:name="com.karumi.dexter.DexterActivity"
+164-->[com.karumi:dexter:6.2.3] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\9415376e216bea25adcc231d1ecc0c51\transformed\jetified-dexter-6.2.3\AndroidManifest.xml:28:13-60
+165            android:theme="@style/Dexter.Internal.Theme.Transparent" />
+165-->[com.karumi:dexter:6.2.3] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\9415376e216bea25adcc231d1ecc0c51\transformed\jetified-dexter-6.2.3\AndroidManifest.xml:29:13-69
+166        <activity
+166-->[androidx.biometric:biometric:1.0.0-rc01] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\0409098b16670ecf563d755976ebfab2\transformed\biometric-1.0.0-rc01\AndroidManifest.xml:28:9-31:67
+167            android:name="androidx.biometric.DeviceCredentialHandlerActivity"
+167-->[androidx.biometric:biometric:1.0.0-rc01] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\0409098b16670ecf563d755976ebfab2\transformed\biometric-1.0.0-rc01\AndroidManifest.xml:29:13-78
+168            android:exported="true"
+168-->[androidx.biometric:biometric:1.0.0-rc01] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\0409098b16670ecf563d755976ebfab2\transformed\biometric-1.0.0-rc01\AndroidManifest.xml:30:13-36
+169            android:theme="@style/DeviceCredentialHandlerTheme" />
+169-->[androidx.biometric:biometric:1.0.0-rc01] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\0409098b16670ecf563d755976ebfab2\transformed\biometric-1.0.0-rc01\AndroidManifest.xml:31:13-64
+170
+171        <provider
+171-->[androidx.emoji2:emoji2:1.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\462abe189c92e929de017b36d412659d\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+172            android:name="androidx.startup.InitializationProvider"
+172-->[androidx.emoji2:emoji2:1.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\462abe189c92e929de017b36d412659d\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+173            android:authorities="in.proz.apms.androidx-startup"
+173-->[androidx.emoji2:emoji2:1.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\462abe189c92e929de017b36d412659d\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+174            android:exported="false" >
+174-->[androidx.emoji2:emoji2:1.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\462abe189c92e929de017b36d412659d\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+175            <meta-data
+175-->[androidx.emoji2:emoji2:1.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\462abe189c92e929de017b36d412659d\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+176                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+176-->[androidx.emoji2:emoji2:1.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\462abe189c92e929de017b36d412659d\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+177                android:value="androidx.startup" />
+177-->[androidx.emoji2:emoji2:1.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\462abe189c92e929de017b36d412659d\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+178            <meta-data
+178-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\1a17c2a49d53bdb3ae8554dd47476015\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:29:13-31:52
+179                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+179-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\1a17c2a49d53bdb3ae8554dd47476015\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:30:17-78
+180                android:value="androidx.startup" />
+180-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\1a17c2a49d53bdb3ae8554dd47476015\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:31:17-49
+181            <meta-data
+181-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+182                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+182-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+183                android:value="androidx.startup" />
+183-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+184        </provider> <!-- Needs to be explicitly declared on P+ -->
+185        <uses-library
+185-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b5724c0655d757412a75d4f38f9768cd\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:39:9-41:40
+186            android:name="org.apache.http.legacy"
+186-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b5724c0655d757412a75d4f38f9768cd\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:40:13-50
+187            android:required="false" />
+187-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b5724c0655d757412a75d4f38f9768cd\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:41:13-37
+188
+189        <activity
+189-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a1d4bde079fb8e0eda74774902aaa910\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:23:9-27:75
+190            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+190-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a1d4bde079fb8e0eda74774902aaa910\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:24:13-93
+191            android:excludeFromRecents="true"
+191-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a1d4bde079fb8e0eda74774902aaa910\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:25:13-46
+192            android:exported="false"
+192-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a1d4bde079fb8e0eda74774902aaa910\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:26:13-37
+193            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+193-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a1d4bde079fb8e0eda74774902aaa910\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:27:13-72
+194        <!--
+195            Service handling Google Sign-In user revocation. For apps that do not integrate with
+196            Google Sign-In, this service will never be started.
+197        -->
+198        <service
+198-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a1d4bde079fb8e0eda74774902aaa910\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:33:9-37:51
+199            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+199-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a1d4bde079fb8e0eda74774902aaa910\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:34:13-89
+200            android:exported="true"
+200-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a1d4bde079fb8e0eda74774902aaa910\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:35:13-36
+201            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+201-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a1d4bde079fb8e0eda74774902aaa910\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:36:13-107
+202            android:visibleToInstantApps="true" />
+202-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a1d4bde079fb8e0eda74774902aaa910\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:37:13-48
+203        <service
+203-->[com.google.firebase:firebase-ml-vision:24.1.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\7d5f5e17db5d788ed9158bda22199331\transformed\jetified-firebase-ml-vision-24.1.0\AndroidManifest.xml:9:9-15:19
+204            android:name="com.google.firebase.components.ComponentDiscoveryService"
+204-->[com.google.firebase:firebase-ml-vision:24.1.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\7d5f5e17db5d788ed9158bda22199331\transformed\jetified-firebase-ml-vision-24.1.0\AndroidManifest.xml:10:13-84
+205            android:directBootAware="true"
+205-->[com.google.firebase:firebase-common:20.1.2] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\2f1c5697ad61e783826d6b77cb5e999e\transformed\jetified-firebase-common-20.1.2\AndroidManifest.xml:35:13-43
+206            android:exported="false" >
+206-->[com.google.firebase:firebase-ml-vision:24.1.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\7d5f5e17db5d788ed9158bda22199331\transformed\jetified-firebase-ml-vision-24.1.0\AndroidManifest.xml:11:13-37
+207            <meta-data
+207-->[com.google.firebase:firebase-ml-vision:24.1.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\7d5f5e17db5d788ed9158bda22199331\transformed\jetified-firebase-ml-vision-24.1.0\AndroidManifest.xml:12:13-14:85
+208                android:name="com.google.firebase.components:com.google.firebase.ml.vision.VisionRegistrar"
+208-->[com.google.firebase:firebase-ml-vision:24.1.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\7d5f5e17db5d788ed9158bda22199331\transformed\jetified-firebase-ml-vision-24.1.0\AndroidManifest.xml:13:17-108
+209                android:value="com.google.firebase.components.ComponentRegistrar" />
+209-->[com.google.firebase:firebase-ml-vision:24.1.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\7d5f5e17db5d788ed9158bda22199331\transformed\jetified-firebase-ml-vision-24.1.0\AndroidManifest.xml:14:17-82
+210            <meta-data
+210-->[com.google.firebase:firebase-ml-common:22.1.2] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\20d8a03facdcf5b81131efd0e2bfae03\transformed\jetified-firebase-ml-common-22.1.2\AndroidManifest.xml:11:13-13:85
+211                android:name="com.google.firebase.components:com.google.firebase.ml.common.CommonComponentRegistrar"
+211-->[com.google.firebase:firebase-ml-common:22.1.2] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\20d8a03facdcf5b81131efd0e2bfae03\transformed\jetified-firebase-ml-common-22.1.2\AndroidManifest.xml:12:17-117
+212                android:value="com.google.firebase.components.ComponentRegistrar" />
+212-->[com.google.firebase:firebase-ml-common:22.1.2] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\20d8a03facdcf5b81131efd0e2bfae03\transformed\jetified-firebase-ml-common-22.1.2\AndroidManifest.xml:13:17-82
+213            <meta-data
+213-->[com.google.android.gms:play-services-measurement-api:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\e44d39f7b0648fd67dc8b4519a12e8cf\transformed\jetified-play-services-measurement-api-21.1.1\AndroidManifest.xml:31:13-33:85
+214                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+214-->[com.google.android.gms:play-services-measurement-api:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\e44d39f7b0648fd67dc8b4519a12e8cf\transformed\jetified-play-services-measurement-api-21.1.1\AndroidManifest.xml:32:17-139
+215                android:value="com.google.firebase.components.ComponentRegistrar" />
+215-->[com.google.android.gms:play-services-measurement-api:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\e44d39f7b0648fd67dc8b4519a12e8cf\transformed\jetified-play-services-measurement-api-21.1.1\AndroidManifest.xml:33:17-82
+216            <meta-data
+216-->[com.google.firebase:firebase-installations:17.0.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a367764c83f56e6af0eb77bc5313a65b\transformed\jetified-firebase-installations-17.0.1\AndroidManifest.xml:18:13-20:85
+217                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+217-->[com.google.firebase:firebase-installations:17.0.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a367764c83f56e6af0eb77bc5313a65b\transformed\jetified-firebase-installations-17.0.1\AndroidManifest.xml:19:17-127
+218                android:value="com.google.firebase.components.ComponentRegistrar" />
+218-->[com.google.firebase:firebase-installations:17.0.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\a367764c83f56e6af0eb77bc5313a65b\transformed\jetified-firebase-installations-17.0.1\AndroidManifest.xml:20:17-82
+219        </service>
+220
+221        <activity
+221-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\aa7d1f6afc46a11b83ba06181a77d2b0\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:9-22:45
+222            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+222-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\aa7d1f6afc46a11b83ba06181a77d2b0\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:19-85
+223            android:exported="false"
+223-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\aa7d1f6afc46a11b83ba06181a77d2b0\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:22:19-43
+224            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+224-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\aa7d1f6afc46a11b83ba06181a77d2b0\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:21:19-78
+225
+226        <provider
+226-->[com.google.firebase:firebase-common:20.1.2] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\2f1c5697ad61e783826d6b77cb5e999e\transformed\jetified-firebase-common-20.1.2\AndroidManifest.xml:26:9-31:39
+227            android:name="com.google.firebase.provider.FirebaseInitProvider"
+227-->[com.google.firebase:firebase-common:20.1.2] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\2f1c5697ad61e783826d6b77cb5e999e\transformed\jetified-firebase-common-20.1.2\AndroidManifest.xml:27:13-77
+228            android:authorities="in.proz.apms.firebaseinitprovider"
+228-->[com.google.firebase:firebase-common:20.1.2] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\2f1c5697ad61e783826d6b77cb5e999e\transformed\jetified-firebase-common-20.1.2\AndroidManifest.xml:28:13-72
+229            android:directBootAware="true"
+229-->[com.google.firebase:firebase-common:20.1.2] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\2f1c5697ad61e783826d6b77cb5e999e\transformed\jetified-firebase-common-20.1.2\AndroidManifest.xml:29:13-43
+230            android:exported="false"
+230-->[com.google.firebase:firebase-common:20.1.2] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\2f1c5697ad61e783826d6b77cb5e999e\transformed\jetified-firebase-common-20.1.2\AndroidManifest.xml:30:13-37
+231            android:initOrder="100" />
+231-->[com.google.firebase:firebase-common:20.1.2] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\2f1c5697ad61e783826d6b77cb5e999e\transformed\jetified-firebase-common-20.1.2\AndroidManifest.xml:31:13-36
+232
+233        <receiver
+233-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:29:9-33:20
+234            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+234-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:30:13-85
+235            android:enabled="true"
+235-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:31:13-35
+236            android:exported="false" >
+236-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:32:13-37
+237        </receiver>
+238
+239        <service
+239-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:35:9-38:40
+240            android:name="com.google.android.gms.measurement.AppMeasurementService"
+240-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:36:13-84
+241            android:enabled="true"
+241-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:37:13-35
+242            android:exported="false" />
+242-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:38:13-37
+243        <service
+243-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:39:9-43:72
+244            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+244-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:40:13-87
+245            android:enabled="true"
+245-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:41:13-35
+246            android:exported="false"
+246-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:42:13-37
+247            android:permission="android.permission.BIND_JOB_SERVICE" />
+247-->[com.google.android.gms:play-services-measurement:21.1.1] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\b7163daff62856b97b3e1f13ac9cd7de\transformed\jetified-play-services-measurement-21.1.1\AndroidManifest.xml:43:13-69
+248
+249        <meta-data
+249-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\e1f64310e06d900fc04f88e6c9516901\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:21:9-23:69
+250            android:name="com.google.android.gms.version"
+250-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\e1f64310e06d900fc04f88e6c9516901\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:22:13-58
+251            android:value="@integer/google_play_services_version" />
+251-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\e1f64310e06d900fc04f88e6c9516901\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:23:13-66
+252
+253        <uses-library
+253-->[androidx.window:window:1.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\dddfca3a96e2d7947e6556d4952dd37f\transformed\jetified-window-1.0.0\AndroidManifest.xml:25:9-27:40
+254            android:name="androidx.window.extensions"
+254-->[androidx.window:window:1.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\dddfca3a96e2d7947e6556d4952dd37f\transformed\jetified-window-1.0.0\AndroidManifest.xml:26:13-54
+255            android:required="false" />
+255-->[androidx.window:window:1.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\dddfca3a96e2d7947e6556d4952dd37f\transformed\jetified-window-1.0.0\AndroidManifest.xml:27:13-37
+256        <uses-library
+256-->[androidx.window:window:1.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\dddfca3a96e2d7947e6556d4952dd37f\transformed\jetified-window-1.0.0\AndroidManifest.xml:28:9-30:40
+257            android:name="androidx.window.sidecar"
+257-->[androidx.window:window:1.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\dddfca3a96e2d7947e6556d4952dd37f\transformed\jetified-window-1.0.0\AndroidManifest.xml:29:13-51
+258            android:required="false" />
+258-->[androidx.window:window:1.0.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\dddfca3a96e2d7947e6556d4952dd37f\transformed\jetified-window-1.0.0\AndroidManifest.xml:30:13-37
+259
+260        <receiver
+260-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+261            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+261-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+262            android:directBootAware="false"
+262-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+263            android:enabled="true"
+263-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+264            android:exported="true"
+264-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+265            android:permission="android.permission.DUMP" >
+265-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+266            <intent-filter>
+266-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+267                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+267-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+267-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+268            </intent-filter>
+269            <intent-filter>
+269-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+270                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+270-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+270-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+271            </intent-filter>
+272            <intent-filter>
+272-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+273                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+273-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+273-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+274            </intent-filter>
+275            <intent-filter>
+275-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+276                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+276-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+276-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\DELL LATITUDE 5400\.gradle\caches\transforms-3\97807d32b516b24a53a260159af2b7ad\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+277            </intent-filter>
+278        </receiver>
+279    </application>
+280
+281</manifest>
