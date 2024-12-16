@@ -169,6 +169,7 @@ public class OvertimeAdapterNew extends RecyclerView.Adapter<OvertimeAdapterNew.
         holder.employee_id.setText(" - "+modal.getEmp_empno());
         String value =String.valueOf(modal.getEmp_name().charAt(0));
         holder.first_letter.setText(value);
+        checkBox.setVisibility(View.VISIBLE);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

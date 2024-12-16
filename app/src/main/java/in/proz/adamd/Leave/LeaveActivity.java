@@ -344,7 +344,7 @@ public class LeaveActivity extends AppCompatActivity implements View.OnClickList
             getLeaveList();
             getList();
         }else{
-            commonClass.showError(LeaveActivity.this,"No Network Available!!!");
+            commonClass.showInternetWarning(LeaveActivity.this);
         }
 
 

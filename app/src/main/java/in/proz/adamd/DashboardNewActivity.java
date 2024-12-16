@@ -223,8 +223,7 @@ public class DashboardNewActivity extends AppCompatActivity implements View.OnCl
          requestList.add("Permission");
          requestList.add("Loan");
         requestList.add("Claim");
-        requestList.add("OnDuty");
-        requestList.add("Overtime");
+         requestList.add("Overtime");
 
         progressDialog = new ProgressDialog(DashboardNewActivity.this);
         progressDialog.setMessage("Loading");
@@ -330,19 +329,13 @@ public class DashboardNewActivity extends AppCompatActivity implements View.OnCl
                         intent4.putExtra("claim_type", "claim");
                         intent4.putExtra("position", 1);
                         startActivity(intent4);
-                    } else if (po == 3) {
-                        //asset
-                        Intent intent5 = new Intent(getApplicationContext(), OnDuty.class);
-                        intent5.putExtra("position", 2);
-                        startActivity(intent5);
-
                     } else if (po == 4) {
-                        //ticket
+                        //asset
                         Intent intent5 = new Intent(getApplicationContext(), OverTime.class);
                         intent5.putExtra("position", 3);
                         startActivity(intent5);
 
-                    }
+                    }  
                 }
             }
         });

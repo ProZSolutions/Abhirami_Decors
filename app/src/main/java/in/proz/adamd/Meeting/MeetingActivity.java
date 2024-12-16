@@ -45,6 +45,7 @@ import java.util.Date;
 import java.util.List;
 
 import in.proz.adamd.Adapter.MeetingAdapter;
+import in.proz.adamd.AdminModule.AdminNewDashboard;
 import in.proz.adamd.DashboardNewActivity;
 import in.proz.adamd.Map.MapCurrentLocation;
 import in.proz.adamd.ModalClass.MeetingEmpModal;
@@ -293,16 +294,7 @@ public class MeetingActivity extends AppCompatActivity implements AdapterView.On
        // nabout_layout.setOnClickListener(this);
         nreports_layout.setOnClickListener(this);
         nlocation_layout.setOnClickListener(this);
-        /*if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
-                !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminRole")) &&
-                !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminName"))){
-            nprofile_layout.setVisibility(View.VISIBLE);
-            nlocation_layout.setVisibility(View.GONE);
-        }else{
-            nprofile_layout.setVisibility(View.GONE);
-            nlocation_layout.setVisibility(View.VISIBLE);
-        }
-*/
+
 
         employeeMailList = new ArrayList<>();
         employeeNameList = new ArrayList<>();
@@ -357,6 +349,8 @@ public class MeetingActivity extends AppCompatActivity implements AdapterView.On
           loader = findViewById(R.id.loader);
         if(commonClass.isOnline(MeetingActivity.this)){
             getEmployeeList();
+        }else{
+            commonClass.showInternetWarning(MeetingActivity.this);
         }
         add_team.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -378,6 +372,8 @@ public class MeetingActivity extends AppCompatActivity implements AdapterView.On
                  getEmployeeList();
              }
              getList();
+         }else{
+             commonClass.showInternetWarning(MeetingActivity.this);
          }
          Log.d("getEmployeeList"," size in init "+getEmployeeList.size());
 

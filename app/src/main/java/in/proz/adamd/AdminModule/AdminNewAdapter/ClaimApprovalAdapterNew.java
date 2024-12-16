@@ -200,7 +200,7 @@ public class ClaimApprovalAdapterNew extends RecyclerView.Adapter<ClaimApprovalA
         }
         String value =String.valueOf(modal.getEmp_name().charAt(0));
         holder.first_letter.setText(value);
-
+        check_all.setVisibility(View.VISIBLE);
         check_all.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

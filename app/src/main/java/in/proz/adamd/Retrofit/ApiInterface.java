@@ -381,6 +381,9 @@ public interface ApiInterface {
     Call<OverTimeMain> getOverTimeList(@Query("page") String pageNo);
     @POST("onduty-create")
     Call<CommonPojo> insertOnDuty(@Query("date") String date,@Query("leave_type") String leave_type,@Query("reason") String reason);
+    @POST("onduty-create")
+    Call<CommonPojo> insertOnDutyDialog(@Query("date") String date,@Query("leave_type") String leave_type,
+                                        @Query("reason") String reason,@Query("emp_id") String emp_id);
     @POST("empovertime-create")
     Call<CommonPojo> insertOverTime(@Query("date") String date,@Query("leave_type") String leave_type,@Query("reason") String reason,
                                     @Query("from_time") String from_time,@Query("to_time") String to_time);

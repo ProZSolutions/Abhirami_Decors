@@ -64,6 +64,7 @@ import java.util.List;
 
 import in.proz.adamd.Adapter.ClaimAdapter;
 import in.proz.adamd.AdminModule.AdminNewApprovals;
+import in.proz.adamd.AdminModule.AdminNewDashboard;
 import in.proz.adamd.DashboardNewActivity;
 import in.proz.adamd.Map.MapCurrentLocation;
 import in.proz.adamd.ModalClass.ClaimModal;
@@ -178,8 +179,11 @@ public class ClaimActivity extends AppCompatActivity implements View.OnClickList
                // change_layout.setText("Advance Claim List");
             }
         }
-      
-        getList();
+        if(commonClass.isOnline(ClaimActivity.this)) {
+            getList();
+        }else{
+            commonClass.showInternetWarning(ClaimActivity.this);
+        }
     }
 
     private void updateAdminUI() {
@@ -262,11 +266,6 @@ public class ClaimActivity extends AppCompatActivity implements View.OnClickList
         }
 
 
-      /*   online_icon = findViewById(R.id.online_icon);
-        online_layout = findViewById(R.id.online_layout);
-        online_text = findViewById(R.id.online_text);
-        comm.onlineStatusCheck(ClaimActivity.this,online_layout,online_text,online_icon);*/
-
 
         frame_layout = findViewById(R.id.frame_layout);
         frame_layout.setOnClickListener(this);
@@ -277,8 +276,7 @@ public class ClaimActivity extends AppCompatActivity implements View.OnClickList
          view_image=findViewById(R.id.view_image);
          view_image.setOnClickListener(this);
         listLayout = findViewById(R.id.listLayout);
-     //   header = findViewById(R.id.title);
-        progressDialog = new ProgressDialog(ClaimActivity.this);
+         progressDialog = new ProgressDialog(ClaimActivity.this);
         progressDialog.setCancelable(false);
         from_picker=findViewById(R.id.from_picker);
         recyclerView = findViewById(R.id.recyclerView);
@@ -293,10 +291,8 @@ public class ClaimActivity extends AppCompatActivity implements View.OnClickList
         edt_amount = findViewById(R.id.edt_amount);
         edt_reason = findViewById(R.id.edt_reason);
       
-         //change_layout = findViewById(R.id.change_layout);
-          back_arrow.setOnClickListener(this);
-        // change_layout.setOnClickListener(this);
-        from_picker.setOnClickListener(this);
+           back_arrow.setOnClickListener(this);
+         from_picker.setOnClickListener(this);
         request_layout.setOnClickListener(this);
      }
     private void callDashboard() {

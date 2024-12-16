@@ -2,6 +2,7 @@ package in.proz.adamd.AdminModule.AdminAdapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,9 +30,14 @@ import com.google.gson.GsonBuilder;
 import com.tuyenmonkey.mkloader.MKLoader;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import in.proz.adamd.AdminModule.AdminEmployee.AdminEmpActivityNew;
+import in.proz.adamd.AdminModule.AdminNewApprovals;
+import in.proz.adamd.OnDuty.OnDuty;
 import in.proz.adamd.R;
 import in.proz.adamd.Retrofit.ApiClient;
 import in.proz.adamd.Retrofit.ApiInterface;
@@ -43,11 +50,14 @@ import retrofit2.Response;
 public class EmployeeAdapterNew extends RecyclerView.Adapter<EmployeeAdapterNew.ProductViewHolder>{
     List<CommonPojo> commonPojoList;
     Activity context;
+    String onDutyDate=null;
     int commonPos;
+    boolean emp_status=false;
     RecyclerView recyclerView;
     // ProgressDialog progressDialog;
     CommonClass commonClass;
     MKLoader loader;
+
     public  EmployeeAdapterNew(Activity context, List<CommonPojo> commonPojoList, int commonPos,
                             RecyclerView recyclerView, MKLoader loader){
 
@@ -149,6 +159,16 @@ public class EmployeeAdapterNew extends RecyclerView.Adapter<EmployeeAdapterNew.
             }
         });
 
+        holder.onduty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                emp_status=!emp_status;
+                if(emp_status){
+                    callOnDutyDialog(context,commonPojo);
+                   // callOnDutyInsertMethod();
+                }
+            }
+        });
         holder.reset_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -279,6 +299,202 @@ public class EmployeeAdapterNew extends RecyclerView.Adapter<EmployeeAdapterNew.
         });
 
     }
+    public void callOnDutyDialog(Activity context, CommonPojo commonPojo){
+        AlertDialog.Builder builder=new AlertDialog.Builder(this.context);
+        View view= LayoutInflater.from(this.context).inflate(R.layout.onduty_request,null);
+        ImageView close = view.findViewById(R.id.close);
+        ImageView mike = view.findViewById(R.id.mike);
+        EditText selete_date = view.findViewById(R.id.selete_date);
+        EditText edt_reason = view.findViewById(R.id.edt_reason);
+        LinearLayout request_layout = view.findViewById(R.id.request_layout);
+        LinearLayout reset_layout = view.findViewById(R.id.reset_layout);
+        MKLoader loader1 = view.findViewById(R.id.loader);
+        TextView id_val = view.findViewById(R.id.id_val);
+        id_val.setText(commonPojo.getName()+"("+commonPojo.getEmp_no()+")");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+        onDutyDate = sdf.format(new Date());
+        selete_date.setText(sdf1.format(new Date()));
+
+
+
+
+        builder.setView(view);
+        final AlertDialog mDialog = builder.create();
+        mDialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
+        Window window = mDialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        wlp.gravity = Gravity.CENTER;
+        wlp.width = LinearLayout.LayoutParams.MATCH_PARENT;
+        window.setAttributes(wlp);
+        mDialog.create();
+        mDialog.show();
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                emp_status=!emp_status;
+                mDialog.dismiss();
+            }
+        });
+        mike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (context instanceof AdminEmpActivityNew) { // Ensure context is the activity
+                    ((AdminEmpActivityNew) context).recordVoiceToText(edt_reason); // Call the activity method
+                }
+            }
+        });
+        selete_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callDatePicker(context,selete_date);
+            }
+        });
+        reset_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                emp_status=!emp_status;
+                mDialog.dismiss();
+            }
+        });
+        request_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(onDutyDate)){
+                    commonClass.showWarning(context,"Select OnDuty Date");
+                }else if(TextUtils.isEmpty(edt_reason.getText().toString())){
+                    commonClass.showWarning(context,"Enter Reason");
+                }else{
+                    request_layout.setEnabled(false);
+                    loader1.setVisibility(View.VISIBLE);
+                    ApiInterface apiInterface  = ApiClient.getTokenRetrofit(commonClass.getSharedPref(context,"token"),
+                            commonClass.getDeviceID(context)).create(ApiInterface.class);
+                    Call<CommonPojo> call=null ;
+
+                    call = apiInterface.insertOnDutyDialog(onDutyDate,
+                            "5",edt_reason.getText().toString(),commonPojo.getEmp_id());
+
+
+                    Log.d("insertMethod"," url "+call.request().url());
+                    call.enqueue(new Callback<CommonPojo>() {
+                        @Override
+                        public void onResponse(Call<CommonPojo> call, Response<CommonPojo> response) {
+                            //  progressDialog.dismiss();
+                            loader1.setVisibility(View.GONE);
+                            request_layout.setEnabled(true);
+                            if(response.isSuccessful()){
+                                Log.d("insertMethod"," res[onse "+response.code());
+                                if(response.code()==200){
+                                    Log.d("claim_url"," respone "+response.body().getStatus());
+                                    if(response.body().getStatus().equals("success")){
+                                        commonClass.showSuccess(context,response.body().getData());
+
+                                        new Handler().postDelayed(new Runnable() {
+                                            public void run() {
+                                                if(context != null && !context.isFinishing() && !context.isDestroyed()) {
+
+                                                    if (mDialog != null) {
+                                                        if (mDialog.isShowing()) {
+                                                            mDialog.dismiss();
+                                                            Intent intent = new Intent(context, AdminNewApprovals.class);
+                                                            intent.putExtra("position", 3);
+                                                            context.startActivity(intent);
+                                                        }
+                                                    }
+
+                                                }
+                                            }
+                                        }, 2500);
+
+                                    }else{
+                                        commonClass.showError(context,response.body().getData());
+                                    }
+                                }else{
+                                    Log.d("insertMethod"," res "+response.code());
+                                    Gson gson = new GsonBuilder().create();
+                                    CommonPojo mError = new CommonPojo();
+                                    try {
+                                        mError = gson.fromJson(response.errorBody().string(), CommonPojo.class);
+
+                                        commonClass.showError(context,mError.getError());
+                                        //    Toast.makeText(getApplicationContext(), mError.getError(), Toast.LENGTH_LONG).show();
+                                    } catch (IOException e) {
+                                        // handle failure to read error
+                                        Log.d("thumbnail_url", " exp error  " + e.getMessage());
+                                    }
+                                }
+                            }else{
+                                Gson gson = new GsonBuilder().create();
+                                CommonPojo mError = new CommonPojo();
+                                try {
+                                    mError = gson.fromJson(response.errorBody().string(), CommonPojo.class);
+
+                                    commonClass.showError(context,mError.getError());
+                                    //    Toast.makeText(getApplicationContext(), mError.getError(), Toast.LENGTH_LONG).show();
+                                } catch (IOException e) {
+                                    // handle failure to read error
+                                    Log.d("thumbnail_url", " exp error  " + e.getMessage());
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<CommonPojo> call, Throwable t) {
+                            //progressDialog.dismiss();
+                            loader1.setVisibility(View.GONE);
+                            request_layout.setEnabled(true);
+                            Log.d("claim_url"," on failure error "+t.getMessage());
+                            commonClass.showError(context,t.getMessage());
+
+                        }
+                    });
+
+                }
+            }
+        });
+    }
+    public void callDatePicker(Context context,EditText selete_date){
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR); // current year
+        int mMonth = c.get(Calendar.MONTH); // current month
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        // set day of month , month and year value in the edit text
+
+
+                        String str_date=String.valueOf(dayOfMonth);
+                        String str_month=String.valueOf(monthOfYear+1);
+                        if(dayOfMonth<=9){
+                            str_date="0"+String.valueOf(dayOfMonth);
+                        }
+                        if((monthOfYear+1)<=9) {
+                            str_month = "0" + String.valueOf(monthOfYear + 1);
+                        }
+                        onDutyDate=year + "-" + str_month + "-" + str_date;
+
+                        selete_date.setText(str_date + "-"
+                                + str_month + "-" + year);
+
+
+
+                    }
+                }, mYear, mMonth, mDay);
+        long min = System.currentTimeMillis() -604800000L;
+        //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        datePickerDialog.getDatePicker().setMinDate(min);
+        long mill = System.currentTimeMillis() ;
+        datePickerDialog.getDatePicker().setMaxDate(mill);
+        datePickerDialog.show();
+
+    }
+
+
     public void callAlertDialog(Context context, CommonPojo commonPojo, String title,
                                 String type, String reason, MKLoader loader,String btn_tit){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
@@ -396,7 +612,7 @@ public class EmployeeAdapterNew extends RecyclerView.Adapter<EmployeeAdapterNew.
     class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView emp_id,name,first_letter;
         LinearLayout linear;
-        ImageView user_status,reset_user;
+        ImageView user_status,reset_user,onduty;
         public ProductViewHolder(View view) {
             super(view);
             linear = view.findViewById(R.id.linear);
@@ -404,6 +620,7 @@ public class EmployeeAdapterNew extends RecyclerView.Adapter<EmployeeAdapterNew.
             emp_id = view.findViewById(R.id.emp_id);
             reset_user = view.findViewById(R.id.reset_user);
             name = view.findViewById(R.id.name);
+            onduty = view.findViewById(R.id.onduty);
             user_status = view.findViewById(R.id.user_status);
         }
     }

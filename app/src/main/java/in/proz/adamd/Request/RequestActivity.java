@@ -224,8 +224,12 @@ TextView no_data,no_data_tic;
 
 
         }
+        if(commonClass.isOnline(RequestActivity.this)){
+            getListTic();
+        }else {
+            commonClass.showInternetWarning(RequestActivity.this);
+        }
 
-        getListTic();
     }
 
 
@@ -313,7 +317,6 @@ TextView no_data,no_data_tic;
 
     private void initView() {
 
-
         nhome_layout= findViewById(R.id.nhome_layout);
         nprofile_layout= findViewById(R.id.nprofile_layout);
         nreports_layout= findViewById(R.id.nreports_layout);
@@ -339,14 +342,7 @@ TextView no_data,no_data_tic;
 
         tic_re_text= findViewById(R.id.tic_re_text);
         re_text = findViewById(R.id.re_text);
-         /*CommonClass comm = new CommonClass();
-        online_icon = findViewById(R.id.online_icon);
-        online_layout = findViewById(R.id.online_layout);
-        online_text = findViewById(R.id.online_text);
-        comm.onlineStatusCheck(RequestActivity.this,online_layout,online_text,online_icon);*/
 
-      /*  header = findViewById(R.id.header);
-        ticheader = findViewById(R.id.ticheader);*/
         requestMultiplePermissions();
         ///only header layout
         header_relative = findViewById(R.id.header_relative);
@@ -428,6 +424,8 @@ TextView no_data,no_data_tic;
         if(commonClass.isOnline(RequestActivity.this)){
             getAllDropDown(1); //main
             getList();
+        }else{
+            commonClass.showInternetWarning(RequestActivity.this);
         }
         spinnerRequest.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -482,6 +480,8 @@ TextView no_data,no_data_tic;
         ticrecyclerView.setLayoutManager(layoutManager1);
         if(ticcommonClass.isOnline(RequestActivity.this)) {
             getDropDownList();
+        }else{
+            ticcommonClass.showInternetWarning(RequestActivity.this);
         }
         ticspinnerRequest.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

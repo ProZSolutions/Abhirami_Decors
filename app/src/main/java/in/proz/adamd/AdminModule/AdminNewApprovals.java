@@ -49,6 +49,7 @@ import in.proz.adamd.AdminFilterAdapter.DepartmentAdapter;
 import in.proz.adamd.AdminFilterAdapter.StatusAdapter;
 import in.proz.adamd.AdminModule.AdminApprovalModal.LeaveAppModal;
 import in.proz.adamd.AdminModule.AdminApprovalModal.LeaveTopModal;
+import in.proz.adamd.AdminModule.AdminCommon.CommonPageActivityNew;
 import in.proz.adamd.AdminModule.AdminNewAdapter.ClaimApprovalAdapterNew;
 import in.proz.adamd.AdminModule.AdminNewAdapter.LeaveApprovalAdapterNew;
 import in.proz.adamd.AdminModule.AdminNewAdapter.LoanApprovalAdapterNew;
@@ -205,25 +206,11 @@ public class AdminNewApprovals extends AppCompatActivity implements View.OnClick
         nprofile_layout= findViewById(R.id.nprofile_layout);
         nprofile_layout.setOnClickListener(this);
         nhome_layout= findViewById(R.id.nhome_layout);
-     //   nabout_layout= findViewById(R.id.nabout_layout);
-        nreports_layout= findViewById(R.id.nreports_layout);
+         nreports_layout= findViewById(R.id.nreports_layout);
         nlocation_layout= findViewById(R.id.nlocation_layout);
         nhome_layout.setOnClickListener(this);
-      //  nabout_layout.setOnClickListener(this);
-        nreports_layout.setOnClickListener(this);
+         nreports_layout.setOnClickListener(this);
         nlocation_layout.setOnClickListener(this);
-
-       /* if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
-                !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminRole")) &&
-                !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminName"))){
-            nprofile_layout.setVisibility(View.VISIBLE);
-            nlocation_layout.setVisibility(View.GONE);
-        }else{
-            nprofile_layout.setVisibility(View.GONE);
-            nlocation_layout.setVisibility(View.VISIBLE);
-        }*/
-
-
         check_all = findViewById(R.id.check_all);
 
 
@@ -259,7 +246,6 @@ public class AdminNewApprovals extends AppCompatActivity implements View.OnClick
         manager=new GridLayoutManager(getApplicationContext(),1);
         recyclerView.setLayoutManager(manager);
 
-Log.d("getPostionValue"," pos "+position);
 
         switch (position){
             case 0:
@@ -399,7 +385,12 @@ Log.d("getPostionValue"," pos "+position);
                 }
             }
         });
-        getEmployeeList();
+        if(commonClass.isOnline(AdminNewApprovals.this)){
+            getEmployeeList();
+        }else{
+            commonClass.showInternetWarning(AdminNewApprovals.this);
+        }
+
 
 
     }

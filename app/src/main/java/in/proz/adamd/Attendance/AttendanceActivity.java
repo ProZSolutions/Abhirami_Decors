@@ -417,7 +417,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
             }
         }else{
             frame_layout.setVisibility(View.VISIBLE);
-            change_layout.setVisibility(View.VISIBLE);
+            change_layout.setVisibility(View.GONE);
         }
 
 

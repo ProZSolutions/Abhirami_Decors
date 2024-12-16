@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import in.proz.adamd.AdminModule.AdminNewDashboard;
 import in.proz.adamd.DashboardNewActivity;
 import in.proz.adamd.Map.MapCurrentLocation;
 import in.proz.adamd.ModalClass.WSREmpList;
@@ -251,7 +252,11 @@ public class WSRLayout extends AppCompatActivity implements View.OnClickListener
             }
         });
        // callTempList();
-        getEmployeeList();
+        if(commonClass.isOnline(WSRLayout.this)) {
+            getEmployeeList();
+        }else{
+            commonClass.showInternetWarning(WSRLayout.this);
+        }
 
     }
 

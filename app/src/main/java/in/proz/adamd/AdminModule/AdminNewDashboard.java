@@ -908,8 +908,13 @@ public class AdminNewDashboard extends AppCompatActivity implements View.OnClick
         branchDB.getWritableDatabase();
         departmentDB = new DepartmentDB(AdminNewDashboard.this);
         departmentDB.getWritableDatabase();
-        getDropDownList();
-        getEmployeeList();
+        if(commonClass.isOnline(AdminNewDashboard.this)){
+            getDropDownList();
+            getEmployeeList();
+        }else{
+            commonClass.showInternetWarning(AdminNewDashboard.this);
+        }
+
     }
 
 

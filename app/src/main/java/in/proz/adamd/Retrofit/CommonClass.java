@@ -40,6 +40,7 @@ import androidx.annotation.RequiresApi;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RetryPolicy;
 
+import com.google.android.gms.maps.model.Dash;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -267,6 +268,39 @@ public class CommonClass {
                 }
             }
         }, 2500);
+    }
+
+    public void showInternetWarning(Activity context){
+        String message ="This Module Will Work When Internet Available";
+        //dialog.setContentView(R.layout.dlg_warning);
+        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        View view= LayoutInflater.from(context).inflate(R.layout.dlg_warning,null);
+
+        TextView text = (TextView) view.findViewById(R.id.msg_text);
+        TextView btn_1 = view.findViewById(R.id.btn_1);
+        btn_1.setText("OK");
+        text.setText(message);
+        builder.setView(view);
+        final AlertDialog mDialog = builder.create();
+        mDialog.setCancelable(false);
+        mDialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
+
+        Window window = mDialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        wlp.gravity = Gravity.CENTER;
+        wlp.width = LinearLayout.LayoutParams.MATCH_PARENT;
+        window.setAttributes(wlp);
+
+        mDialog.create();
+        mDialog.show();
+        btn_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(context, DashboardNewActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
     }
     public void showSuccess(Activity context,String message){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);

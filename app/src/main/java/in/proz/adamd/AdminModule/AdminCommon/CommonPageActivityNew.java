@@ -283,7 +283,12 @@ public class CommonPageActivityNew extends AppCompatActivity implements View.OnC
                 }
             }
         });
-        getCustomerList();
+        if(commonClass.isOnline(CommonPageActivityNew.this)){
+            getCustomerList();
+        }else{
+            commonClass.showInternetWarning(CommonPageActivityNew.this);
+        }
+
 
     }
 

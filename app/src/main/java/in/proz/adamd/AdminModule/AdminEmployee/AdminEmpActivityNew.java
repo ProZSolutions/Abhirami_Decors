@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +45,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import in.proz.adamd.AdminFilterAdapter.BranchAdapter;
@@ -85,6 +88,7 @@ public class    AdminEmpActivityNew extends AppCompatActivity implements View.On
     ImageView clear,img1 ;
     String searchTextStr=null;
     boolean[] selectedProjects;
+    EditText edt_reason;
 
     String type,type_title,date_str,tag,server_str;
     GridLayoutManager manager;
@@ -202,7 +206,9 @@ public class    AdminEmpActivityNew extends AppCompatActivity implements View.On
             date_str=format1.format(new Date());
             server_str = format2.format(new Date());
         }
-        getDropDownList();
+        if(commonClass.isOnline(AdminEmpActivityNew.this)) {
+            getDropDownList();
+        }
 
         adapter = new EmployeeAdapterNew(   AdminEmpActivityNew.this,
                 commonPojoList,-1,recyclerView,loader);
@@ -271,8 +277,51 @@ public class    AdminEmpActivityNew extends AppCompatActivity implements View.On
                 }
             }
         });
-        getCustomerList();
+        if(commonClass.isOnline(AdminEmpActivityNew.this)){
+            getCustomerList();
+        }else{
+            commonClass.showInternetWarning(AdminEmpActivityNew.this);
+        }
 
+
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK && data != null) {
+                ArrayList<String> result = data.getStringArrayListExtra(
+                        RecognizerIntent.EXTRA_RESULTS);
+                String str_rem = edt_reason.getText().toString();
+                if (TextUtils.isEmpty(str_rem)) {
+                    str_rem = Objects.requireNonNull(result).get(0);
+                } else {
+                    str_rem = str_rem + " " + Objects.requireNonNull(result).get(0);
+                }
+                edt_reason.setText(str_rem);
+            }
+        }
+    }
+    public void recordVoiceToText( EditText edt_reason) {
+        this.edt_reason = edt_reason;
+        Intent intent4
+                = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent4.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        /*intent4.putExtra(RecognizerIntent.EXTRA_LANGUAGE,
+                Locale.getDefault());*/
+        intent4.putExtra(RecognizerIntent.EXTRA_LANGUAGE,
+                "ta-IN");
+        intent4.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to text");
+
+        try {
+            startActivityForResult(intent4, 1);
+        }
+        catch (Exception e) {
+            Toast.makeText(AdminEmpActivityNew.this, " " + e.getMessage(),
+                            Toast.LENGTH_SHORT)
+                    .show();
+        }
     }
 
     private void getCustomerList() {

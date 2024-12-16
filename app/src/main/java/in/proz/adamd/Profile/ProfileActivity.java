@@ -116,7 +116,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         title=findViewById(R.id.title);
         title.setText("Profile");
          initView();
-        getList();
+         if(commonClass.isOnline(ProfileActivity.this)){
+             getList();
+         }else{
+             commonClass.showInternetWarning(ProfileActivity.this);
+         }
+
 
     }
 

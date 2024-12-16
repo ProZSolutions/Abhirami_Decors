@@ -102,14 +102,9 @@ public class CalendarActivity extends AppCompatActivity implements   View.OnClic
 
         // header_title.setText("Employee");
         CommonClass comm = new CommonClass();
-       /* online_icon = findViewById(R.id.online_icon);
-        online_layout = findViewById(R.id.online_layout);
-        online_text = findViewById(R.id.online_text);
-        comm.onlineStatusCheck(CalendarActivity.this,online_layout,online_text,online_icon);
-*/
+
         loader = findViewById(R.id.loader);
-       // getPojoList =new ArrayList<>();
-        title = findViewById(R.id.title);
+         title = findViewById(R.id.title);
          title.setText("Calendar List");
         dateHashmap =new HashMap<>();
         detailsHashmap = new HashMap<>();
@@ -119,8 +114,7 @@ public class CalendarActivity extends AppCompatActivity implements   View.OnClic
         calendarList.add("DSR List");
         calendarList.add("Holiday List");
         spinnerCalendar = findViewById(R.id.spinnerCalendar);
-        /*progressDialog =new ProgressDialog(this);
-        progressDialog.setCancelable(false);*/
+
         customCalendar=findViewById(R.id.custom_calendar);
         callDefaultUpdateCalendar(null);
         ArrayAdapter ad  = new ArrayAdapter(this,R.layout.spinner_drop_down,calendarList);
@@ -176,30 +170,7 @@ public class CalendarActivity extends AppCompatActivity implements   View.OnClic
             }
         });
 
-      /*  customCalendar.setOnDateSelectedListener(new OnDateSelectedListener() {
-            @Override
-            public void onDateSelected(View view, Calendar selectedDate, Object desc) {
-                // get string date
-                if(dateHashmap!=null){
-                    if(dateHashmap.size()!=0){
-                        String sDate=selectedDate.get(Calendar.DAY_OF_MONTH)
-                                +"/" +(selectedDate.get(Calendar.MONTH)+1)
-                                +"/" + selectedDate.get(Calendar.YEAR);
-                        int date = selectedDate.get(Calendar.DAY_OF_MONTH);
 
-                        if(dateHashmap.size()!=0){
-                            if(dateHashmap.containsKey(date)){
-                                String message = String.valueOf(detailsHashmap.get(date));
-                                //commonClass.showAppToast(CalendarActivity.this,message);
-                            }
-                        }
-
-                    }
-                }
-
-
-            }
-        });*/
         spinnerCalendar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -251,17 +222,7 @@ public class CalendarActivity extends AppCompatActivity implements   View.OnClic
         if(!TextUtils.isEmpty(todayDate)){
             date = todayDate;
         }
-        /*HashMap<Object, Property> mapDescToProp = new HashMap<>();
-        Property propDefault = new Property();
-        propDefault.layoutResource = R.layout.leave_normal;
-        propDefault.enable = false;
-        mapDescToProp.put("normal", propDefault);
-        propDefault.dateTextViewResource=R.id.text_view;
-        Property propUnavailable = new Property();
-        propUnavailable.layoutResource = R.layout.leave_green;
-        propUnavailable.dateTextViewResource=R.id.text_view;
-        mapDescToProp.put("leave", propUnavailable);
-        customCalendar.setMapDescToProp(mapDescToProp);*/
+
         Set<CalendarDay> dateNormal = new HashSet<>();
         Log.d("dateFormatL","date1 "+date);
         String splitDate[] = date.split("-");

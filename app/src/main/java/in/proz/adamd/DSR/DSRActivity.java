@@ -62,6 +62,7 @@ import java.util.regex.Pattern;
 import javax.net.ssl.HttpsURLConnection;
 
 import in.proz.adamd.Adapter.DSRAdapter;
+import in.proz.adamd.AdminModule.AdminNewDashboard;
 import in.proz.adamd.Attendance.AttendanceActivity;
 import in.proz.adamd.AttendanceSQLite.AttendanceDSR;
 import in.proz.adamd.DashboardNewActivity;
@@ -610,21 +611,6 @@ public class DSRActivity extends AppCompatActivity implements View.OnClickListen
         date_text.setOnClickListener(this);
         Date date = new Date();
         String today =serverFormat.format(date);
-      /*  str_to = today;
-        try {
-            String str_local_today = displayFormat.format(date);
-            Date myDate = serverFormat.parse(today);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(myDate);
-            calendar.add(Calendar.DAY_OF_YEAR, -7);
-            Date newDate = calendar.getTime();
-            String one_week_before_server = serverFormat.format(newDate);
-            String one_week_before_dis = displayFormat.format(newDate);
-            str_from = one_week_before_server;
-            date_text.setText(one_week_before_dis+" TO "+str_local_today);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }*/
 
 
          edt_others = findViewById(R.id.edt_others);
@@ -702,7 +688,9 @@ public class DSRActivity extends AppCompatActivity implements View.OnClickListen
                 getList();
             }
 
-        }
+        }else{
+             commonClass.showInternetWarning(DSRActivity.this);
+         }
          /*project_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
              @Override
              public void onFocusChange(View view, boolean b) {

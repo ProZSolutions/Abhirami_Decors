@@ -74,6 +74,7 @@ import java.util.List;
 
 import in.proz.adamd.Adapter.ClaimAdapter;
 import in.proz.adamd.AdminModule.AdminNewApprovals;
+import in.proz.adamd.AdminModule.AdminNewDashboard;
 import in.proz.adamd.DashboardNewActivity;
 import in.proz.adamd.Map.MapCurrentLocation;
 import in.proz.adamd.ModalClass.ClaimModal;
@@ -317,7 +318,11 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
                // header_title.setText("Employee");
 
                 if(commonPojo==null) {
-                    getList();
+                    if(commonClass.isOnline(LoanActivity.this)) {
+                        getList();
+                    }else{
+                        commonClass.showInternetWarning(LoanActivity.this);
+                    }
                 }
             }
         }
@@ -707,6 +712,7 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
                                 callDashboard();
                                // updateAdminUI();
                             }else {
+
                                 getList();
                             }
                         }else{

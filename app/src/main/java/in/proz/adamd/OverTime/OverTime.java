@@ -194,21 +194,6 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
         request_text=findViewById(R.id.request_text);
 
 
-
-
-       /* SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat simpleDateFormatmin = new SimpleDateFormat("mm");
-        SimpleDateFormat simpleDateFormatHR = new SimpleDateFormat("HH");
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy");
-        Date currentTime = Calendar.getInstance().getTime();
-        Date againTime =new Date();
-        againTime.setTime(System.currentTimeMillis()+(2*60*60*1000));
-        str_time_from= simpleDateFormat.format(currentTime);
-        str_time_to = simpleDateFormat.format(againTime);
-        edt_fromtime.setText(getTime(str_time_from));
-        edt_totime.setText(getTime(str_time_to));*/
-
         callDateTimeSetMethod();
         TextView header_title = findViewById(R.id.header_title);
         header_title.setText(commonClass.getSharedPref(getApplicationContext(),"EmppName"));
@@ -217,11 +202,6 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
         mike.setOnClickListener(this);
         header=findViewById(R.id.title);
         CommonClass comm = new CommonClass();
-        /*online_icon = findViewById(R.id.online_icon);
-        online_layout = findViewById(R.id.online_layout);
-        online_text = findViewById(R.id.online_text);
-        comm.onlineStatusCheck(OverTime.this,online_layout,online_text,online_icon);*/
-
 
         edt_reason = findViewById(R.id.edt_reason);
         dropDownTable = new DropDownTableOD(OverTime.this);
@@ -310,8 +290,12 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
         }
 
 
+        if(commonClass.isOnline(OverTime.this)){
+            getOverTimeList();
+        }else {
+            commonClass.showInternetWarning(OverTime.this);
+        }
 
-        getOverTimeList();
          if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
                 !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminRole")) &&
                 !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminName"))){
@@ -320,7 +304,12 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
              if(commonPojo!=null){
                  updateUIData();
              }else {
-                 getList();
+                 if(commonClass.isOnline(OverTime.this)){
+                     getList();
+                 }else{
+                     commonClass.showInternetWarning(OverTime.this);
+                 }
+
              }
         }
     }

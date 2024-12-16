@@ -80,6 +80,7 @@ public class OnDutyAdapterNew extends RecyclerView.Adapter<OnDutyAdapterNew.Prod
         this.serverDate =serverDate;
         this.checkboxpos = checkboxpos;
         this.checkBox=checkBox;
+
         this.usableDate = usableDate;
         this.selectedDeptID = selectedDeptID;
         this.projectListID1 = projectListID1;
@@ -188,6 +189,7 @@ public class OnDutyAdapterNew extends RecyclerView.Adapter<OnDutyAdapterNew.Prod
         holder.employee_id.setText(" - "+modal.getEmp_empno());
         String value =String.valueOf(modal.getEmp_name().charAt(0));
         holder.first_letter.setText(value);
+        checkBox.setVisibility(View.GONE);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -212,7 +214,7 @@ public class OnDutyAdapterNew extends RecyclerView.Adapter<OnDutyAdapterNew.Prod
             holder.status.setVisibility(View.GONE);
 
             //  holder.relativeLayout.setBackground(context.getResources().getDrawable(R.drawable.reactangle_padding_with_border_solid));
-            holder.checkbox.setVisibility(View.VISIBLE);
+            holder.checkbox.setVisibility(View.GONE);
         }else if(modal.getStatus().equals("9") || modal.getStatus().equals("6")){
             holder.checkbox.setVisibility(View.GONE);
             if(modal.getStatus().equals("9")){
@@ -238,7 +240,7 @@ public class OnDutyAdapterNew extends RecyclerView.Adapter<OnDutyAdapterNew.Prod
             holder.status.setTextColor(context.getResources().getColor(R.color.warning_color));
             holder.status.setBackgroundTintList(context.getResources().getColorStateList(R.color.warning_color_shade_20));
             //holder.relativeLayout.setBackground(context.getResources().getDrawable(R.drawable.reactangle_padding_with_border_solid));
-            holder.checkbox.setVisibility(View.VISIBLE);
+            holder.checkbox.setVisibility(View.GONE);
         }
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -432,6 +434,8 @@ public class OnDutyAdapterNew extends RecyclerView.Adapter<OnDutyAdapterNew.Prod
         TextView leave_type = view.findViewById(R.id.leave_type);
         LinearLayout decline = view.findViewById(R.id.decline);
         LinearLayout approve = view.findViewById(R.id.approve);
+        decline.setVisibility(View.GONE);
+        approve.setVisibility(View.GONE);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -498,8 +502,8 @@ public class OnDutyAdapterNew extends RecyclerView.Adapter<OnDutyAdapterNew.Prod
 
         if(modal.getStatus().equals("3")){
             status.setText(null);
-            approve.setVisibility(View.VISIBLE);
-            decline.setVisibility(View.VISIBLE);
+            approve.setVisibility(View.GONE);
+            decline.setVisibility(View.GONE);
         }else if(modal.getStatus().equals("6") ){
             approve.setVisibility(View.GONE);
             decline.setVisibility(View.GONE);
@@ -519,7 +523,7 @@ public class OnDutyAdapterNew extends RecyclerView.Adapter<OnDutyAdapterNew.Prod
             }else{
                 approve.setVisibility(View.GONE);
                 if(currentMonth==getMonth) {
-                    decline.setVisibility(View.VISIBLE);
+                    decline.setVisibility(View.GONE);
                 }else{
                     decline.setVisibility(View.GONE);
                 }
@@ -534,7 +538,7 @@ public class OnDutyAdapterNew extends RecyclerView.Adapter<OnDutyAdapterNew.Prod
             params.gravity= Gravity.LEFT;
             alignment_layout.setLayoutParams(params);
             if(comparison>0){
-                approve.setVisibility(View.VISIBLE);
+                approve.setVisibility(View.GONE);
                 decline.setVisibility(View.GONE);
 
                 status_icon.setImageDrawable(context.getResources().getDrawable(R.drawable.cancelled_icon_2));
@@ -542,7 +546,7 @@ public class OnDutyAdapterNew extends RecyclerView.Adapter<OnDutyAdapterNew.Prod
                 status.setTextColor(context.getResources().getColor(R.color.failure_color));
             }else{
                 if(currentMonth==getMonth) {
-                    approve.setVisibility(View.VISIBLE);
+                    approve.setVisibility(View.GONE);
                 }else{
                     approve.setVisibility(View.GONE);
                 }

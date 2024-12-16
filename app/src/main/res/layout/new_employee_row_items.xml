@@ -35,7 +35,7 @@
 
         <LinearLayout
             android:id="@+id/linear"
-            android:layout_toLeftOf="@id/user_status"
+            android:layout_toLeftOf="@id/onduty"
              android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -98,7 +98,15 @@
 
 
         </LinearLayout>
-
+        <ImageView
+            android:id="@+id/onduty"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_toLeftOf="@id/user_status"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/pfinger"
+            app:tint="@color/n_org" />
         <ImageView
             android:id="@+id/user_status"
             android:layout_width="25dp"

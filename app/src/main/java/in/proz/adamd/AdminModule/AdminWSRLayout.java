@@ -211,18 +211,7 @@ public class AdminWSRLayout extends AppCompatActivity implements View.OnClickLis
         //nabout_layout.setOnClickListener(this);
         nreports_layout.setOnClickListener(this);
         nlocation_layout.setOnClickListener(this);
-/*
 
-        if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
-                !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminRole")) &&
-                !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminName"))){
-            nprofile_layout.setVisibility(View.VISIBLE);
-            nlocation_layout.setVisibility(View.GONE);
-        }else{
-            nprofile_layout.setVisibility(View.GONE);
-            nlocation_layout.setVisibility(View.VISIBLE);
-        }
-*/
 
         spinner_layout = findViewById(R.id.spinner_layout);
         spinner_layout.setOnClickListener(this);
@@ -255,7 +244,11 @@ public class AdminWSRLayout extends AppCompatActivity implements View.OnClickLis
         no_data = findViewById(R.id.no_data);
         back_arrow = findViewById(R.id.back_arrow);
         back_arrow.setOnClickListener(this);
-        getList();
+        if(commonClass.isOnline(AdminWSRLayout.this)) {
+            getList();
+        }else{
+            commonClass.showInternetWarning(AdminWSRLayout.this);
+        }
      }
 
     public static String extractNumbers(String input) {

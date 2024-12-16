@@ -38,6 +38,7 @@ import java.util.Objects;
 
 import in.proz.adamd.Adapter.OnDutyAdapter;
 import in.proz.adamd.AdminModule.AdminNewApprovals;
+import in.proz.adamd.AdminModule.AdminNewDashboard;
 import in.proz.adamd.Attendance.AttendanceActivity;
 import in.proz.adamd.DashboardNewActivity;
 import in.proz.adamd.Map.MapCurrentLocation;
@@ -233,15 +234,24 @@ int pageNo=1;
         }
 
 
+        if(commonClass.isOnline(OnDuty.this)){
+            getDropDownList();
+        }else{
+            commonClass.showInternetWarning(OnDuty.this);
+        }
 
 
-        getDropDownList();
          if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
                 !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminRole")) &&
                 !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminName"))){
             updateAdminUI();
         }else {
-             getList();
+             if(commonClass.isOnline(OnDuty.this)){
+                 getList();
+             }else{
+                 commonClass.showInternetWarning(OnDuty.this);
+             }
+
          }
     }
     private void getDropDownList() {

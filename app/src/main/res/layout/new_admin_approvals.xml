@@ -178,6 +178,7 @@
                 <CheckBox
                     android:layout_marginLeft="17dp"
                     android:id="@+id/check_all"
+                    android:visibility="gone"
                     android:text="Check All"
                     android:fontFamily="@font/inter_18pt_medium"
                     android:textColor="@color/n_blue"
