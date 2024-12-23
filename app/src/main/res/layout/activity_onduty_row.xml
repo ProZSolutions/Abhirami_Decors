@@ -11,8 +11,18 @@
         android:background="@drawable/rectangle_outer_gray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <ImageView
+            android:id="@+id/ot_icon"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            app:tint="@color/color_primary"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/overtime_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <LinearLayout
+            android:layout_toLeftOf="@id/ot_icon"
             android:layout_marginTop="5dp"
             android:id="@+id/contentLayout"
             android:orientation="vertical"
@@ -120,12 +130,14 @@
             </LinearLayout>
             <View
                 android:layout_margin="10dp"
+                android:visibility="gone"
                 android:background="@color/n_outer"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"/>
             <RelativeLayout
                 android:layout_margin="1dp"
                 android:id="@+id/relativelayout"
+                android:visibility="gone"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

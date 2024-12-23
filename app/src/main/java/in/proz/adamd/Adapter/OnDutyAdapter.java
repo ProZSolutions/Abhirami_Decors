@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Locale;
 
 import in.proz.adamd.OnDuty.OnDuty;
+import in.proz.adamd.OverTime.OverTime;
 import in.proz.adamd.R;
 import in.proz.adamd.Retrofit.ApiClient;
 import in.proz.adamd.Retrofit.ApiInterface;
@@ -98,6 +99,14 @@ public class OnDutyAdapter extends RecyclerView.Adapter<OnDutyAdapter.ProductVie
         holder.leave_type.setText(commonPojo.getLeave_type());
         holder.reason.setText(commonPojo.getReason());
         holder.date.setText(commonPojo.getDate());
+        holder.ot_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(context, OverTime.class);
+                intent.putExtra("emp_no",commonPojo.getEmp_no());
+                context.startActivity(intent);
+            }
+        });
 
      /*   if(!TextUtils.isEmpty(commonPojo.getFrom()) && !TextUtils.isEmpty(commonPojo.getTo())){
             String[] fromStr = commonPojo.getFrom().split(" ");
@@ -119,7 +128,7 @@ public class OnDutyAdapter extends RecyclerView.Adapter<OnDutyAdapter.ProductVie
             if(staut.startsWith("pend")){
                 holder.approved_status.setText("Pending");
                 Log.d("status_value"," pending ");
-                holder.relativelayout.setVisibility(View.VISIBLE);
+                holder.relativelayout.setVisibility(View.GONE);
                 holder.approved_by.setText(commonPojo.getApproved());
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                    // holder.relativelayout.setBackgroundTintList(context.getColorStateList(R.color.purple_shade_50));
@@ -147,7 +156,7 @@ public class OnDutyAdapter extends RecyclerView.Adapter<OnDutyAdapter.ProductVie
                 }
                 Log.d("status_value"," approved "+commonPojo.getStatus_by()+" label "+commonPojo.getStatus());
                 if(!TextUtils.isEmpty(commonPojo.getStatus_by())){
-                    holder.relativelayout.setVisibility(View.VISIBLE);
+                    holder.relativelayout.setVisibility(View.GONE);
                     holder.request_layout.setVisibility(View.GONE);
                     holder.approve_layout.setVisibility(View.VISIBLE);
 
@@ -171,7 +180,7 @@ public class OnDutyAdapter extends RecyclerView.Adapter<OnDutyAdapter.ProductVie
                     }
                 }
 
-                holder.relativelayout.setVisibility(View.VISIBLE);
+                holder.relativelayout.setVisibility(View.GONE);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
                    // holder.relativelayout.setBackgroundTintList(context.getColorStateList(R.color.pink_50));
@@ -188,7 +197,7 @@ public class OnDutyAdapter extends RecyclerView.Adapter<OnDutyAdapter.ProductVie
                 holder.approved_status.setText(commonPojo.getStatus());
                 Log.d("status_value"," cancelled ");
                 holder.approved_by.setText(commonPojo.getStatus_by());
-                holder.relativelayout.setVisibility(View.VISIBLE);
+                holder.relativelayout.setVisibility(View.GONE);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     holder.approved_status.setTextColor(context.getColorStateList(R.color.war1));
                     holder.approved_status.setCompoundDrawableTintList(context.getColorStateList(R.color.war1));
@@ -333,10 +342,11 @@ public class OnDutyAdapter extends RecyclerView.Adapter<OnDutyAdapter.ProductVie
         TextView leave_type,date,approved_status,approved_by,reason;
         RelativeLayout relativelayout;
         LinearLayout request_layout,approve_layout;
-        ImageView icon;
+        ImageView icon,ot_icon;
         public ProductViewHolder(View view) {
             super(view);
             leave_type = view.findViewById(R.id.leave_type);
+            ot_icon = view.findViewById(R.id.ot_icon);
             date = view.findViewById(R.id.date);
             reason = view.findViewById(R.id.reason);
             approved_status = view.findViewById(R.id.approved_status);

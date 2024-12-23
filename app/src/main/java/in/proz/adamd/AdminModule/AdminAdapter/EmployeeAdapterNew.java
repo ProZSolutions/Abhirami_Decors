@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
@@ -28,16 +29,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.tuyenmonkey.mkloader.MKLoader;
+import com.tuyenmonkey.mkloader.model.Line;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import in.proz.adamd.AdminModule.AdminEmployee.AdminEmpActivityNew;
 import in.proz.adamd.AdminModule.AdminNewApprovals;
-import in.proz.adamd.OnDuty.OnDuty;
+import in.proz.adamd.Leave.LeaveActivity;
+import in.proz.adamd.Loan.LoanActivity;
 import in.proz.adamd.R;
 import in.proz.adamd.Retrofit.ApiClient;
 import in.proz.adamd.Retrofit.ApiInterface;
@@ -57,6 +61,10 @@ public class EmployeeAdapterNew extends RecyclerView.Adapter<EmployeeAdapterNew.
     // ProgressDialog progressDialog;
     CommonClass commonClass;
     MKLoader loader;
+    List<String> requestList = new ArrayList<>();
+    String SendToID ="-1";
+    String str_time_from,str_time_to;
+
 
     public  EmployeeAdapterNew(Activity context, List<CommonPojo> commonPojoList, int commonPos,
                             RecyclerView recyclerView, MKLoader loader){
@@ -69,7 +77,8 @@ public class EmployeeAdapterNew extends RecyclerView.Adapter<EmployeeAdapterNew.
       /*  progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);*/
         commonClass = new CommonClass();
-
+        requestList.add("OnDuty Request");
+        requestList.add("Overtime Request");
     }
 
     @NonNull
@@ -164,7 +173,7 @@ public class EmployeeAdapterNew extends RecyclerView.Adapter<EmployeeAdapterNew.
             public void onClick(View v) {
                 emp_status=!emp_status;
                 if(emp_status){
-                    callOnDutyDialog(context,commonPojo);
+                    callOnDutyDialog(context,commonPojo,"onduty");
                    // callOnDutyInsertMethod();
                 }
             }
@@ -299,10 +308,18 @@ public class EmployeeAdapterNew extends RecyclerView.Adapter<EmployeeAdapterNew.
         });
 
     }
-    public void callOnDutyDialog(Activity context, CommonPojo commonPojo){
+
+
+
+
+
+
+    public void callOnDutyDialog(Activity context, CommonPojo commonPojo,String type){
         AlertDialog.Builder builder=new AlertDialog.Builder(this.context);
         View view= LayoutInflater.from(this.context).inflate(R.layout.onduty_request,null);
         ImageView close = view.findViewById(R.id.close);
+        TextView header = view.findViewById(R.id.header);
+
         ImageView mike = view.findViewById(R.id.mike);
         EditText selete_date = view.findViewById(R.id.selete_date);
         EditText edt_reason = view.findViewById(R.id.edt_reason);

@@ -148,6 +148,7 @@ import in.proz.adamd.Decor.EventDecorator;
 import in.proz.adamd.Face.FaceModal;
 import in.proz.adamd.Face.SQLFaceModal;
 import in.proz.adamd.FaceAuth.SimilarityClassifier;
+import in.proz.adamd.Loan.LoanActivity;
 import in.proz.adamd.Map.MapCurrentLocation;
 import in.proz.adamd.ModalClass.AttendanceListSubModal;
 import in.proz.adamd.ModalClass.AttendanceMain;
@@ -621,6 +622,9 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void initView() {
+        if(!commonClass.isOnline(AttendanceActivity.this)){
+            commonClass.showInternetWarning(AttendanceActivity.this);
+        }
         recognize = findViewById(R.id.button3);
         
         recognize.setOnClickListener(new View.OnClickListener() {

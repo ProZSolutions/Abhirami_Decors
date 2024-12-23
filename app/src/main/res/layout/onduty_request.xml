@@ -14,6 +14,14 @@
         android:layout_margin="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/header"
+            android:text="OnDuty Request"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -21,6 +29,7 @@
                 android:id="@+id/id_val"
                 android:gravity="left"
                 android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
                 android:layout_toLeftOf="@id/close"
                 android:fontFamily="@font/inter_18pt_medium"
                 android:textSize="12dp"
@@ -102,7 +111,7 @@
 
                                 android:layout_marginTop="15dp"
                                 android:textSize="13dp"
-                                android:text="Select Date"
+                                android:text="@string/date_selete"
 
                                 android:fontFamily="@font/inter_18pt_medium"
                                 android:textColor="@color/black"

@@ -33,6 +33,7 @@
     <string name="meti">Meeting Title  <font fgcolor="#F49D12">*</font></string>
     <string name="date">Date  <font fgcolor="#F49D12">*</font></string>
     <string name="date_to">Select To Date <font fgcolor="#F49D12">*</font></string>
+    <string name="date_selete">Select Date <font fgcolor="#F49D12">*</font></string>
     <string name="planned">Planned Task  <font fgcolor="#F49D12">*</font></string>
     <string name="completed">Completed Task  <font fgcolor="#F49D12">*</font></string>
     <string name="url">Project URL <font fgcolor="#F49D12">*</font></string>

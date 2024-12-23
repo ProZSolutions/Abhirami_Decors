@@ -43,6 +43,7 @@ import in.proz.adamd.Retrofit.CommonClass;
 import in.proz.adamd.Retrofit.CommonPojo;
  import in.proz.adamd.Retrofit.LoginInfo;
  import in.proz.adamd.SQLiteDB.BranchTable;
+ import in.proz.adamd.SQLiteDB.DashboardUIViewTable;
  import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -296,10 +297,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
                                     if(!response.body().getRole().equals("10")) {
-
+                                    Log.d("role_option"," come to in ");
                                     if (response.body().getLoginInfo() != null) {
-                                        if (response.body().getLoginInfo() != null) {
-                                            commonClass.putSharedPref(getApplicationContext(),"role_no",response.body().getRole());
+                                        Log.d("role_option"," come to in login info ");
+                                             commonClass.putSharedPref(getApplicationContext(),"role_no",response.body().getRole());
                                             LoginInfo info = response.body().getLoginInfo();
                                             if (!TextUtils.isEmpty(info.getEmployee_No())) {
                                                 commonClass.putSharedPref(getApplicationContext(), "AdminEmpNo", info.getEmployee_No());
@@ -317,7 +318,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                 Log.d("login_url", " role name " + listString);
                                                 commonClass.putSharedPref(getApplicationContext(), "AdminRoleName", listString);
                                             }
-                                        }
+
                                     } else {
                                         Log.d("login_url", " login info null ");
                                     }
@@ -339,14 +340,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     commonClass.putSharedPref(LoginActivity.this,"username",username.getText().toString());
                                     commonClass.putSharedPref(LoginActivity.this,"token",response.body().getToken_type()+" "+response.body().getBearer_token());
                                     //commonClass.showSuccess(LoginActivity.this,"Logged In Successfully");
+                                    DashboardUIViewTable dashboardUIViewTable = new DashboardUIViewTable(LoginActivity.this);
+                                    dashboardUIViewTable.getWritableDatabase();
+                                    dashboardUIViewTable.DropTable();
                                     if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"first_time"))){
                                         commonClass.showSuccess(LoginActivity.this,"Logged In Successfully");
                                         new Handler().postDelayed(new Runnable() {
                                             public void run() {
                                                  Intent intent = new Intent(getApplicationContext(), DashboardNewActivity.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                 startActivity(intent);
                                             }
-                                        }, 2000);
+                                        }, 2500);
                                     }else{
                                         commonClass.putSharedPref(getApplicationContext(),"first_time","fist");
                                         Log.d("LoginPage"," login name "+response.body().getName());

@@ -230,6 +230,9 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public  void initView(){
+        if(!commonClass.isOnline(LoanActivity.this)){
+            commonClass.showInternetWarning(LoanActivity.this);
+        }
         frame_tag = findViewById(R.id.frame_tag);
         nhome_layout= findViewById(R.id.nhome_layout);
         nprofile_layout= findViewById(R.id.nprofile_layout);

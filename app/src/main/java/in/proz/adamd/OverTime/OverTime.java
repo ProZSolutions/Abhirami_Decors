@@ -44,11 +44,14 @@ import java.util.Objects;
 
 import in.proz.adamd.Adapter.OverTimeAdapter;
 import in.proz.adamd.AdminModule.AdminNewApprovals;
+import in.proz.adamd.AdminModule.AdminNewDashboard;
 import in.proz.adamd.DashboardNewActivity;
 import in.proz.adamd.Map.MapCurrentLocation;
 import in.proz.adamd.ModalClass.EmpDropDown;
+import in.proz.adamd.ModalClass.MeetingEmpModal;
 import in.proz.adamd.ModalClass.OverTimeMain;
 import in.proz.adamd.NotesActivity.NotesActivity;
+import in.proz.adamd.OnDuty.OnDuty;
 import in.proz.adamd.Profile.ProfileActivity;
 import in.proz.adamd.R;
 import in.proz.adamd.Retrofit.ApiClient;
@@ -66,6 +69,7 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
     int first_pos=0;
 
     ImageView mike;
+    String emp_no;
     String str_time_from,str_time_to;
     int position;
     DropDownTableOD dropDownTable;
@@ -99,6 +103,9 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
     int main_change=0;
     TextView edt_fromtime,edt_totime;
     ImageView totime_picker,fromtime_picker;
+    List<String> employeeNameList=new ArrayList<>();
+    List<String>  employeeMailList=new ArrayList<>();
+    Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +123,7 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
         Bundle b= getIntent().getExtras();
         if(b!=null){
             position= b.getInt("position");
+            emp_no = b.getString("emp_no");
             if(position>0){
                 updateAdminUI();
             }
@@ -171,6 +179,20 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
     }
 
     public void initView(){
+        spinner = findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(spinner.getSelectedView()!=null) {
+                    ((TextView) spinner.getSelectedView()).setTextColor(getResources().getColor(R.color.black));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         title = findViewById(R.id.title);
         edt_fromtime = findViewById(R.id.edt_fromtime);
         edt_totime = findViewById(R.id.edt_totime);
@@ -292,6 +314,7 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
 
         if(commonClass.isOnline(OverTime.this)){
             getOverTimeList();
+            getEmployeeListFromOT();
         }else {
             commonClass.showInternetWarning(OverTime.this);
         }
@@ -312,6 +335,102 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
 
              }
         }
+    }
+    private void getEmployeeListFromOT() {
+        loader.setVisibility(View.VISIBLE);
+        ApiInterface apiInterface = ApiClient.getTokenRetrofit(commonClass.getSharedPref(getApplicationContext(), "token"),
+                commonClass.getDeviceID(OverTime.this)).create(ApiInterface.class);
+        Call<MeetingEmpModal> call = apiInterface.getEmpDetailsFromOT();
+        Log.d("getEmployeeList"," ca;;  "+call.request().url());
+        call.enqueue(new Callback<MeetingEmpModal>() {
+            @Override
+            public void onResponse(Call<MeetingEmpModal> call, Response<MeetingEmpModal> response) {
+                loader.setVisibility(View.GONE);
+                Log.d("getEmployeeList"," codee "+response.code());
+                if(response.isSuccessful()){
+                    if(response.code()==200){
+                        if(response.body().getStatus().equals("success")){
+                            if(response.body().getGetData()!=null){
+                                Log.d("getEmployeeList"," size as "+response.body().getEmployeeList().size());
+                                if(response.body().getEmployeeList().size()!=0){
+                                    List<CommonPojo> getEmployeeList = response.body().getEmployeeList();
+                                    employeeNameList.clear();
+                                    employeeMailList.clear();
+                                    for(int i=0;i<getEmployeeList.size();i++){
+                                        employeeNameList.add(getEmployeeList.get(i).getName());
+                                        employeeMailList.add(getEmployeeList.get(i).getEmp_id());
+                                    }
+                                    if (employeeNameList.size()!=0){
+                                        updateUI();
+                                    }else{
+                                        getEmployeeList();
+                                    }
+
+                                }else{
+                                    employeeNameList.clear();
+                                    employeeMailList.clear();
+                                    getEmployeeList();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MeetingEmpModal> call, Throwable t) {
+                loader.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
+
+    private void getEmployeeList() {
+        loader.setVisibility(View.VISIBLE);
+        ApiInterface apiInterface = ApiClient.getTokenRetrofit(commonClass.getSharedPref(getApplicationContext(), "token"),
+                commonClass.getDeviceID(OverTime.this)).create(ApiInterface.class);
+        Call<MeetingEmpModal> call = apiInterface.getEmpDetails();
+        Log.d("getEmployeeList"," ca;;  "+call.request().url());
+        call.enqueue(new Callback<MeetingEmpModal>() {
+            @Override
+            public void onResponse(Call<MeetingEmpModal> call, Response<MeetingEmpModal> response) {
+                loader.setVisibility(View.GONE);
+                Log.d("getEmployeeList"," codee "+response.code());
+                if(response.isSuccessful()){
+                    if(response.code()==200){
+                        if(response.body().getStatus().equals("success")){
+                            if(response.body().getGetData()!=null){
+                                Log.d("getEmployeeList"," size as "+response.body().getGetData().size());
+                                if(response.body().getGetData().size()!=0){
+                                    List<CommonPojo> getEmployeeList = response.body().getGetData();
+                                    employeeNameList.clear();
+                                    employeeMailList.clear();
+                                    for(int i=0;i<getEmployeeList.size();i++){
+                                        employeeNameList.add(getEmployeeList.get(i).getName());
+                                        employeeMailList.add(getEmployeeList.get(i).getId());
+                                    }
+                                    if (employeeNameList.size()!=0){
+                                        updateUI();
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MeetingEmpModal> call, Throwable t) {
+                loader.setVisibility(View.GONE);
+            }
+        });
+    }
+    private void updateUI() {
+        ArrayAdapter ad  = new ArrayAdapter(this,R.layout.spinner_drop_down,employeeNameList);
+        ad.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(ad);
     }
     private String getTime(String string ) {
         String[] arr1=string.split(":");
@@ -620,14 +739,18 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
 
         Log.d("getTimeValues"," start "+str_time_from+" to "+str_time_to);
 
+        int id = spinner.getSelectedItemPosition();
+        String emp_noo = employeeMailList.get(id);
+
         if(commonPojo!=null){
             call = apiInterface.updateOverTime(commonPojo.getId(),str_from_date,
                     dropDownIds.get(spinnerLeave.getSelectedItemPosition()),edt_reason.getText().toString(),str_time_from,str_time_to);
 
 
         }else{
-            call = apiInterface.insertOverTime(str_from_date,
-                    dropDownIds.get(spinnerLeave.getSelectedItemPosition()),edt_reason.getText().toString(),str_time_from,str_time_to);
+            call = apiInterface.insertOverTimeDialog(str_from_date,
+                    dropDownIds.get(spinnerLeave.getSelectedItemPosition()),
+                    edt_reason.getText().toString(),str_time_from,str_time_to,emp_noo);
 
 
         }
@@ -729,7 +852,7 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
                 }, 2500);
 
             }else{
-                Intent intent = new Intent(getApplicationContext(), DashboardNewActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AdminNewDashboard.class);
                 startActivity(intent);
             }
         }else{
@@ -741,7 +864,7 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
                 listLayout.setVisibility(View.VISIBLE);
                 getList();
             }else{
-                Intent intent = new Intent(getApplicationContext(), DashboardNewActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AdminNewDashboard.class);
                 startActivity(intent);
             }
 

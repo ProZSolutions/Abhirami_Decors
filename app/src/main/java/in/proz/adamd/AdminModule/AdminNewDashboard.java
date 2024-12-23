@@ -64,6 +64,8 @@ import in.proz.adamd.DashboardNewActivity;
 import in.proz.adamd.Map.MapCurrentLocation;
 import in.proz.adamd.ModalClass.KeystoneModal;
 import in.proz.adamd.NotesActivity.NotesActivity;
+import in.proz.adamd.OnDuty.OnDuty;
+import in.proz.adamd.OverTime.OverTime;
 import in.proz.adamd.Profile.ProfileActivity;
 import in.proz.adamd.R;
 import in.proz.adamd.Retrofit.AdminApiInterface;
@@ -119,6 +121,8 @@ public class AdminNewDashboard extends AppCompatActivity implements View.OnClick
     LinearLayout nhome_layout,nreports_layout,nlocation_layout,nprofile_layout;
     List<KeystoneModal> branchMainList= new ArrayList<>();
     List<KeystoneModal> departmentMainList= new ArrayList<>();
+    LinearLayout linear_onduty_req ,linear_overtime_req;
+    TextView tot_overtime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -763,7 +767,12 @@ public class AdminNewDashboard extends AppCompatActivity implements View.OnClick
         header_title.setText(commonClass.getSharedPref(getApplicationContext(),"EmppName"));
 
         tot_onduty= findViewById(R.id.tot_onduty);
-        commonClass.putSharedPref(getApplicationContext(),"dash",null);
+        linear_onduty_req= findViewById(R.id.linear_onduty_req);
+        linear_overtime_req= findViewById(R.id.linear_overtime_req);
+        tot_overtime= findViewById(R.id.tot_overtime);
+         linear_onduty_req.setOnClickListener(this);
+        linear_overtime_req.setOnClickListener(this);
+         commonClass.putSharedPref(getApplicationContext(),"dash",null);
         commonClass.putSharedPref(getApplicationContext(),"department_id",null);
         commonClass.putSharedPref(getApplicationContext(),"branch_id",null);
         commonClass.putSharedPref(getApplicationContext(),"status",null);
@@ -1005,6 +1014,11 @@ public class AdminNewDashboard extends AppCompatActivity implements View.OnClick
                                     tot_onduty.setText(response.body().getDashboardModal().getToday_onduty_pencount());
                                 }
                             }
+                            if(response.body().getDashboardModal().getToday_overtime_pencount()!=null){
+                                if(!TextUtils.isEmpty(response.body().getDashboardModal().getToday_overtime_pencount())){
+                                    tot_overtime.setText(response.body().getDashboardModal().getToday_overtime_pencount());
+                                }
+                            }
                             if(response.body().getDashboardModal().getTotal_late_details()!=null){
                                 if(!TextUtils.isEmpty(response.body().getDashboardModal().getTotal_late_details().getCount())){
                                     tot_late.setText(response.body().getDashboardModal().getTotal_late_details().getCount());
@@ -1173,6 +1187,15 @@ public class AdminNewDashboard extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
+            case R.id.linear_onduty_req:
+                Intent intenton = new Intent(getApplicationContext(), OnDuty.class);
+                startActivity(intenton);
+                break;
+            case R.id.linear_overtime_req:
+                Intent intentot = new Intent(getApplicationContext(), OverTime.class);
+                startActivity(intentot);
+                break;
+
             case R.id.nprofile_layout:
                 Intent intentabout1 = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(intentabout1);

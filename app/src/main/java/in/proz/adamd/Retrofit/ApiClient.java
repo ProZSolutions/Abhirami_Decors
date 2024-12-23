@@ -63,6 +63,33 @@ public class ApiClient {
                 .client(httpClient.build()).addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
+    public static Retrofit getTokenRetrofitRR(final String token,final String device_id){
+        retrofit=null;
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.connectTimeout(5, TimeUnit.MINUTES);
+        httpClient.readTimeout(5, TimeUnit.MINUTES);
+
+        httpClient.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Log.d("auth_token"," aut "+token+" device "+device_id);
+                Request request = chain.request();
+
+                Request authenticatedRequest = request.newBuilder()
+                        .header("Authorization", token)
+                        .header("Accept","application/json")
+                        .header("Device-ID",device_id)
+                        .build();
+                return chain.proceed(authenticatedRequest);
+            }
+
+        });
+        CommonClass commonClass=new CommonClass();
+        String BASE_URL = commonClass.commonURL();
+        return new Retrofit.Builder().baseUrl("https://revathitraders.in/api/")
+                .client(httpClient.build()).addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
    public static Retrofit getTokenWithoutAuth(){
         retrofit=null;
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();

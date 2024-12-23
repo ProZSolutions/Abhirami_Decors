@@ -6,6 +6,8 @@ package in.proz.adamd.Retrofit;
  import in.proz.adamd.AdminModule.AdminModals.InnerModal;
  import in.proz.adamd.AttendanceUploadModal.UploadGeoModal;
  import in.proz.adamd.AttendanceUploadModal.UploadTimeModal;
+ import in.proz.adamd.CommonJson.DashboardMainParse;
+ import in.proz.adamd.CommonJson.DashboardParseContent;
  import in.proz.adamd.Face.FaceModal;
  import in.proz.adamd.FaceAuth.SimilarityClassifier;
  import in.proz.adamd.Meeting.MeetingModal;
@@ -48,6 +50,8 @@ public interface ApiInterface {
 
     ////offline to online sync work
 
+    @GET("dashboard-condition")
+    Call<DashboardMainParse>  getDashboardUI();
     @POST("faceauth-store")
     Call<CommonPojo> registerFace(@Body SimilarityClassifier.Recognition recognitionData);
     @POST("faceauth-list")
@@ -203,6 +207,8 @@ public interface ApiInterface {
     Call<WSREmpList> getDSRSendTo();
         @POST("employee-dropdown")
         Call<MeetingEmpModal> getEmpDetails();
+    @POST("empovertime-dropdown")
+    Call<MeetingEmpModal> getEmpDetailsFromOT();
     //meeting    module
 
 
@@ -384,6 +390,9 @@ public interface ApiInterface {
     @POST("onduty-create")
     Call<CommonPojo> insertOnDutyDialog(@Query("date") String date,@Query("leave_type") String leave_type,
                                         @Query("reason") String reason,@Query("emp_id") String emp_id);
+    @POST("empovertime-create")
+    Call<CommonPojo> insertOverTimeDialog(@Query("date") String date,@Query("leave_type") String leave_type,@Query("reason") String reason,
+                                    @Query("from_time") String from_time,@Query("to_time") String to_time,@Query("emp_id") String emp_id);
     @POST("empovertime-create")
     Call<CommonPojo> insertOverTime(@Query("date") String date,@Query("leave_type") String leave_type,@Query("reason") String reason,
                                     @Query("from_time") String from_time,@Query("to_time") String to_time);

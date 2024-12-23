@@ -9,6 +9,12 @@ public class DashboardModal {
     String today_onduty_pencount;
     @SerializedName("today_leave_pencount")
     String today_leave_pencount;
+    @SerializedName("today_overtime_pencount")
+    String today_overtime_pencount;
+
+    public String getToday_overtime_pencount() {
+        return today_overtime_pencount;
+    }
 
     public String getToday_onduty_pencount() {
         return today_onduty_pencount;

@@ -42,7 +42,9 @@ import in.proz.adamd.AdminModule.AdminNewDashboard;
 import in.proz.adamd.Attendance.AttendanceActivity;
 import in.proz.adamd.DashboardNewActivity;
 import in.proz.adamd.Map.MapCurrentLocation;
+import in.proz.adamd.Meeting.MeetingActivity;
 import in.proz.adamd.ModalClass.DModal;
+import in.proz.adamd.ModalClass.MeetingEmpModal;
 import in.proz.adamd.ModalClass.OnDutyMain;
 import in.proz.adamd.NotesActivity.NotesActivity;
 import in.proz.adamd.Profile.ProfileActivity;
@@ -86,6 +88,9 @@ int pageNo=1;
      List<CommonPojo> getGetOnDutyList = new ArrayList<>();
     TextView online_text,header,request_text,no_data;
     LinearLayout nhome_layout,nprofile_layout,nreports_layout,nlocation_layout;
+    List<String> employeeNameList=new ArrayList<>();
+    List<String>  employeeMailList=new ArrayList<>();
+    Spinner spinner;
 
     int main_change=0;
     @Override
@@ -107,6 +112,7 @@ int pageNo=1;
     }
 
     private void updateAdminUI() {
+
         title.setText("Onduty Request");
         apply_leave_layout.setVisibility(View.VISIBLE);
         frame_layout.setVisibility(View.GONE);
@@ -122,6 +128,20 @@ int pageNo=1;
     }
 
     public void initView(){
+        spinner = findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(spinner.getSelectedView()!=null) {
+                    ((TextView) spinner.getSelectedView()).setTextColor(getResources().getColor(R.color.black));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         title = findViewById(R.id.title);
         title.setText("Onduty List");
         nhome_layout= findViewById(R.id.nhome_layout);
@@ -182,7 +202,7 @@ int pageNo=1;
                 {
                     isScrolling = false;
                     pageNo+=1;
-                    getList();
+                   // getList();
                 }
             }
         });
@@ -241,19 +261,66 @@ int pageNo=1;
         }
 
 
-         if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
+      /*   if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
                 !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminRole")) &&
                 !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminName"))){
-            updateAdminUI();
-        }else {
+             getList();
+        }else {*/
              if(commonClass.isOnline(OnDuty.this)){
-                 getList();
+               //  getList();
+                 getEmployeeList();
              }else{
                  commonClass.showInternetWarning(OnDuty.this);
              }
 
-         }
+        // }
     }
+    private void getEmployeeList() {
+        loader.setVisibility(View.VISIBLE);
+        ApiInterface apiInterface = ApiClient.getTokenRetrofit(commonClass.getSharedPref(getApplicationContext(), "token"),
+                commonClass.getDeviceID(OnDuty.this)).create(ApiInterface.class);
+        Call<MeetingEmpModal> call = apiInterface.getEmpDetails();
+        Log.d("getEmployeeList"," ca;;  "+call.request().url());
+        call.enqueue(new Callback<MeetingEmpModal>() {
+            @Override
+            public void onResponse(Call<MeetingEmpModal> call, Response<MeetingEmpModal> response) {
+                loader.setVisibility(View.GONE);
+                Log.d("getEmployeeList"," codee "+response.code());
+                if(response.isSuccessful()){
+                    if(response.code()==200){
+                        if(response.body().getStatus().equals("success")){
+                            if(response.body().getGetData()!=null){
+                                Log.d("getEmployeeList"," size as "+response.body().getGetData().size());
+                                if(response.body().getGetData().size()!=0){
+                                    List<CommonPojo> getEmployeeList = response.body().getGetData();
+                                    for(int i=0;i<getEmployeeList.size();i++){
+                                        employeeNameList.add(getEmployeeList.get(i).getName());
+                                        employeeMailList.add(getEmployeeList.get(i).getId());
+                                    }
+                                     if (employeeNameList.size()!=0){
+                                        updateUI();
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MeetingEmpModal> call, Throwable t) {
+                loader.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void updateUI() {
+        ArrayAdapter ad  = new ArrayAdapter(this,R.layout.spinner_drop_down,employeeNameList);
+        ad.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(ad);
+    }
+
     private void getDropDownList() {
         // progressDialog.show();
         loader.setVisibility(View.VISIBLE);
@@ -390,7 +457,7 @@ int pageNo=1;
                     frame_icon.setImageDrawable(getResources().getDrawable(R.drawable.add_circle_white));
                     apply_leave_layout.setVisibility(View.GONE);
                     listLayout.setVisibility(View.VISIBLE);
-                     getList();
+                    // getList();
                  }else{
                     first_pos=0;
                     resetUI();
@@ -482,8 +549,12 @@ int pageNo=1;
                 commonClass.getDeviceID(OnDuty.this)).create(ApiInterface.class);
         Call<CommonPojo> call=null ;
 
-        call = apiInterface.insertOnDuty(str_from_date,
-                dropDownTable.selectOnlyID(spinnerLeave.getSelectedItem().toString(),"onduty"),edt_reason.getText().toString());
+        int pos = spinner.getSelectedItemPosition();
+        String emp_no = employeeMailList.get(pos);
+
+        call = apiInterface.insertOnDutyDialog(str_from_date,
+                dropDownTable.selectOnlyID(spinnerLeave.getSelectedItem().toString(),"onduty"),
+                edt_reason.getText().toString(),emp_no);
 
 
         Log.d("insertMethod"," url "+call.request().url());
@@ -499,13 +570,17 @@ int pageNo=1;
                         Log.d("claim_url"," respone "+response.body().getStatus());
                         if(response.body().getStatus().equals("success")){
                             commonClass.showSuccess(OnDuty.this,response.body().getData());
-                             resetUI();
+                          //   resetUI();
                             if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
                                     !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminRole")) &&
                                     !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminName"))){
                                 //updateAdminUI();
                                 main_change=1;
-                                callIntent();
+                                new Handler().postDelayed(new Runnable() {
+                                    public void run() {
+                                        callIntent();
+                                    }
+                                }, 1500);
                             }else {
                                 getList();
                             }
@@ -583,7 +658,7 @@ int pageNo=1;
                 }, 2500);
 
             }else{
-                Intent intent = new Intent(getApplicationContext(), DashboardNewActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AdminNewDashboard.class);
                 startActivity(intent);
             }
         }else{
@@ -617,11 +692,11 @@ int pageNo=1;
                                         getGetOnDutyList.add(response.body() .getGetOnDutyList().get(i));
                                     }
 
-                                    if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
+                                    /*if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
                                             !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminRole")) &&
                                             !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminName"))){
-                                        if(commonClass.getSharedPref(getApplicationContext(),"role_no").equals("70")){
-                                            if(first_pos==1){
+                                        if(commonClass.getSharedPref(getApplicationContext(),"role_no").equals("70")){*/
+                                           // if(first_pos==1){
                                                 adapter.notifyDataSetChanged();
                                                 no_data.setVisibility(View.GONE);
                                                 apply_leave_layout.setVisibility(View.GONE);
@@ -629,14 +704,14 @@ int pageNo=1;
                                                 frame_tag.setText("Apply OnDuty");
                                                 frame_icon.setImageDrawable(getResources().getDrawable(R.drawable.add_circle_white));
 
-                                            }else{
+                                          /*  }else{
                                                 updateAdminUI();
-                                            }
-                                        }else{
+                                            }*/
+                                        /*}else{
                                             updateAdminUI();
-                                        }
+                                        }*/
 
-                                    }else{
+                                   /* }else{
                                         adapter.notifyDataSetChanged();
                                         no_data.setVisibility(View.GONE);
                                         apply_leave_layout.setVisibility(View.GONE);
@@ -644,7 +719,7 @@ int pageNo=1;
                                         frame_tag.setText("Apply OnDuty");
                                         frame_icon.setImageDrawable(getResources().getDrawable(R.drawable.add_circle_white));
 
-                                    }
+                                    }*/
 
 
 

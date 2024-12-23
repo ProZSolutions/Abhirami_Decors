@@ -233,6 +233,9 @@
 
 
         </activity>
+        <service android:name=".PushNotification.MyForegroundService"
+            android:enabled="true"
+            android:exported="false" />
 
 
         <!--
@@ -267,7 +270,13 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/api" />
-
+        <service
+            android:name=".PushNotification.MyFirebaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
 
         <receiver
             android:name="in.proz.adamd.BackgroundTask.Restarter"

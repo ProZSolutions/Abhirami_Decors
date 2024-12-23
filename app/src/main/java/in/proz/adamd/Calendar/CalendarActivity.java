@@ -42,6 +42,7 @@ import java.util.Set;
 
 import in.proz.adamd.BackgroundColorDecorator;
 import in.proz.adamd.DashboardNewActivity;
+import in.proz.adamd.Loan.LoanActivity;
 import in.proz.adamd.ModalClass.LeaveModal;
 import in.proz.adamd.Profile.ProfileActivity;
 import in.proz.adamd.R;
@@ -83,7 +84,9 @@ public class CalendarActivity extends AppCompatActivity implements   View.OnClic
     }
 
     private void initView() {
-
+        if(!commonClass.isOnline(CalendarActivity.this)){
+            commonClass.showInternetWarning(CalendarActivity.this);
+        }
         nhome_layout= findViewById(R.id.nhome_layout);
       //  nabout_layout= findViewById(R.id.nabout_layout);
         nreports_layout= findViewById(R.id.nreports_layout);

@@ -12,6 +12,12 @@ public class MeetingEmpModal implements Serializable {
     String status;
     @SerializedName("data")
     List<CommonPojo> getData;
+    @SerializedName("employee")
+    List<CommonPojo> employeeList;
+
+    public List<CommonPojo> getEmployeeList() {
+        return employeeList;
+    }
 
     public String getStatus() {
         return status;
