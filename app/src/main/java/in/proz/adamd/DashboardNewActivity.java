@@ -117,7 +117,7 @@ public class DashboardNewActivity extends AppCompatActivity implements View.OnCl
     int[] empListImg= {R.drawable.pfinger,R.drawable.leav,R.drawable.dsr,R.drawable.icons_overtime,R.drawable.meet
             ,R.drawable.loa,R.drawable.reimb,R.drawable.mycalendarrr__1_};
 
-    int[] adminMidImg ={R.drawable.group_emp,R.drawable.dsr};
+    int[] adminMidImg ={R.drawable.group_emp,R.drawable.dsr,R.drawable.check_out,R.drawable.icons_overtime};
     int[] adminEssentialsImg ={R.drawable.meet,R.drawable.pfinger,R.drawable.mycalendarrr__1_
             ,R.drawable.my_profileee__1_};
 
@@ -632,7 +632,7 @@ public class DashboardNewActivity extends AppCompatActivity implements View.OnCl
 
 
     private void initView() {
-        linear_layout1= findViewById(R.id.linear_layout1);
+         linear_layout1= findViewById(R.id.linear_layout1);
         linear_layout2= findViewById(R.id.linear_layout2);
         linear_layout3= findViewById(R.id.linear_layout3);
         linear_layout4= findViewById(R.id.linear_layout4);

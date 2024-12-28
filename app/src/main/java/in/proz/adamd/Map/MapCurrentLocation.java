@@ -27,13 +27,18 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.Image;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
 import android.speech.RecognizerIntent;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
@@ -170,67 +175,63 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener , RouteListener {
+public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener, RouteListener {
     private MapView mapView;
     EditText edt_planned_work;
-    String branch_id=null;
-    double ofz_lat= 11.2391346,ofz_lng=78.1654629;
-    List<String> projectNameList= new ArrayList<>();
+    String branch_id = null;
+    double ofz_lat = 11.2391346, ofz_lng = 78.1654629;
+    List<String> projectNameList = new ArrayList<>();
     boolean[] selectedProjects;
-    String dsr_flag="0";
+    String dsr_flag = "0";
     ArrayList<Integer> projectListID = new ArrayList<>();
     ArrayList<Polyline> polylines = null;
-    TextView   recognize;
+    TextView recognize;
 
 
-
-    int other_status=0;
+    int other_status = 0;
 
     MapRipple mapRipple;
-    int distance_value=0;
+    int distance_value = 0;
 
-    ProgressDialog progressDialog ;
+    ProgressDialog progressDialog;
     //RelativeLayout header_relative;
 
-    String workLocation="office";
+    String workLocation = "office";
     public int yr, mnth, dy;
     public Calendar calendar;
-    public String dt,today_date;
+    public String dt, today_date;
     CircleImageView profile_img;
-    TextView designation,name;
+    TextView designation, name;
 
     private FusedLocationProviderClient fusedLocationClient;
     private GoogleMap googleMap;
-    double latitude,longitude;
-    ProjectDetails projectDetails ;
-    AttendanceListDB attendanceListDB ;
+    double latitude, longitude;
+    ProjectDetails projectDetails;
+    AttendanceListDB attendanceListDB;
     PunchINOUTDB punchINOUTDB;
     AttendanceDSR attendanceDSR;
-    Marker marker,marker1;
-    LinearLayout check_in,checkout;
+    Marker marker, marker1;
+    LinearLayout check_in, checkout;
     TextView title;
     ImageView back_arrow;
     DecimalFormat decimalFormat = new DecimalFormat("00");
     MKLoader loader;
-    Intent mServiceIntent,lIntent,lUIntent;
+    Intent mServiceIntent, lIntent, lUIntent;
 
-    LinearLayout nhome_layout,nprofile_layout,nreports_layout,nlocation_layout;
+    LinearLayout nhome_layout, nprofile_layout, nreports_layout, nlocation_layout;
     ImageView iimgnotes;
     TextView txtnote;
     CommonClass commonClass = new CommonClass();
-  /*  LinearLayout online_layout;
-    ImageView online_icon;
-    TextView online_text;*/
+    /*  LinearLayout online_layout;
+      ImageView online_icon;
+      TextView online_text;*/
     private YourService mYourService;
     LinearLayout office_layout, home_layout, client_layout;
     ImageView ofz_icon, home_icon, client_icon;
-    TextView  ofz_text, home_text, client_text;
+    TextView ofz_text, home_text, client_text;
     LocationForegroundService lService;
     LocationUpdateService lUService;
     String admin;
-
-
-
 
 
     // face detector
@@ -239,42 +240,47 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
     PreviewView previewView;
     Interpreter tfLite;
     CameraSelector cameraSelector;
-    boolean developerMode=false;
-    float distance= 1.0f;
-    boolean start=true,flipX=false;
-    Context context= MapCurrentLocation.this;
-    int cam_face=CameraSelector.LENS_FACING_FRONT; //Default Back Camera
+    boolean developerMode = false;
+    float distance = 1.0f;
+    boolean start = true, flipX = false;
+    Context context = MapCurrentLocation.this;
+    int cam_face = CameraSelector.LENS_FACING_FRONT; //Default Back Camera
     int[] intValues;
-    int inputSize=112;  //Input size for model
-    boolean isModelQuantized=false;
+    int inputSize = 112;  //Input size for model
+    boolean isModelQuantized = false;
     float[][] embeedings;
     float IMAGE_MEAN = 128.0f;
     float IMAGE_STD = 128.0f;
-    int OUTPUT_SIZE=192; //Output size of model
+    int OUTPUT_SIZE = 192; //Output size of model
     private static int SELECT_PICTURE = 2;
     ProcessCameraProvider cameraProvider;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
 
-    String modelFile="mobile_face_net.tflite"; //model name
+    String modelFile = "mobile_face_net.tflite"; //model name
     private HashMap<String, SimilarityClassifier.Recognition> registered = new HashMap<>(); //saved Faces
 
 
-FaceAuthDB faceAuthDB;
+    FaceAuthDB faceAuthDB;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mapcurrentlocation);
-        faceAuthDB=new FaceAuthDB(MapCurrentLocation.this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            SendPushNotification();
+        }
+      //  Toast.makeText(getApplicationContext(), "Flow1", Toast.LENGTH_SHORT).show();
+        faceAuthDB = new FaceAuthDB(MapCurrentLocation.this);
         faceAuthDB.getWritableDatabase();
+        isLowNetwork(MapCurrentLocation.this);
        /* ofz_lat = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"branch_lat"));
         ofz_lng = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"branch_long"));
 
 */
-        Log.d("office_location"," lat "+ofz_lat+" lng "+ofz_lng);
-        Bundle b= getIntent().getExtras();
-        if(b!=null){
+        Log.d("office_location", " lat " + ofz_lat + " lng " + ofz_lng);
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
             admin = b.getString("admin");
         }
         CommonClass comm = new CommonClass();
@@ -303,17 +309,17 @@ FaceAuthDB faceAuthDB;
         name = findViewById(R.id.name);
         profile_img = findViewById(R.id.profile_img);
         designation = findViewById(R.id.designation);
-        name.setText(commonClass.getSharedPref(getApplicationContext(),"name"));
-        designation.setText(commonClass.getSharedPref(getApplicationContext(),"designation"));
-        Picasso.with(MapCurrentLocation.this).load(commonClass.getSharedPref(getApplicationContext(),"image")).into(profile_img);
+        name.setText(commonClass.getSharedPref(getApplicationContext(), "name"));
+        designation.setText(commonClass.getSharedPref(getApplicationContext(), "designation"));
+        Picasso.with(MapCurrentLocation.this).load(commonClass.getSharedPref(getApplicationContext(), "image")).into(profile_img);
 
         back_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!TextUtils.isEmpty(admin)){
+                if (!TextUtils.isEmpty(admin)) {
                     Intent intent = new Intent(getApplicationContext(), AdminNewApprovals.class);
                     startActivity(intent);
-                }else{
+                } else {
                     Intent intent = new Intent(getApplicationContext(), DashboardNewActivity.class);
                     startActivity(intent);
                 }
@@ -334,19 +340,18 @@ FaceAuthDB faceAuthDB;
             @Override
             public void onClick(View v) {
                 start = true;
-                 recognize.setVisibility(View.GONE);
+                recognize.setVisibility(View.GONE);
             }
         });
-        registered=readFromSP();
-
+        registered = readFromSP();
 
 
         try {
-            Log.d("FaceReg"," try block "+modelFile);
-            tfLite=new Interpreter(loadModelFile(MapCurrentLocation.this,modelFile));
+            Log.d("FaceReg", " try block " + modelFile);
+            tfLite = new Interpreter(loadModelFile(MapCurrentLocation.this, modelFile));
         } catch (IOException e) {
-            Log.d("FaceReg"," error block "+e.getMessage()+"  "+e.getLocalizedMessage()+" cause "+
-                    e.getCause()+" track "+e.getStackTrace());
+            Log.d("FaceReg", " error block " + e.getMessage() + "  " + e.getLocalizedMessage() + " cause " +
+                    e.getCause() + " track " + e.getStackTrace());
             e.printStackTrace();
         }
         //Initialize Face Detector
@@ -360,58 +365,60 @@ FaceAuthDB faceAuthDB;
         calendar = Calendar.getInstance();
 
         yr = calendar.get(Calendar.YEAR);
-        mnth = calendar.get(Calendar.MONTH)+1;
+        mnth = calendar.get(Calendar.MONTH) + 1;
         dy = calendar.get(Calendar.DAY_OF_MONTH);
         dt = decimalFormat.format(Double.valueOf(yr)) + "-" + decimalFormat.format(Double.valueOf(mnth + 1)) + "-" + dy;
-        today_date = dy+"-"+mnth+"-"+yr;
+        today_date = dy + "-" + mnth + "-" + yr;
         checkout.setEnabled(false);
 
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this);
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"punch_in"))){
-            String date = dy+"-"+mnth+"-"+yr;
-            Log.d("attendance_punch"," attendance "+commonClass.getSharedPref(getApplicationContext(),"punch_in")+
-                    " date "+date);
-            if(date.equals(commonClass.getSharedPref(getApplicationContext(),"punch_in"))){
+        if (!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(), "punch_in"))) {
+            String date = dy + "-" + mnth + "-" + yr;
+            Log.d("attendance_punch", " attendance " + commonClass.getSharedPref(getApplicationContext(), "punch_in") +
+                    " date " + date);
+            if (date.equals(commonClass.getSharedPref(getApplicationContext(), "punch_in"))) {
                 checkout.setEnabled(true);
                 check_in.setEnabled(false);
                 updateCheckHeader(2);
-            }else{
-                String splitarr[]=commonClass.getSharedPref(getApplicationContext(),"punch_in").split("-");
-                if(!splitarr[0].equals(dy)){
-                    commonClass.putSharedPref(getApplicationContext(),"punch_in",null);
+            } else {
+                String splitarr[] = commonClass.getSharedPref(getApplicationContext(), "punch_in").split("-");
+                if (!splitarr[0].equals(dy)) {
+                    commonClass.putSharedPref(getApplicationContext(), "punch_in", null);
                     check_in.setEnabled(true);
                     checkout.setEnabled(false);
                     updateCheckHeader(1);
                 }
             }
-        }else{
+        } else {
             check_in.setEnabled(true);
             checkout.setEnabled(false);
         }
         getLastLocation();
-         loader.setVisibility(View.VISIBLE);
+        loader.setVisibility(View.VISIBLE);
 
 
-        if(commonClass.isOnline(MapCurrentLocation.this)){
+        if (commonClass.isOnline(MapCurrentLocation.this)) {
             getFaceList();
-        }else{
+        } else {
             getFaceListOffline();
         }
-        if(commonClass.isOnline(MapCurrentLocation.this)){
+        if (commonClass.isOnline(MapCurrentLocation.this)) {
             checkAttendancePunchOrNot();
-        }else{
-            Log.d("checkinHeader"," already punch "+commonClass.getSharedPref(getApplicationContext(),"sync_id")+
-                    " ppun "+commonClass.getSharedPref(getApplicationContext(),"punch_in"));
-            if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"punch_in"))){
+        } else {
+            Log.d("checkinHeader", " already punch " + commonClass.getSharedPref(getApplicationContext(), "sync_id") +
+                    " ppun " + commonClass.getSharedPref(getApplicationContext(), "punch_in"));
+            if (!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(), "punch_in"))) {
                 /// already punch in
                 checkout.setEnabled(true);
-                 check_in.setEnabled(false);
+                check_in.setEnabled(false);
                 updateCheckHeader(2);
-            }else {
+            } else {
                 /// not yet punched
-                 check_in.setEnabled(true);
+                check_in.setEnabled(true);
                 checkout.setEnabled(false);
                 updateCheckHeader(1);
             }
@@ -419,58 +426,60 @@ FaceAuthDB faceAuthDB;
 
         }
 
-        Log.d("gettingWorkLocation"," s "+commonClass.getSharedPref(getApplicationContext(),"work_location"));
-        if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"work_location"))){
-            workLocation = commonClass.getSharedPref(getApplicationContext(),"work_location");
-            if(workLocation.equals("client")){
+        Log.d("gettingWorkLocation", " s " + commonClass.getSharedPref(getApplicationContext(), "work_location"));
+        if (!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(), "work_location"))) {
+            workLocation = commonClass.getSharedPref(getApplicationContext(), "work_location");
+            if (workLocation.equals("client")) {
                 updateUIHeader(3);
-            }else if(workLocation.equals("home")){
+            } else if (workLocation.equals("home")) {
                 updateUIHeader(2);
-            }else if(workLocation.equals("office")){
+            } else if (workLocation.equals("office")) {
                 updateUIHeader(1);
             }
-        }else{
-            workLocation ="office";
+        } else {
+            workLocation = "office";
             updateUIHeader(1);
         }
+        getLastLocation();
     }
+
     public void checkAttendancePunchOrNot() {
         loader.setVisibility(View.VISIBLE);
-        ApiInterface apiInterface = ApiClient.getTokenRetrofit( commonClass.getSharedPref(getApplicationContext(),"token"),
+        ApiInterface apiInterface = ApiClient.getTokenRetrofit(commonClass.getSharedPref(getApplicationContext(), "token"),
                 commonClass.getDeviceID(getApplicationContext())).create(ApiInterface.class);
         Call<PunchModal> call = apiInterface.getAttendancePunchInStatus();
-        Log.d("getAttendance"," call "+call.request().url());
+        Log.d("getAttendance", " call " + call.request().url());
         call.enqueue(new Callback<PunchModal>() {
             @Override
             public void onResponse(Call<PunchModal> call, Response<PunchModal> response) {
                 loader.setVisibility(View.GONE);
-                Log.d("getAttendance"," response "+response.code());
-                if(response.isSuccessful()){
-                    if(response.code()==200){
-                        if(response.body().getStatus().equals("success")){
+                Log.d("getAttendance", " response " + response.code());
+                if (response.isSuccessful()) {
+                    if (response.code() == 200) {
+                        if (response.body().getStatus().equals("success")) {
 
-                            if(!TextUtils.isEmpty(response.body().getCommonPojo().getDsr_flag())){
-                                dsr_flag =response.body().getCommonPojo().getDsr_flag();
+                            if (!TextUtils.isEmpty(response.body().getCommonPojo().getDsr_flag())) {
+                                dsr_flag = response.body().getCommonPojo().getDsr_flag();
                             }
 
-                            Log.d("getAttendance"," punch status "+response.body().getCommonPojo().getPunch_status()
-                                    +" syne "+response.body().getCommonPojo().getSync_id()+" dsr flag "+dsr_flag);
-                            if(response.body().getCommonPojo().getPunch_status().equals("0")){
+                            Log.d("getAttendance", " punch status " + response.body().getCommonPojo().getPunch_status()
+                                    + " syne " + response.body().getCommonPojo().getSync_id() + " dsr flag " + dsr_flag);
+                            if (response.body().getCommonPojo().getPunch_status().equals("0")) {
                                 commonClass.putSharedPref(getApplicationContext(), "punch_in", null);
-                                 check_in.setEnabled(true);
+                                check_in.setEnabled(true);
                                 checkout.setEnabled(false);
                                 updateCheckHeader(1);
-                            }else{
-                                commonClass.putSharedPref(getApplicationContext(),"punch_in",today_date);
-                                commonClass.putSharedPref(getApplicationContext(),"sync_id",response.body().getCommonPojo().getSync_id());
+                            } else {
+                                commonClass.putSharedPref(getApplicationContext(), "punch_in", today_date);
+                                commonClass.putSharedPref(getApplicationContext(), "sync_id", response.body().getCommonPojo().getSync_id());
                                 checkout.setEnabled(true);
-                                 check_in.setEnabled(false);
+                                check_in.setEnabled(false);
                                 updateCheckHeader(2);
                             }
-                        }else{
+                        } else {
                             //commonClass.showError(MapCurrentLocation.this,response.body().getStatus());
                         }
-                    }else{
+                    } else {
                         Gson gson = new GsonBuilder().create();
                         CommonPojo mError = new CommonPojo();
                         try {
@@ -483,7 +492,7 @@ FaceAuthDB faceAuthDB;
                             Log.d("thumbnail_url", " exp error  " + e.getMessage());
                         }
                     }
-                }else{
+                } else {
                     Gson gson = new GsonBuilder().create();
                     CommonPojo mError = new CommonPojo();
                     try {
@@ -501,30 +510,32 @@ FaceAuthDB faceAuthDB;
             @Override
             public void onFailure(Call<PunchModal> call, Throwable t) {
                 loader.setVisibility(View.GONE);
-                Log.d("getAttendance"," error "+t.getMessage());
+                Log.d("getAttendance", " error " + t.getMessage());
                 //commonClass.showError(MapCurrentLocation.this,t.getMessage());
             }
         });
 
     }
 
-    public void initView(){
+    public void initView() {
         iimgnotes = findViewById(R.id.location_icon);
         txtnote = findViewById(R.id.location_text);
         iimgnotes.setImageTintList(getApplicationContext().getColorStateList(R.color.n_org));
         txtnote.setTextColor(getApplicationContext().getColor(R.color.black));
-        nhome_layout= findViewById(R.id.nhome_layout);
-        nprofile_layout= findViewById(R.id.nprofile_layout);
-        nreports_layout= findViewById(R.id.nreports_layout);
-        nlocation_layout= findViewById(R.id.nlocation_layout);
+        nhome_layout = findViewById(R.id.nhome_layout);
+        nprofile_layout = findViewById(R.id.nprofile_layout);
+        nreports_layout = findViewById(R.id.nreports_layout);
+        nlocation_layout = findViewById(R.id.nlocation_layout);
         nhome_layout.setOnClickListener(this);
         nprofile_layout.setOnClickListener(this);
         nreports_layout.setOnClickListener(this);
         nlocation_layout.setOnClickListener(this);
 
-        TextView htitle = findViewById(R.id.header_title);
-        htitle.setText(commonClass.getSharedPref(getApplicationContext(),"EmppName"));
 
+
+
+        TextView htitle = findViewById(R.id.header_title);
+        htitle.setText(commonClass.getSharedPref(getApplicationContext(), "EmppName"));
 
 
         lUService = new LocationUpdateService();
@@ -533,7 +544,7 @@ FaceAuthDB faceAuthDB;
         mServiceIntent = new Intent(this, mYourService.getClass());
         lUIntent = new Intent(this, lUService.getClass());
         lIntent = new Intent(this, lService.getClass());
-      //  header_relative = findViewById(R.id.header_relative);
+        //  header_relative = findViewById(R.id.header_relative);
         office_layout = findViewById(R.id.office_layout);
         home_layout = findViewById(R.id.home_layout);
         client_layout = findViewById(R.id.client_layout);
@@ -546,16 +557,29 @@ FaceAuthDB faceAuthDB;
         office_layout.setOnClickListener(this);
         client_layout.setOnClickListener(this);
         home_layout.setOnClickListener(this);
+        if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"work_from_home"))){
+            if(commonClass.getSharedPref(getApplicationContext(),"work_from_home").equals("0")){
+                home_layout.setVisibility(View.GONE);
+                workLocation = "office";
+                updateUIHeader(1);
+            }else{
+                home_layout.setVisibility(View.VISIBLE);
+                workLocation = "home";
+                updateUIHeader(2);
+            }
+        }
+
     }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void updateCheckHeader(int i) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             check_in.setBackgroundTintList(getApplicationContext().getColorStateList(R.color.n_blue));
             checkout.setBackgroundTintList(getApplicationContext().getColorStateList(R.color.n_blue));
         }
-        if(i==1){
+        if (i == 1) {
             check_in.setBackgroundTintList(getApplicationContext().getColorStateList(R.color.n_org));
-        }else{
+        } else {
             checkout.setBackgroundTintList(getApplicationContext().getColorStateList(R.color.n_org));
         }
     }
@@ -566,9 +590,29 @@ FaceAuthDB faceAuthDB;
         Intent intent = new Intent(getApplicationContext(), DashboardNewActivity.class);
         startActivity(intent);
     }
+    @RequiresApi(api = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    private void SendPushNotification() {
+        Dexter.withContext(MapCurrentLocation.this)
+                .withPermissions(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                ).withListener(new MultiplePermissionsListener() {
+                    @Override public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+
+                        }else{
+                         }
+                    }
+                    @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
+                }).check();
+    }
 
     private void getLastLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+         //   Toast.makeText(getApplicationContext(), "Access fine location not given", Toast.LENGTH_SHORT).show();
+
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -578,51 +622,116 @@ FaceAuthDB faceAuthDB;
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        mapView.getMapAsync(MapCurrentLocation.this);
+
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
                         if (location != null) {
+                       //     Toast.makeText(getApplicationContext(), "Flow4", Toast.LENGTH_SHORT).show();
+
                             // Use the location to update the map
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
-                            distance_value = CalculationByDistance(ofz_lat,ofz_lng,latitude,longitude,"10km");
+                            distance_value = CalculationByDistance(ofz_lat, ofz_lng, latitude, longitude, "10km");
+                            //  distance_value = CalculationByDistance(ofz_lat,ofz_lng,11.2378483,78.1513483,"10km");
 
-                            LatLng latLng1 = new LatLng(latitude,longitude);
-                            Log.d("mapFunction"," location "+latitude+" lon "+longitude);
+                            LatLng latLng1 = new LatLng(latitude, longitude);
+                            Log.d("mapFunction", " location " + latitude + " lon " + longitude);
                             mapView.getMapAsync(MapCurrentLocation.this);
 
                             // Add code to update the map with the current location
+                        } else {
+                          //  Toast.makeText(getApplicationContext(), "Flow5", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
     }
+
+    public boolean isLowNetwork(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (cm != null) {
+            NetworkCapabilities nc = cm.getNetworkCapabilities(cm.getActiveNetwork());
+            if (nc != null) {
+                if (nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    int linkSpeed = getWifiLinkSpeed(context); // In Mbps
+                    commonClass.showWarning(MapCurrentLocation.this,"Network Slow.Map May take time to load");
+                     return linkSpeed < 5; // Example: Low network if speed < 5 Mbps
+                } else if (nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    int networkType = getMobileNetworkType(context);
+                    return isLowMobileNetwork(networkType); // Check based on network type
+                }
+            }
+        }
+        return true; // Return true if network information is unavailable
+    }
+
+    // Helper to get Wi-Fi link speed
+    private int getWifiLinkSpeed(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        if (wifiManager != null) {
+            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+          //  Toast.makeText(getApplicationContext(), "WIFI Speed " + wifiInfo.getLinkSpeed(), Toast.LENGTH_SHORT).show();
+
+            return wifiInfo.getLinkSpeed(); // Link speed in Mbps
+        }
+        return 0;
+    }
+
+    // Helper to get mobile network type
+    private int getMobileNetworkType(Context context) {
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        if (tm != null) {
+            return tm.getNetworkType();
+        }
+        return TelephonyManager.NETWORK_TYPE_UNKNOWN;
+    }
+
+    // Helper to check low mobile network types
+    private boolean isLowMobileNetwork(int networkType) {
+        switch (networkType) {
+            case TelephonyManager.NETWORK_TYPE_GPRS:    // ~ 100 kbps
+            case TelephonyManager.NETWORK_TYPE_EDGE:    // ~ 50-100 kbps
+            case TelephonyManager.NETWORK_TYPE_CDMA:    // ~ 14-64 kbps
+            case TelephonyManager.NETWORK_TYPE_1xRTT:   // ~ 50-100 kbps
+            case TelephonyManager.NETWORK_TYPE_IDEN:    // ~ 25 kbps
+                return true; // Consider these as low networks
+            default:
+                return false; // Higher-speed networks
+        }
+    }
+
     private void getProjectList() {
         //  progressDialog.show();
+       // Toast.makeText(getApplicationContext(), "Flow2", Toast.LENGTH_SHORT).show();
+
         loader.setVisibility(View.VISIBLE);
-        Log.d("projectDetails"," token "+commonClass.getSharedPref(getApplicationContext(),"token")+"  device "+
+        Log.d("projectDetails", " token " + commonClass.getSharedPref(getApplicationContext(), "token") + "  device " +
                 commonClass.getDeviceID(getApplicationContext()));
         ApiInterface apiInterface = ApiClient.getTokenRetrofit(commonClass.getSharedPref(getApplicationContext(), "token"),
                 commonClass.getDeviceID(MapCurrentLocation.this)).create(ApiInterface.class);
         Call<ProjectListModal> call = apiInterface.getProjectList();
-        Log.d("getProjectList"," list as "+call.request().url());
+        Log.d("getProjectList", " list as " + call.request().url());
         call.enqueue(new Callback<ProjectListModal>() {
             @Override
             public void onResponse(Call<ProjectListModal> call, Response<ProjectListModal> response) {
                 // progressDialog.dismiss();
                 loader.setVisibility(View.GONE);
-                Log.d("getProjectList"," code "+response.code());
-                if(response.isSuccessful()){
-                    if(response.code()==200){
-                        if(response.body().getGetProjectList().size()!=0){
+                Log.d("getProjectList", " code " + response.code());
+                if (response.isSuccessful()) {
+                    if (response.code() == 200) {
+                        if (response.body().getGetProjectList().size() != 0) {
                             projectDetails.DropTable();
-                            for(int i=0;i<response.body().getGetProjectList().size();i++){
+                            for (int i = 0; i < response.body().getGetProjectList().size(); i++) {
                                /* projectIdList.add(response.body().getGetProjectList().get(i).getProject_id());
                                 projectNameList.add(response.body().getGetProjectList().get(i).getProject_name());
                                 gitURLList.put(response.body().getGetProjectList().get(i).getProject_id(),
                                         response.body().getGetProjectList().get(i).getGit_url());*/
-                                String listString = String.join(",",  response.body().getGetProjectList().get(i).getGit_url());
-                                Log.d("projectDetails"," insert git "+listString);
+                                String listString = String.join(",", response.body().getGetProjectList().get(i).getGit_url());
+                                Log.d("projectDetails", " insert git " + listString);
                                 projectDetails.insertData(response.body().getGetProjectList().get(i).getProject_id(),
                                         response.body().getGetProjectList().get(i).getProject_name(),
                                         listString);
@@ -651,7 +760,8 @@ FaceAuthDB faceAuthDB;
                 projectNameList);
         nachoTextView.setAdapter(adapter);*/
     }
-    public void projectAlertDialog(TextView project_name, LinearLayout other_layout ){
+
+    public void projectAlertDialog(TextView project_name, LinearLayout other_layout) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MapCurrentLocation.this);
 
         // set title
@@ -663,7 +773,7 @@ FaceAuthDB faceAuthDB;
         selectedProjects = new boolean[stringArray.length];
 
 
-        if(projectListID.size()!=0) {
+        if (projectListID.size() != 0) {
             for (int i = 0; i < projectListID.size(); i++) {
                 selectedProjects[projectListID.get(i)] = true;
             }
@@ -695,13 +805,13 @@ FaceAuthDB faceAuthDB;
                 }
                 // set text on textView
                 project_name.setText(stringBuilder.toString());
-                if(stringBuilder!=null){
+                if (stringBuilder != null) {
                     String str = stringBuilder.toString();
-                    if(str.contains("Other")){
-                        other_status =1;
+                    if (str.contains("Other")) {
+                        other_status = 1;
                         other_layout.setVisibility(View.VISIBLE);
-                    }else{
-                        other_status=0;
+                    } else {
+                        other_status = 0;
                         other_layout.setVisibility(View.GONE);
                     }
                 }
@@ -722,6 +832,7 @@ FaceAuthDB faceAuthDB;
         alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.n_org));
         alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.n_org));
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -753,16 +864,16 @@ FaceAuthDB faceAuthDB;
 
         try {
             startActivityForResult(intent4, i);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Toast.makeText(MapCurrentLocation.this, " " + e.getMessage(),
                             Toast.LENGTH_SHORT)
                     .show();
         }
     }
+
     private void callAlertDialog() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        View view= LayoutInflater.from(this).inflate(R.layout.dsr_dialog_layout,null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.dsr_dialog_layout, null);
         TextView skipp_laypput = view.findViewById(R.id.skipp_laypput);
         ImageView back_arrow = view.findViewById(R.id.back_arrow);
         ImageView mike = view.findViewById(R.id.mike);
@@ -781,15 +892,15 @@ FaceAuthDB faceAuthDB;
         project_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                projectAlertDialog(project_name,oth_layout);
+                projectAlertDialog(project_name, oth_layout);
             }
         });
 
-        if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
-                !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminRole")) &&
-                !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminName"))){
+        if (!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(), "AdminEmpNo")) &&
+                !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(), "AdminRole")) &&
+                !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(), "AdminName"))) {
             skipp_laypput.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             skipp_laypput.setVisibility(View.GONE);
         }
         builder.setView(view);
@@ -817,61 +928,31 @@ FaceAuthDB faceAuthDB;
             @Override
             public void onClick(View v) {
                 //checkInAttendance();
-               callDashboard();
+                callDashboard();
             }
         });
         bottom_request_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(project_name.getText().toString())){
-                    commonClass.showWarning(MapCurrentLocation.this,"Please Select Project Name");
-                }else if(oth_layout.getVisibility()==View.VISIBLE){
-                    if(TextUtils.isEmpty(edt_others.getText().toString())){
-                        commonClass.showWarning(MapCurrentLocation.this,"Please Enter Other Project Name");
-                    }else{
-                       /* if(TextUtils.isEmpty(edt_planned_work.getText().toString())){
-                            commonClass.showWarning(MapCurrentLocation.this,"Please Enter Planned Work");
-                        }else{*/
-                        if(TextUtils.isEmpty(edt_planned_work.getText().toString())){
-                            edt_planned_work.setText("திட்டமிட்ட பணி எதுவும் இல்லை");
-                        }
-                            if(commonClass.isOnline(MapCurrentLocation.this)){
-                                callUpdateMethod(mDialog,project_name.getText().toString(),edt_others.getText().toString(),
-                                        edt_planned_work.getText().toString(),loader1);
-                            }else{
-                                SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-                                String date_format = date.format(new Date());
-                                Log.d("checkinHeader","insert 3 ");
-                                attendanceDSR.insertBulk(date_format,project_name.getText().toString(),
-                                        edt_planned_work.getText().toString(),edt_others.getText().toString());
-                                commonClass.putSharedPref(getApplicationContext(),"dsr_date",date_format);
-                                //checkInAttendance();
-                            }
+                if (TextUtils.isEmpty(edt_planned_work.getText().toString())) {
+                    edt_planned_work.setText("திட்டமிட்ட பணி எதுவும் இல்லை");
+                }
+                if (commonClass.isOnline(MapCurrentLocation.this)) {
+                    bottom_request_layout.setEnabled(false);
+                    check_in.setEnabled(false);
+                    mDialog.dismiss();
+                    callUpdateMethod(mDialog, project_name.getText().toString(), edt_others.getText().toString(),
+                            edt_planned_work.getText().toString(), loader1);
+                } else {
+                    SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+                    String date_format = date.format(new Date());
+                    Log.d("checkinHeader", "insert 3 ");
+                    attendanceDSR.insertBulk(date_format, project_name.getText().toString(),
+                            edt_planned_work.getText().toString(), edt_others.getText().toString());
+                    commonClass.putSharedPref(getApplicationContext(), "dsr_date", date_format);
+                    //checkInAttendance();
+                }
 
-                        }
-                    //}
-                }else{
-                    /*if(TextUtils.isEmpty(edt_planned_work.getText().toString())){
-                        commonClass.showWarning(MapCurrentLocation.this,"Please Enter Planned Work");
-                    }else{*/
-                        if(commonClass.isOnline(MapCurrentLocation.this)) {
-                            bottom_request_layout.setEnabled(false);
-                            check_in.setEnabled(false);
-                            mDialog.dismiss();
-                            callUpdateMethod(mDialog, project_name.getText().toString(), edt_others.getText().toString(),
-                                    edt_planned_work.getText().toString(), loader1);
-                        }else{
-                            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-                            String date_format = date.format(new Date());
-                            Log.d("checkinHeader"," date format "+date_format);
-                            mDialog.dismiss();
-                            attendanceDSR.insertBulk(date_format,project_name.getText().toString(),
-                                    edt_planned_work.getText().toString(),edt_others.getText().toString());
-                            commonClass.putSharedPref(getApplicationContext(),"dsr_date",date_format);
-                            checkInAttendance();
-                        }
-                    }
-               // }
             }
         });
 
@@ -886,14 +967,14 @@ FaceAuthDB faceAuthDB;
                                   MKLoader loader1) {
         List<String> sProject = new ArrayList<>();
         String str_pro = projectname;
-        if(!TextUtils.isEmpty(str_pro)){
+        if (!TextUtils.isEmpty(str_pro)) {
             String[] split = str_pro.split(",");
-            for (int i=0;i<split.length;i++){
+            for (int i = 0; i < split.length; i++) {
                 String projectName = projectDetails.getAllProjectIDList(split[i]);
-                Log.d("attendance_list"," split id "+split[i]+" project namt "+projectName);
-                if(TextUtils.isEmpty(projectName)){
+                Log.d("attendance_list", " split id " + split[i] + " project namt " + projectName);
+                if (TextUtils.isEmpty(projectName)) {
                     sProject.add("others");
-                }else {
+                } else {
                     sProject.add(projectName);
                 }
 
@@ -906,56 +987,56 @@ FaceAuthDB faceAuthDB;
         loader1.setVisibility(View.VISIBLE);
         ApiInterface apiInterface = ApiClient.getTokenRetrofit(commonClass.getSharedPref(getApplicationContext(), "token"),
                 commonClass.getDeviceID(MapCurrentLocation.this)).create(ApiInterface.class);
-        Call<CommonPojo> call = apiInterface.DSRInsertInAttendance(commonClass.getSharedPref(getApplicationContext(),"emp_id"),
-                date_format,plannedwork,sProject,othername);
-        Log.d("attendance_list"," call "+call.request().url());
+        Call<CommonPojo> call = apiInterface.DSRInsertInAttendance(commonClass.getSharedPref(getApplicationContext(), "emp_id"),
+                date_format, plannedwork, sProject, othername);
+        Log.d("attendance_list", " call " + call.request().url());
         call.enqueue(new Callback<CommonPojo>() {
             @Override
             public void onResponse(Call<CommonPojo> call, Response<CommonPojo> response) {
                 loader1.setVisibility(View.GONE);
-                Log.d("attendance_list"," code "+response.code());
+                Log.d("attendance_list", " code " + response.code());
                 mDialog.dismiss();
-                if(response.isSuccessful()){
-                    if(response.code()==400){
-                        commonClass.putSharedPref(getApplicationContext(),"dsr_date",date_format);
+                if (response.isSuccessful()) {
+                    if (response.code() == 400) {
+                        commonClass.putSharedPref(getApplicationContext(), "dsr_date", date_format);
                     }
-                    if(response.code()==200){
+                    if (response.code() == 200) {
 
-                        if(response.body().getStatus().contains("success")){
-                            commonClass.putSharedPref(getApplicationContext(),"dsr_date",date_format);
-                           // checkInAttendance();
-                            commonClass.showSuccess(MapCurrentLocation.this,response.body().getData());
+                        if (response.body().getStatus().contains("success")) {
+                            commonClass.putSharedPref(getApplicationContext(), "dsr_date", date_format);
+                            // checkInAttendance();
+                            commonClass.showSuccess(MapCurrentLocation.this, response.body().getData());
                             new Handler().postDelayed(new Runnable() {
-                                public void run()   {
+                                public void run() {
                                     callDashboard();
                                 }
                             }, 1500);
 
-                        }else{
-                            commonClass.showError(MapCurrentLocation.this,response.body().getData());
+                        } else {
+                            commonClass.showError(MapCurrentLocation.this, response.body().getData());
                         }
-                    }else{
-                      //  checkInAttendance();
+                    } else {
+                        //  checkInAttendance();
                         Gson gson = new GsonBuilder().create();
                         CommonPojo mError = new CommonPojo();
                         try {
                             mError = gson.fromJson(response.errorBody().string(), CommonPojo.class);
 
-                            commonClass.showError(MapCurrentLocation.this,mError.getError());
+                            commonClass.showError(MapCurrentLocation.this, mError.getError());
                             //    Toast.makeText(getApplicationContext(), mError.getError(), Toast.LENGTH_LONG).show();
                         } catch (IOException e) {
                             // handle failure to read error
                             Log.d("thumbnail_url", " exp error  " + e.getMessage());
                         }
                     }
-                }else{
-                   // checkInAttendance();
+                } else {
+                    // checkInAttendance();
                     Gson gson = new GsonBuilder().create();
                     CommonPojo mError = new CommonPojo();
                     try {
                         mError = gson.fromJson(response.errorBody().string(), CommonPojo.class);
 
-                        commonClass.showError(MapCurrentLocation.this,mError.getError());
+                        commonClass.showError(MapCurrentLocation.this, mError.getError());
                         //    Toast.makeText(getApplicationContext(), mError.getError(), Toast.LENGTH_LONG).show();
                     } catch (IOException e) {
                         // handle failure to read error
@@ -969,57 +1050,60 @@ FaceAuthDB faceAuthDB;
                 //checkInAttendance();
                 loader1.setVisibility(View.GONE);
                 mDialog.dismiss();
-                commonClass.showError(MapCurrentLocation.this,t.getMessage());
+                commonClass.showError(MapCurrentLocation.this, t.getMessage());
             }
         });
     }
+
     private void checkInConditionMethod() {
-        if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"dsr_date"))){
+        if (!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(), "dsr_date"))) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String date = dateFormat.format(new Date());
-            Log.d("getDateFormatValue"," if con "+date);
-            if(commonClass.getSharedPref(getApplicationContext(),"dsr_date").equals(date)){
-                if(commonClass.isOnline(MapCurrentLocation.this)){
-                    if(commonClass.isLocationEnabled(MapCurrentLocation.this)){
+            Log.d("getDateFormatValue", " if con " + date);
+            if (commonClass.getSharedPref(getApplicationContext(), "dsr_date").equals(date)) {
+                if (commonClass.isOnline(MapCurrentLocation.this)) {
+                    if (commonClass.isLocationEnabled(MapCurrentLocation.this)) {
                         checkInAttendance();
-                    }else{
-                       commonClass.showWarning(MapCurrentLocation.this,"Enable Location and then try");
+                    } else {
+                        commonClass.showWarning(MapCurrentLocation.this, "Enable Location and then try");
                     }
-                }else {
+                } else {
                     checkInAttendance();
                 }
 
-            }else {
+            } else {
                 Log.d("getDateFormatValue", " com to else ");
-                commonClass.putSharedPref(getApplicationContext(),"dsr_date",null);
-               // checkInAttendance();
-                if(commonClass.isOnline(MapCurrentLocation.this)){
-                    if(commonClass.isLocationEnabled(MapCurrentLocation.this)){
+                commonClass.putSharedPref(getApplicationContext(), "dsr_date", null);
+                // checkInAttendance();
+                if (commonClass.isOnline(MapCurrentLocation.this)) {
+                    if (commonClass.isLocationEnabled(MapCurrentLocation.this)) {
                         checkInAttendance();
-                    }else{
-                        commonClass.showWarning(MapCurrentLocation.this,"Enable Location and then try");
+                    } else {
+                        commonClass.showWarning(MapCurrentLocation.this, "Enable Location and then try");
                     }
-                }else {
+                } else {
                     checkInAttendance();
                 }
 
             }
-        }else{
-            Log.d("getDateFormatValue"," come to outer else ");
+        } else {
+            Log.d("getDateFormatValue", " come to outer else ");
             //callAlertDialog();
             // checkInAttendance();
-            if(commonClass.isOnline(MapCurrentLocation.this)){
-                if(commonClass.isLocationEnabled(MapCurrentLocation.this)){
+            if (commonClass.isOnline(MapCurrentLocation.this)) {
+                if (commonClass.isLocationEnabled(MapCurrentLocation.this)) {
                     checkInAttendance();
-                }else{
-                    commonClass.showWarning(MapCurrentLocation.this,"Enable Location and then try");
+                } else {
+                    commonClass.showWarning(MapCurrentLocation.this, "Enable Location and then try");
                 }
-            }else {
+            } else {
                 checkInAttendance();
             }
         }
     }
-    public int CalculationByDistance(double lat1,double lon1,double lat2,double lon2,String actual_distance ) {
+
+    public int CalculationByDistance(double lat1, double lon1, double lat2, double lon2, String actual_distance) {
+        Log.d("getDistance", " current lat lng " + lat2 + " " + lon2);
         ///idea 3
       /*  double distance;
         Location locationA = new Location("");
@@ -1032,20 +1116,21 @@ FaceAuthDB faceAuthDB;
         Log.d("distance_calculation"," idea 3 distance "+distance);
         return (int) distance;
 */
-        double distance=0;
-        double minDis=0;
+        double distance = 0;
+        double minDis = 0;
 
-        BranchTable branchTable= new BranchTable(MapCurrentLocation.this);
+        BranchTable branchTable = new BranchTable(MapCurrentLocation.this);
         branchTable.getWritableDatabase();
 
 
         List<in.proz.adamd.ModalClass.LatLng> getBranchDetails = new ArrayList<>();
         getBranchDetails = branchTable.getAllNameList();
-        Log.d("getDistance"," get list size "+getBranchDetails.size());
-        if(getBranchDetails.size()!=0){
-            for(int i=0;i<getBranchDetails.size();i++){
-                Double lat11 =Double.valueOf(getBranchDetails.get(i).getLatitude());
-                Double lng11 =Double.valueOf(getBranchDetails.get(i).getLongitude());
+        Log.d("getDistance", " get list size " + getBranchDetails.size());
+        if (getBranchDetails.size() != 0) {
+
+            for (int i = 0; i < getBranchDetails.size(); i++) {
+                Double lat11 = Double.valueOf(getBranchDetails.get(i).getLatitude());
+                Double lng11 = Double.valueOf(getBranchDetails.get(i).getLongitude());
                 Location locationA = new Location("");
                 locationA.setLatitude(lat11);
                 locationA.setLongitude(lng11);
@@ -1053,13 +1138,13 @@ FaceAuthDB faceAuthDB;
                 locationB.setLatitude(lat2);
                 locationB.setLongitude(lon2);
                 distance = locationA.distanceTo(locationB);
-                Log.d("getDistance"," as "+minDis);
-                if(i==0){
+                Log.d("getDistance", " as " + minDis);
+                if (i == 0) {
                     minDis = distance;
                     branch_id = getBranchDetails.get(i).getId();
-                }else{
-                    if(minDis>distance){
-                        minDis=distance;
+                } else {
+                    if (minDis > distance) {
+                        minDis = distance;
                         branch_id = getBranchDetails.get(i).getId();
                     }
                 }
@@ -1067,12 +1152,10 @@ FaceAuthDB faceAuthDB;
         }
 
 
-
-
-
-        Log.d("getDistance"," idea 3 distance "+distance);
+        Log.d("getDistance", " idea 3 distance " + distance + " branch id " + branch_id);
         return (int) minDis;
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -1098,10 +1181,10 @@ FaceAuthDB faceAuthDB;
     }
 
 
-    public BitmapDescriptor setIcon(Activity context,int drawableID){
-        Drawable drawable = ActivityCompat.getDrawable(context,drawableID);
-        drawable.setBounds(0,0,drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight());
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight(),Bitmap.Config.ARGB_4444);
+    public BitmapDescriptor setIcon(Activity context, int drawableID) {
+        Drawable drawable = ActivityCompat.getDrawable(context, drawableID);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_4444);
         Canvas canvas = new Canvas(bitmap);
         drawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
@@ -1109,14 +1192,34 @@ FaceAuthDB faceAuthDB;
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-      //  getLastLocation();
+        //  getLastLocation();
         googleMap = googleMap;
-        if(loader.getVisibility()==View.VISIBLE){
+     //   Toast.makeText(getApplicationContext(), "Flow7", Toast.LENGTH_SHORT).show();
+
+        if (loader.getVisibility() == View.VISIBLE) {
             loader.setVisibility(View.GONE);
         }
+
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+         //   Toast.makeText(getApplicationContext(),"Access Fine Location Not Granded ",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+            if (location != null) {
+                // Get the current latitude and longitude
+                latitude =location.getLatitude();
+                longitude = location.getLongitude();
+
+            } else {
+               // Toast.makeText(this, "Unable to fetch location", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         Log.d("mapFunction"," lat "+latitude+" lng "+longitude);
         LatLng defaultLocation = new LatLng(latitude, longitude); // San Francisco, USA
-        LatLng defaultLocation1 = new LatLng(ofz_lat, ofz_lng); // San Francisco, USA
+       // LatLng defaultLocation1 = new LatLng(ofz_lat, ofz_lng); // San Francisco, USA
 
 
         // Move the camera to the default location and set a zoom level
@@ -1144,9 +1247,9 @@ FaceAuthDB faceAuthDB;
 
         googleMap.addMarker(new MarkerOptions().position(defaultLocation).title("Current Location"))
                 .setIcon(setIcon(MapCurrentLocation.this,R.drawable.placeholder));
-        googleMap.addMarker(new MarkerOptions().position(defaultLocation1).title("Office Location"))
+       /* googleMap.addMarker(new MarkerOptions().position(defaultLocation1).title("Office Location"))
                 .setIcon(setIcon(MapCurrentLocation.this,R.drawable.building));
-        getRoutePoints(defaultLocation,defaultLocation1);
+        getRoutePoints(defaultLocation,defaultLocation1);*/
         /*String url = getDirectionsUrl(marker.getPosition(), marker1.getPosition());
         Log.d("getLocation"," url as "+url);
         DownloadTask downloadTask = new DownloadTask();
@@ -1159,7 +1262,9 @@ FaceAuthDB faceAuthDB;
      }
     public void getRoutePoints(LatLng start, LatLng end) {
             Log.d("ROUTELIST"," route "+start+" end "+end );
-            RouteDrawing routeDrawing = new RouteDrawing.Builder()
+        //Toast.makeText(getApplicationContext(),"Flow8",Toast.LENGTH_SHORT).show();
+
+        RouteDrawing routeDrawing = new RouteDrawing.Builder()
                     .context(MapCurrentLocation.this)  // pass your activity or fragment's context
                     .travelMode(AbstractRouting.TravelMode.DRIVING)
                     .withListener(this).alternativeRoutes(true)
@@ -1172,8 +1277,11 @@ FaceAuthDB faceAuthDB;
 
     @Override
     public void onRouteFailure(ErrorHandling e) {
-        Log.d("ROUTELIST"," failed");
-    }
+      //  Toast.makeText(getApplicationContext(),"Flow10",Toast.LENGTH_SHORT).show();
+
+        Log.d("getDetails"," error "+e.getMessage());
+        //Toast.makeText(getApplicationContext(),"Route failed "+e.getMessage(),Toast.LENGTH_SHORT).show();
+     }
 
     @Override
     public void onRouteStart() {
@@ -1182,6 +1290,17 @@ FaceAuthDB faceAuthDB;
 
     @Override
     public void onRouteSuccess(ArrayList<RouteInfoModel> list, int routeIndexing) {
+       // Toast.makeText(getApplicationContext(),"Flow9",Toast.LENGTH_SHORT).show();
+
+        if (googleMap == null) {
+            Log.e("GoogleMap", "GoogleMap is not initialized. Cannot add polyline.");
+            return;
+        }
+
+        if (list == null || list.isEmpty() || routeIndexing < 0 || routeIndexing >= list.size()) {
+            Log.e("RouteError", "Invalid route data or index.");
+            return;
+        }
         PolylineOptions polylineOptions = new PolylineOptions();
         ArrayList<Polyline> polylines = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -1200,145 +1319,11 @@ FaceAuthDB faceAuthDB;
 
     @Override
     public void onRouteCancelled() {
-        Log.d("ROUTELIST"," cancelled ");
+       // Toast.makeText(getApplicationContext(),"Route cancelled ",Toast.LENGTH_SHORT).show();
     }
 
-    private class DownloadTask extends AsyncTask<String, Void, String> {
 
-        @Override
-        protected String doInBackground(String... url) {
-
-            String data = "";
-
-            try {
-                data = downloadUrl(url[0]);
-            } catch (Exception e) {
-                Log.d("getLocation", e.toString());
-            }
-            return data;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            Log.d("getLocation"," on resut "+result);
-            ParserTask parserTask = new ParserTask();
-            parserTask.execute(result);
-        }
-    }
-
-    private String getDirectionsUrl(LatLng origin, LatLng dest) {
-
-        // Origin of route
-        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
-
-        // Destination of route
-        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
-
-        // Setting mode
-        String mode = "mode=driving";
-
-        // Building the parameters to the web service
-        String parameters = str_origin + "&" + str_dest + "&" + mode;
-
-        // Output format
-        String output = "json";
-
-        // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + "AIzaSyBKd134aL6vOuUnxjE6JdMh-gY9yA7cYnA";
-
-        return url;
-    }
-    private String downloadUrl(String strUrl) throws IOException {
-        String data = "";
-        InputStream iStream = null;
-        HttpURLConnection urlConnection = null;
-        try {
-            URL url = new URL(strUrl);
-
-            urlConnection = (HttpURLConnection) url.openConnection();
-
-            urlConnection.connect();
-
-            iStream = urlConnection.getInputStream();
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
-
-            StringBuffer sb = new StringBuffer();
-
-            String line = "";
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-            }
-
-            data = sb.toString();
-
-            br.close();
-
-        } catch (Exception e) {
-            Log.d("Exception", e.toString());
-        } finally {
-            iStream.close();
-            urlConnection.disconnect();
-        }
-        return data;
-    }
-    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
-
-        // Parsing the data in non-ui thread
-        @Override
-        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
-
-            JSONObject jObject;
-            List<List<HashMap<String, String>>> routes = null;
-
-            try {
-                jObject = new JSONObject(jsonData[0]);
-                DataParser parser = new DataParser();
-
-                routes = parser.parse(jObject);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return routes;
-        }
-
-        @Override
-        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
-            ArrayList points = new ArrayList();
-            PolylineOptions lineOptions = new PolylineOptions();
-
-            for (int i = 0; i < result.size(); i++) {
-
-                List<HashMap<String, String>> path = result.get(i);
-
-                for (int j = 0; j < path.size(); j++) {
-                    HashMap<String, String> point = path.get(j);
-
-                    double lat = Double.parseDouble(point.get("lat"));
-                    double lng = Double.parseDouble(point.get("lng"));
-                    LatLng position = new LatLng(lat, lng);
-
-                    points.add(position);
-                }
-
-                lineOptions.addAll(points);
-                lineOptions.width(12);
-                lineOptions.color(Color.RED);
-                lineOptions.geodesic(true);
-
-            }
-
-            // Drawing polyline in the Google Map
-
-            if (points.size() != 0){
-                if(lineOptions!=null) {
-                    googleMap.addPolyline(lineOptions);
-                }
-            }
-        }
-    }
-    private void updateUIHeader(int i) {
+     private void updateUIHeader(int i) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
            // header_relative.setBackground(getApplicationContext().getDrawable(R.drawable.color_shadow));
             office_layout.setBackground(getApplicationContext().getDrawable(R.drawable.rectangle_border));
@@ -1443,7 +1428,15 @@ FaceAuthDB faceAuthDB;
                     if(workLocation.equals("office")){
                         if(distance_value<=20 && distance_value>=0){
                             check_in.setEnabled(false);
-                            checkInConditionMethod();
+                             if(TextUtils.isEmpty(branch_id)){
+                                commonClass.showWarning(MapCurrentLocation.this,"You should be along to branch location");
+                            }else {
+                                if(branch_id.equals("null")){
+                                    commonClass.showWarning(MapCurrentLocation.this,"You should be along to branch location");
+                                }else{
+                                    checkInConditionMethod();
+                                }
+                            }
                         }else{
                             commonClass.showWarning(MapCurrentLocation.this, "You should be along to office location  ");
                         }
@@ -1476,16 +1469,24 @@ FaceAuthDB faceAuthDB;
                     if (workLocation.equals("office")) {
                         if (distance_value <= 20 && distance_value >= 0) {
                             Log.d("CheckInCondition", " condition 1");
-
-                            if(commonClass.isOnline(MapCurrentLocation.this)){
-                                if(commonClass.isLocationEnabled(MapCurrentLocation.this)){
-                                    checkOutAttendance();
-                                }else{
-                                    commonClass.showWarning(MapCurrentLocation.this,"Enable Location and then try");
-                                }
+                            if(TextUtils.isEmpty(branch_id)){
+                                commonClass.showWarning(MapCurrentLocation.this,"You should be along to branch location");
                             }else {
-                                checkOutAttendance();
+                                if(branch_id.equals("null")){
+                                    commonClass.showWarning(MapCurrentLocation.this,"You should be along to branch location");
+                                }else{
+                                    if(commonClass.isOnline(MapCurrentLocation.this)){
+                                        if(commonClass.isLocationEnabled(MapCurrentLocation.this)){
+                                            checkOutAttendance();
+                                        }else{
+                                            commonClass.showWarning(MapCurrentLocation.this,"Enable Location and then try");
+                                        }
+                                    }else {
+                                        checkOutAttendance();
+                                    }
+                                }
                             }
+
                         } else {
                             commonClass.showWarning(MapCurrentLocation.this, "You should be along to office location  ");
                         }
@@ -2021,6 +2022,8 @@ private void checkInAttendance() {
     }
     private void cameraBind()
     {
+      //  Toast.makeText(getApplicationContext(),"Flow3",Toast.LENGTH_SHORT).show();
+
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
 
         previewView=findViewById(R.id.previewView);

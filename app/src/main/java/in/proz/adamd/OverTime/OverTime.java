@@ -390,7 +390,7 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
         loader.setVisibility(View.VISIBLE);
         ApiInterface apiInterface = ApiClient.getTokenRetrofit(commonClass.getSharedPref(getApplicationContext(), "token"),
                 commonClass.getDeviceID(OverTime.this)).create(ApiInterface.class);
-        Call<MeetingEmpModal> call = apiInterface.getEmpDetails();
+        Call<MeetingEmpModal> call = apiInterface.getOnDropDown();
         Log.d("getEmployeeList"," ca;;  "+call.request().url());
         call.enqueue(new Callback<MeetingEmpModal>() {
             @Override
@@ -406,6 +406,8 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
                                     List<CommonPojo> getEmployeeList = response.body().getGetData();
                                     employeeNameList.clear();
                                     employeeMailList.clear();
+                                    employeeNameList.add("Select");
+                                    employeeMailList.add("-1");
                                     for(int i=0;i<getEmployeeList.size();i++){
                                         employeeNameList.add(getEmployeeList.get(i).getName());
                                         employeeMailList.add(getEmployeeList.get(i).getId());
@@ -428,7 +430,7 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
         });
     }
     private void updateUI() {
-        ArrayAdapter ad  = new ArrayAdapter(this,R.layout.spinner_drop_down,employeeNameList);
+        ArrayAdapter ad  = new ArrayAdapter(this,R.layout.spinner_drop_down_new,employeeNameList);
         ad.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(ad);
     }
@@ -679,9 +681,9 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
 
     }
     private void callCheckData() {
-       /* if(spinnerLeave.getSelectedItem().toString().contains("Select")){
-            commonClass.showWarning(OverTime.this,"Please select type");
-        }else*/ if(TextUtils.isEmpty(selete_date.getText().toString())){
+        if(spinner.getSelectedItem().toString().contains("Select")){
+            commonClass.showWarning(OverTime.this,"Please select Employee Name");
+        }else  if(TextUtils.isEmpty(selete_date.getText().toString())){
             commonClass.showWarning(OverTime.this,"Please select date");
         }else if(TextUtils.isEmpty(edt_fromtime.getText().toString())){
             commonClass.showWarning(OverTime.this,"Please Select From Time");
@@ -741,7 +743,7 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
 
         int id = spinner.getSelectedItemPosition();
         String emp_noo = employeeMailList.get(id);
-
+Log.d("insertMethod"," from time "+str_time_from+" to "+str_time_to);
         if(commonPojo!=null){
             call = apiInterface.updateOverTime(commonPojo.getId(),str_from_date,
                     dropDownIds.get(spinnerLeave.getSelectedItemPosition()),edt_reason.getText().toString(),str_time_from,str_time_to);
@@ -749,7 +751,7 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
 
         }else{
             call = apiInterface.insertOverTimeDialog(str_from_date,
-                    dropDownIds.get(spinnerLeave.getSelectedItemPosition()),
+                    "7",
                     edt_reason.getText().toString(),str_time_from,str_time_to,emp_noo);
 
 
@@ -762,8 +764,8 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
                 //  progressDialog.dismiss();
                 loader.setVisibility(View.GONE);
                 request_layout.setEnabled(true);
+                Log.d("insertMethod"," res[onse "+response.code());
                 if(response.isSuccessful()){
-                    Log.d("insertMethod"," res[onse "+response.code());
                     if(response.code()==200){
                         Log.d("claim_url"," respone "+response.body().getStatus());
                         if(response.body().getStatus().equals("success")){
@@ -846,13 +848,14 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         Intent intent = new Intent(getApplicationContext(), AdminNewApprovals.class);
-                        intent.putExtra("position", position);
+                        intent.putExtra("position", 4);
                         startActivity(intent);
                     }
                 }, 2500);
 
             }else{
-                Intent intent = new Intent(getApplicationContext(), AdminNewDashboard.class);
+                Intent intent = new Intent(getApplicationContext(), DashboardNewActivity.class);
+                intent.putExtra("position", 4);
                 startActivity(intent);
             }
         }else{
@@ -864,7 +867,7 @@ public class OverTime extends AppCompatActivity implements View.OnClickListener 
                 listLayout.setVisibility(View.VISIBLE);
                 getList();
             }else{
-                Intent intent = new Intent(getApplicationContext(), AdminNewDashboard.class);
+                Intent intent = new Intent(getApplicationContext(), DashboardNewActivity.class);
                 startActivity(intent);
             }
 

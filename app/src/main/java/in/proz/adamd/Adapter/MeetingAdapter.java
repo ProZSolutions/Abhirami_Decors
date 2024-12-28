@@ -229,6 +229,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ProductV
          }else{
             holder.edit_dsr.setVisibility(View.GONE);
         }
+        Log.d("getCommonDetails"," approved status "+commonPojo.getIs_variable());
         if(commonPojo.getStatus().equals("0")){
             if(commonPojo.getIs_variable().equals("1")){
                 holder.approved_status.setText("On Going");

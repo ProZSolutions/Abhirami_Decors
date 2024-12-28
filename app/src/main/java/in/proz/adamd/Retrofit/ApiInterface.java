@@ -207,6 +207,8 @@ public interface ApiInterface {
     Call<WSREmpList> getDSRSendTo();
         @POST("employee-dropdown")
         Call<MeetingEmpModal> getEmpDetails();
+        @GET("onduty-employee-dropdown")
+        Call<MeetingEmpModal> getOnDropDown();
     @POST("empovertime-dropdown")
     Call<MeetingEmpModal> getEmpDetailsFromOT();
     //meeting    module

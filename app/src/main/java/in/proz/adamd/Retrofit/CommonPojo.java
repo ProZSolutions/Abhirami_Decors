@@ -1091,7 +1091,7 @@ String approve_name;
         return id;
     }
 
-    String onduty_id;
+    String onduty_id,work_from_home;
 
     public String getOnduty_id() {
         return onduty_id;
@@ -1099,6 +1099,10 @@ String approve_name;
 
     public String getName() {
         return name;
+    }
+
+    public String getWork_from_home() {
+        return work_from_home;
     }
 
     public String getCasual_leave() {

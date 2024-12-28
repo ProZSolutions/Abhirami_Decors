@@ -103,7 +103,7 @@ public class MeetingActivity extends AppCompatActivity implements AdapterView.On
         selectList.add("Client");
         selectList.add("Internal");
         selectList.add("Others");
-        ArrayAdapter ad  = new ArrayAdapter(this,R.layout.spinner_drop_down,selectList);
+        ArrayAdapter ad  = new ArrayAdapter(this,R.layout.spinner_drop_down_new,selectList);
         ad.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         select_for_spinner.setAdapter(ad);
 
@@ -203,6 +203,8 @@ public class MeetingActivity extends AppCompatActivity implements AdapterView.On
                 }
             }
         }
+        Log.d("getCommonDetails"," from date "+commonPojo.getFrom_date()+" to date "+commonPojo.getTo_date()
+        +" from time "+commonPojo.getF_time()+" to time "+commonPojo.getT_time());
         edt_meeting.setText(commonPojo.getMeeting_name());
         if(!TextUtils.isEmpty(commonPojo.getFrom_date())){
             String[] split = commonPojo.getFrom_date().split(" ");
@@ -217,13 +219,26 @@ public class MeetingActivity extends AppCompatActivity implements AdapterView.On
                 timeFormatChange(Integer.parseInt(spl[0]),Integer.parseInt(spl[1]),ed_fromtime,1);
             }
         }
-        if(!TextUtils.isEmpty(commonPojo.getT_time())){
-            String[] split = commonPojo.getT_time().split(" ");
+      /*  if(!TextUtils.isEmpty(commonPojo.getT_time())){
+            String[] split = commonPojo.getTo_date().split(" ");
             if(split.length!=0){
                  str_to_time = split[0];
                  String[] spl = str_to_time.split(":");
                  timeFormatChange(Integer.parseInt(spl[0]),Integer.parseInt(spl[1]),ed_totime,2);
                // ed_totime.setText(str_to_time);
+            }
+        }*/
+        if(!TextUtils.isEmpty(commonPojo.getTo_date())){
+            String[] split = commonPojo.getTo_date().split(" ");
+            if(split.length!=0){
+                String[] spltDte= split[0].split("-");
+                String[] spltTime= split[1].split(":");
+                ed_totime.setText(spltDte[2]+"-"+spltDte[1]+"-"+spltDte[0]);
+                //str = spltDte[0]+"-"+spltDte[1]+"-"+spltDte[2];
+                str_to_time = spltTime[0]+":"+spltTime[1];
+                //ed_fromtime.setText(str_from_time);
+                String[] spl = str_to_time.split(":");
+                timeFormatChange(Integer.parseInt(spl[0]),Integer.parseInt(spl[1]),ed_totime,2);
             }
         }
         if(!TextUtils.isEmpty(commonPojo.getParticipate())){

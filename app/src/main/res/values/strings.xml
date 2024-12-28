@@ -7,7 +7,7 @@
     <!--<string name="serverUrl">http://tnapi.proz.in/api/</string>-->
     <!-- should change the url in commonclass also -->
     <string name="build_no">Build No : 2</string>
-    <string name="version_Code">1.0.1</string>
+    <string name="version_Code">1.0.2</string>
     <string name="n_org">#f5b24a</string>
     <string name="nleave">#F44336</string>
     <string name="npresnet">#4CAF50</string>
@@ -33,6 +33,7 @@
     <string name="meti">Meeting Title  <font fgcolor="#F49D12">*</font></string>
     <string name="date">Date  <font fgcolor="#F49D12">*</font></string>
     <string name="date_to">Select To Date <font fgcolor="#F49D12">*</font></string>
+    <string name="emp">Select Employee Name <font fgcolor="#F49D12">*</font></string>
     <string name="date_selete">Select Date <font fgcolor="#F49D12">*</font></string>
     <string name="planned">Planned Task  <font fgcolor="#F49D12">*</font></string>
     <string name="completed">Completed Task  <font fgcolor="#F49D12">*</font></string>
@@ -63,7 +64,8 @@
     <string name="asc_n">Asset Name <font fgcolor="#F49D12">*</font></string>
     <string name="no_of">No.Of Quantities <font fgcolor="#F49D12">*</font></string>
     <string name="pri">Priority   <font fgcolor="#F49D12">*</font></string>
-    <string name="api">AIzaSyCrApjyWZC_vOi-Vw6_5uDVOuX_yieZ02k</string>
+    <string name="oldapi">AIzaSyCrApjyWZC_vOi-Vw6_5uDVOuX_yieZ02k</string>
+    <string name="api">AIzaSyBKd134aL6vOuUnxjE6JdMh-gY9yA7cYnA</string>
     <string name="header_1">Proz Solutions LLP is a dynamic and innovative technology company decided to delivering cutting edge  solutions that empower  businesses to thrive in the digital era.Estabilished with a passion  for innovation. Proz Solutions LLP has been at the  forefront  of revolutionzing industried through its comprehensive suite of services and expertise.</string>
     <string name="header_2">At Proz Solutions LLP , we see a future  where technology harmonizes seamlessly  across every aspect  of business,Sparking efficiency ,Productivity,and growth.Our mission is cutting edge, using innovation to craft solutions that align with the rhythm of progress.</string>
 

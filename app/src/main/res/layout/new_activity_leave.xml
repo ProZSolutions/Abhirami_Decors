@@ -103,7 +103,7 @@
                         android:layout_marginRight="5dp"
                         android:fontFamily="@font/inter_18pt_semibold"
                         android:gravity="center"
-                        android:text="Apply Leave"
+                        android:text="Leave List"
                         android:textColor="@color/white" />
 
                 </LinearLayout>
@@ -126,8 +126,7 @@
             app:mk_color="@color/n_org"
             />
         <LinearLayout
-            android:visibility="gone"
-              android:id="@+id/apply_leave_layout"
+               android:id="@+id/apply_leave_layout"
              android:orientation="vertical"
              android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -1132,7 +1131,7 @@
 
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView"
+                         android:id="@+id/recyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 

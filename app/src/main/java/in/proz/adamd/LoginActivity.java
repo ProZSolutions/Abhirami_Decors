@@ -287,6 +287,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     commonClass.putSharedPref(LoginActivity.this,"username",null);
                                     commonClass.putSharedPref(LoginActivity.this,"token",null);
                                     commonClass.putSharedPref(LoginActivity.this,"role_no",null);
+                                    commonClass.putSharedPref(LoginActivity.this,"work_from_home",null);
                                     BranchTable branchTable = new BranchTable(LoginActivity.this);
                                     branchTable.getWritableDatabase();
                                     branchTable.DropTable();
@@ -335,6 +336,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         }
                                     }
 
+                                    commonClass.putSharedPref(LoginActivity.this,"work_from_home",response.body().getWork_from_home());
 
                                     commonClass.putSharedPref(LoginActivity.this,"EmppName",response.body().getName());
                                     commonClass.putSharedPref(LoginActivity.this,"username",username.getText().toString());

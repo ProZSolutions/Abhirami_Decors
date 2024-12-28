@@ -130,6 +130,7 @@ public class DUIEmpAdapter extends  RecyclerView.Adapter<DUIEmpAdapter.ProductVi
         btn_continue1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
                 if (rd1.isChecked() || rd2.isChecked()) {
                     String type = "0";
                     if (rd1.isChecked()) {

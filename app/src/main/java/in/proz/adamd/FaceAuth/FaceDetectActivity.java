@@ -233,16 +233,17 @@ public class FaceDetectActivity extends AppCompatActivity {
                                 } catch (JsonSyntaxException | ClassCastException e) {
                                     // Handle parsing error or class cast error
                                     e.printStackTrace();
-                                    commonClass.showError(FaceDetectActivity.this,"No Face Registered");
+                                    commonClass.showError(FaceDetectActivity.this,"Please Register Your Face");
                                     Log.d("getFaceID"," eror "+e.getMessage());
                                     // You might want to log this or inform the user
                                 }
 
 
                             }else{
-
+                                commonClass.showError(FaceDetectActivity.this,"Your device has been reset, so please re-register your face");
                             }
                         }else{
+                            commonClass.showError(FaceDetectActivity.this,"Your device has been reset, so please re-register your face");
 
                         }
                     }

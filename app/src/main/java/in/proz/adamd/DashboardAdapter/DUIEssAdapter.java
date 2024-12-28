@@ -106,6 +106,8 @@ public class DUIEssAdapter extends  RecyclerView.Adapter<DUIEssAdapter.ProductVi
                 SendToID = String.valueOf(which);
                  //dialog.dismiss();
                 int po = Integer.parseInt(SendToID);
+                dialog.dismiss();
+                SendToID="-1";
                 Log.d("selectedPOS"," it "+po);
                 if(po>=0) {
                     Log.d("selectedPOS", " call if");

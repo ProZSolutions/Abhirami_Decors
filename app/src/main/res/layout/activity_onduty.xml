@@ -196,7 +196,7 @@
 
                                 android:layout_marginTop="15dp"
                                 android:textSize="13dp"
-                                android:text="Select Employee Name"
+                                android:text="@string/emp"
 
                                 android:fontFamily="@font/inter_18pt_medium"
                                 android:textColor="@color/black"
@@ -204,7 +204,7 @@
                                 android:layout_height="wrap_content"/>
                             <RelativeLayout
                                 android:layout_marginTop="5dp"
-                                android:padding="2dp"
+                                android:padding="5dp"
                                 android:background="@drawable/rectangle_outer_gray"
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
@@ -214,7 +214,6 @@
                                     android:id="@+id/spinner"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="3dp"
                                     android:layout_toLeftOf="@+id/arrowLeave1"
                                     android:backgroundTint="@color/gray" />
 
@@ -239,7 +238,7 @@
 
                                 android:layout_marginTop="15dp"
                                 android:textSize="13dp"
-                                android:text="Select Date"
+                                android:text="@string/date"
 
                                 android:fontFamily="@font/inter_18pt_medium"
                                 android:textColor="@color/black"
@@ -287,7 +286,7 @@
                         <TextView
                             android:layout_marginTop="10dp"
                             android:textSize="13dp"
-                            android:text="Reason"
+                            android:text="@string/reason"
                             android:fontFamily="@font/inter_18pt_medium"
                             android:textColor="@color/black"
                             android:layout_width="match_parent"

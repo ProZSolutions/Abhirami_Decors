@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
@@ -24,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -43,7 +45,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -819,6 +823,7 @@ public class DSRActivity extends AppCompatActivity implements View.OnClickListen
                 String week = extractNumbers(SendToName);
                 int weeek =Integer.parseInt(week);
 
+
                 getCalendarDate(weeek);
                 getList();
 
@@ -1203,7 +1208,7 @@ if(listedGit.size()==0){
     public void callIntent(){
         if(apply_leave_layout.getVisibility()==View.VISIBLE){
             dsr_txt.setText("Work List");
-            change_layout.setVisibility(View.VISIBLE);
+            change_layout.setVisibility(View.GONE);
             apply_leave_layout.setVisibility(View.GONE);
             listLayout.setVisibility(View.VISIBLE);
 
@@ -1628,7 +1633,7 @@ if(listedGit.size()==0){
         commonPojo = null;
         if(apply_leave_layout.getVisibility()==View.VISIBLE){
         dsr_txt.setText("Work List");
-            change_layout.setVisibility(View.VISIBLE);
+            change_layout.setVisibility(View.GONE);
              apply_leave_layout.setVisibility(View.GONE);
             listLayout.setVisibility(View.VISIBLE);
             frame_tag.setText("Add Work");
@@ -1664,10 +1669,11 @@ if(listedGit.size()==0){
                 " token "+commonClass.getSharedPref(getApplicationContext(),"token")+" device id "+
                 commonClass.getDeviceID(DSRActivity.this));
         call.enqueue(new Callback<DSRMainModal>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<DSRMainModal> call, Response<DSRMainModal> response) {
                // progressDialog.dismiss();
-                Log.d("credentials"," error "+response.code());
+                Log.d("getDSR"," error "+response.code());
                 // date format 10-12-2024
                 loader.setVisibility(View.GONE);
                 if(response.isSuccessful()){
@@ -1683,16 +1689,23 @@ if(listedGit.size()==0){
                              if(response.body().getDsrSubModals().size()!=0){
                                  
                                  SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                                 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
                                  String todat_date = df.format(new Date());
-                                 
+
+                                 String statis="0",sampledate=sdf1.format(new Date());
                                  for(int i=0;i<response.body().getDsrSubModals().size();i++){
-                                     DSRSubModal modal = response.body().getDsrSubModals().get(i);
-                                     if(!modal.getDate().equals(todat_date)){
-                                         btnplanned_work.setVisibility(View.VISIBLE);
-                                     }else{
-                                         btnplanned_work.setVisibility(View.GONE);
-                                         break;
+                                     DSRSubModal modal = response.body().getDsrSubModals().get(i);                                          Log.d("getDSR"," get dat "+modal.getDate()+" today "+todat_date);
+                                     Log.d("getDSR"," get dat "+modal.getDate()+" today "+todat_date);
+                                    if(modal.getDate().equals(todat_date)){
+                                          statis="1";
+                                          break;
                                      }
+                                 }
+                                 if(statis.equals("1")){
+                                     btnplanned_work.setVisibility(View.GONE);
+                                 }else{
+                                     callCalendarWeek();
+                                     //btnplanned_work.setVisibility(View.VISIBLE);
                                  }
                                  
                                  no_data.setVisibility(View.GONE);
@@ -1700,7 +1713,9 @@ if(listedGit.size()==0){
                                          frame_layout);
                                  recyclerView.setAdapter(adapter);
                              }else{
-                                 btnplanned_work.setVisibility(View.VISIBLE);
+                               //  btnplanned_work.setVisibility(View.VISIBLE);
+                                 callCalendarWeek();
+
                                  no_data.setVisibility(View.VISIBLE);
                                  recyclerView.setAdapter(null);
                              }
@@ -1745,6 +1760,29 @@ if(listedGit.size()==0){
             }
         });
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void callCalendarWeek() {
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH); // Note: Month is 0-based (January = 0)
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        month+=1;
+        Log.d("getDSR"," sate "+year+"-"+month+"-"+day);
+
+        LocalDate date = LocalDate.of(year, month, day);;
+        int weekOfYear = date.get(WeekFields.of(Locale.getDefault()).weekOfYear());
+        Log.d("getDSR","week of yr "+weekOfYear);
+        String rp = calendarSpinner.getText().toString().replace("Calendar Week ","");
+        int rpi = Integer.parseInt(rp);
+        Log.d("getDSR"," rpi "+rpi);
+        if (weekOfYear == rpi) {
+            btnplanned_work.setVisibility(View.VISIBLE);
+        }else{
+            btnplanned_work.setVisibility(View.GONE);
+        }
     }
 
     private void datePicker(TextView edFromdate, int i) {

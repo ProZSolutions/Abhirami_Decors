@@ -458,7 +458,7 @@ public class CalendarActivity extends AppCompatActivity implements   View.OnClic
                 calendar.setTime(format.parse(todayDate));
                 //customCalendar.setDate(calendar,dateHashmap);
                // BackgroundColorDecorator decorator1 = new BackgroundColorDecorator(dateNormal, R.color.gray_50);
-                BackgroundColorDecorator decorator2 = new BackgroundColorDecorator(dateLeave,  Color.parseColor(getApplicationContext().getString(R.string.n_org)));
+                BackgroundColorDecorator decorator2 = new BackgroundColorDecorator(dateLeave,  Color.parseColor(getApplicationContext().getString(R.string.npresnet)));
 
                 // Add decorators to the calendar
                // customCalendar.addDecorator(decorator1);
@@ -559,7 +559,7 @@ public class CalendarActivity extends AppCompatActivity implements   View.OnClic
                 calendar.setTime(format.parse(getDate));
               //  customCalendar.setDate(calendar,dateHashmap);
                // BackgroundColorDecorator decorator1 = new BackgroundColorDecorator(dateNormal, R.color.gray_50);
-                BackgroundColorDecorator decorator2 = new BackgroundColorDecorator(dateLeave,  Color.parseColor(getApplicationContext().getString(R.string.n_org)));
+                BackgroundColorDecorator decorator2 = new BackgroundColorDecorator(dateLeave,  Color.parseColor(getApplicationContext().getString(R.string.npresnet)));
 
                 // Add decorators to the calendar
                // customCalendar.addDecorator(decorator1);

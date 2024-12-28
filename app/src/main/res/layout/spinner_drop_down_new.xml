@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    style="?android:attr/spinnerItemStyle"
+    android:singleLine="true"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp"
+    android:textColor="@color/black"
+    android:fontFamily="@font/inter_18pt_medium"
+    android:textSize="13dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="marquee"
+    android:textAlignment="inherit"/>

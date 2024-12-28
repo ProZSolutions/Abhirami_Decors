@@ -125,8 +125,8 @@
             />
         <LinearLayout
              android:id="@+id/apply_leave_layout"
+               android:orientation="vertical"
             android:visibility="gone"
-              android:orientation="vertical"
               android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -165,13 +165,12 @@
                                 android:layout_marginTop="5dp"
                                 android:background="@drawable/rectangle_outer_gray"
                                 android:orientation="horizontal"
-                                android:padding="3dp"
+                                android:padding="5dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <Spinner
                                     android:background="@null"
-                                    android:padding="6dp"
-                                    android:id="@+id/select_for_spinner"
+                                     android:id="@+id/select_for_spinner"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"/>
 

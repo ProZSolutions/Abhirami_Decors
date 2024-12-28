@@ -279,7 +279,7 @@ int pageNo=1;
         loader.setVisibility(View.VISIBLE);
         ApiInterface apiInterface = ApiClient.getTokenRetrofit(commonClass.getSharedPref(getApplicationContext(), "token"),
                 commonClass.getDeviceID(OnDuty.this)).create(ApiInterface.class);
-        Call<MeetingEmpModal> call = apiInterface.getEmpDetails();
+        Call<MeetingEmpModal> call = apiInterface.getOnDropDown();
         Log.d("getEmployeeList"," ca;;  "+call.request().url());
         call.enqueue(new Callback<MeetingEmpModal>() {
             @Override
@@ -293,6 +293,8 @@ int pageNo=1;
                                 Log.d("getEmployeeList"," size as "+response.body().getGetData().size());
                                 if(response.body().getGetData().size()!=0){
                                     List<CommonPojo> getEmployeeList = response.body().getGetData();
+                                    employeeMailList.add("-1");
+                                    employeeNameList.add("Select");
                                     for(int i=0;i<getEmployeeList.size();i++){
                                         employeeNameList.add(getEmployeeList.get(i).getName());
                                         employeeMailList.add(getEmployeeList.get(i).getId());
@@ -316,7 +318,7 @@ int pageNo=1;
     }
 
     private void updateUI() {
-        ArrayAdapter ad  = new ArrayAdapter(this,R.layout.spinner_drop_down,employeeNameList);
+        ArrayAdapter ad  = new ArrayAdapter(this,R.layout.spinner_drop_down_new,employeeNameList);
         ad.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(ad);
     }
@@ -529,9 +531,9 @@ int pageNo=1;
 
     }
     private void callCheckData() {
-       /* if(spinnerLeave.getSelectedItem().toString().contains("Select")){
-            commonClass.showWarning(OnDuty.this,"Please select type");
-        }else*/ if(TextUtils.isEmpty(selete_date.getText().toString())){
+         if(spinner.getSelectedItem().toString().contains("Select")){
+            commonClass.showWarning(OnDuty.this,"Please select Employee name");
+        }else if(TextUtils.isEmpty(selete_date.getText().toString())){
             commonClass.showWarning(OnDuty.this,"Please select date");
         }else if(TextUtils.isEmpty(edt_reason.getText().toString())){
             commonClass.showWarning(OnDuty.this,"Please enter reason");
@@ -658,11 +660,12 @@ int pageNo=1;
                 }, 2500);
 
             }else{
-                Intent intent = new Intent(getApplicationContext(), AdminNewDashboard.class);
+                Intent intent = new Intent(getApplicationContext(), DashboardNewActivity.class);
+                intent.putExtra("position", 3);
                 startActivity(intent);
             }
         }else{
-            Intent intent = new Intent(getApplicationContext(), AttendanceActivity.class);
+            Intent intent = new Intent(getApplicationContext(), DashboardNewActivity.class);
             startActivity(intent);
         }
     }

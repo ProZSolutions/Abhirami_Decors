@@ -340,9 +340,11 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
         faceAuthDB.getWritableDatabase();
 
 
+
       /*  ofz_lat = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"branch_lat"));
         ofz_lng = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"branch_long"));*/
-        Log.d("office_location"," lat "+ofz_lat+" lng "+ofz_lng);
+        Log.d("office_location"," lat "+ofz_lat+" lng "+ofz_lng
+        +commonClass.getDeviceID(AttendanceActivity.this));
 
 
         commonClass.putSharedPref(getApplicationContext(),"location_not_logged","0");
@@ -604,7 +606,8 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
                         Log.d("locationDetails", " lat " + location.getLatitude() + " lng " + location.getLongitude());
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
-                        distance_value = CalculationByDistance(ofz_lat, ofz_lng, latitude, longitude, "10km");
+                    distance_value = CalculationByDistance(ofz_lat, ofz_lng, latitude, longitude, "10km");
+                       // distance_value = CalculationByDistance(ofz_lat, ofz_lng, 11.2378483, 78.1513483, "10km");
                     }
                 }
             });
@@ -816,7 +819,6 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
 
 
 
-
         customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
           @Override
           public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay newMonth, boolean selected) {
@@ -974,6 +976,17 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
             updateUIHeader(1);
         }
         callAllTheTodayRecords();
+        if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"work_from_home"))){
+            if(commonClass.getSharedPref(getApplicationContext(),"work_from_home").equals("0")){
+                home_layout.setVisibility(View.GONE);
+                workLocation = "office";
+                updateUIHeader(1);
+            }else{
+                home_layout.setVisibility(View.VISIBLE);
+                workLocation = "home";
+                updateUIHeader(2);
+            }
+        }
     }
 
     private void getListFromOffline() {
@@ -1307,8 +1320,16 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
                     if (workLocation.equals("office")) {
                         if (distance_value <= 20 && distance_value >= 0) {
                             Log.d("CheckInCondition", " condition 1");
+                            if(TextUtils.isEmpty(branch_id)){
+                                commonClass.showWarning(AttendanceActivity.this,"You should be along to branch location");
+                            }else {
+                                if(branch_id.equals("null")){
+                                    commonClass.showWarning(AttendanceActivity.this,"You should be along to branch location");
+                                }else{
+                                    checkInConditionMethod();
+                                }
+                            }
 
-                            checkInConditionMethod();
                         } else {
                             commonClass.showWarning(AttendanceActivity.this, "You should be along to office location  ");
                         }
@@ -1353,19 +1374,27 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
                     if (workLocation.equals("office")) {
                         if (distance_value <= 20 && distance_value >= 0) {
                             Log.d("CheckInCondition", " condition 1");
-
-                            if(commonClass.isOnline(AttendanceActivity.this)){
-                                Log.d("checkoutIn"," loc "+commonClass.getSharedPref(getApplicationContext(),"location_not_logged"));
-                                if(commonClass.isLocationEnabled(AttendanceActivity.this)){
-                                    Log.d("checkoutIn"," one ");
-                                    checkOutAttendance();
+                            if(TextUtils.isEmpty(branch_id)){
+                                commonClass.showWarning(AttendanceActivity.this,"You should be along to branch location");
+                            }else {
+                                if(branch_id.equals("null")){
+                                    commonClass.showWarning(AttendanceActivity.this,"You should be along to branch location");
                                 }else{
-                                    commonClass.showWarning(AttendanceActivity.this,"Enable Location and then try");
+                                    if(commonClass.isOnline(AttendanceActivity.this)){
+                                        Log.d("checkoutIn"," loc "+commonClass.getSharedPref(getApplicationContext(),"location_not_logged"));
+                                        if(commonClass.isLocationEnabled(AttendanceActivity.this)){
+                                            Log.d("checkoutIn"," one ");
+                                            checkOutAttendance();
+                                        }else{
+                                            commonClass.showWarning(AttendanceActivity.this,"Enable Location and then try");
+                                        }
+                                    }else{
+                                        Log.d("checkoutIn"," teo ");
+                                        checkOutAttendance();
+                                    }
                                 }
-                            }else{
-                                Log.d("checkoutIn"," teo ");
-                                checkOutAttendance();
                             }
+
 
                         } else {
                             commonClass.showWarning(AttendanceActivity.this, "You should be along to office location  ");
@@ -1983,7 +2012,8 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
                                         }else  if(modal.getLeave().equals("1")){
                                             type="leave";
                                             Log.d("getDating","con3");
-                                        }else if(modal.getLeave().equals("0") && modal.getPin_work_locationList()==null){
+                                        }else if(modal.getLeave().equals("0") &&
+                                                modal.getPin_work_locationList()==null){
                                             type="absent";
                                             //colors.add(R.color.nabsent);
                                             Log.d("getDating","con4");
@@ -2730,13 +2760,16 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
         ///idea 3
         double distance=0;
         double minDis=0;
+        Log.d("attendanceLocation"," alt "+lat2+" lng "+lon2);
 
         BranchTable branchTable= new BranchTable(AttendanceActivity.this);
         branchTable.getWritableDatabase();
 
 
         List<LatLng> getBranchDetails = new ArrayList<>();
-        getBranchDetails = branchTable.getAllNameList();
+        getBranchDetails.add(new in.proz.adamd.ModalClass.LatLng("1","11.236899","78.151472"));
+        getBranchDetails.add(new in.proz.adamd.ModalClass.LatLng("2","11.2379334","78.1514359"));
+       // getBranchDetails = branchTable.getAllNameList();
         Log.d("getDistance"," get list size "+getBranchDetails.size());
         if(getBranchDetails.size()!=0){
             for(int i=0;i<getBranchDetails.size();i++){
@@ -2766,7 +2799,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
 
 
 
-        Log.d("getDistance"," idea 3 distance "+distance);
+        Log.d("attendanceLocation"," idea 3 distance "+distance+" branch id "+branch_id);
         return (int) minDis;
 
     }

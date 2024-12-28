@@ -25,6 +25,8 @@ import in.proz.adamd.AdminModule.AdminNewApprovals;
 import in.proz.adamd.AdminModule.AdminNewDashboard;
 import in.proz.adamd.AdminModule.AdminWSRLayout;
 import in.proz.adamd.CommonJson.DashboardContent;
+import in.proz.adamd.OnDuty.OnDuty;
+import in.proz.adamd.OverTime.OverTime;
 import in.proz.adamd.R;
 import in.proz.adamd.Retrofit.CommonClass;
 
@@ -56,9 +58,17 @@ public class DUIMidAdapter extends  RecyclerView.Adapter<DUIMidAdapter.ProductVi
                 if (modal.getTag().contains("employee")){
                     Intent adminemp = new Intent(context, AdminEmpActivityNew.class);
                     context.startActivity(adminemp);
-                }else{
+                }else if(modal.getTag().contains("dsr")){
                     Intent intentwsr = new Intent(context, AdminWSRLayout.class);
                     context.startActivity(intentwsr);
+                }else if(modal.getTag().contains("onduty")){
+                    Intent intenton = new Intent(context, OnDuty.class);
+                    intenton.putExtra("position",3);
+                    context.startActivity(intenton);
+                }else{
+                    Intent intentot = new Intent(context, OverTime.class);
+                    intentot.putExtra("position",4);
+                    context.startActivity(intentot);
                 }
             }
         });

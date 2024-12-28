@@ -342,7 +342,7 @@ public class LeaveActivity extends AppCompatActivity implements View.OnClickList
         if(commonClass.isOnline(LeaveActivity.this)){
             getDropDownList();
             getLeaveList();
-            getList();
+          //  getList();
         }else{
             commonClass.showInternetWarning(LeaveActivity.this);
         }
@@ -383,11 +383,11 @@ public class LeaveActivity extends AppCompatActivity implements View.OnClickList
                         leave_type_layout.setVisibility(View.GONE);
                         break;
                     case 2:
-                        date_picker_type=1;
+                        date_picker_type=2;
                         lineartotime.setVisibility(View.GONE);
                         linearfromtime.setVisibility(View.GONE);
                         linearfromdate.setVisibility(View.VISIBLE);
-                       // lineartodate.setVisibility(View.VISIBLE);
+                        lineartodate.setVisibility(View.VISIBLE);
                         session_layout.setVisibility(View.GONE);
                         alternativeLayout.setVisibility(View.GONE);
                         leave_type_layout.setVisibility(View.GONE);
@@ -840,19 +840,19 @@ public class LeaveActivity extends AppCompatActivity implements View.OnClickList
                 break;
              
             case R.id.ed_fromdate:
-                datePicker(ed_fromdate,1);
+                datePicker(ed_fromdate,2);
                 break;
             case R.id.edt_todate:
                 datePicker(edt_todate,2);
                 break;
             case R.id.edt_fromtime:
-                timePicker(edt_fromtime,1);
+                timePicker(edt_fromtime,2);
                 break;
             case R.id.edt_totime:
                 timePicker(edt_totime,2);
                 break;
             case R.id.from_picker:
-                datePicker(ed_fromdate,1);
+                datePicker(ed_fromdate,2);
                 break;
             case R.id.fromtime_picker:
                 timePicker(edt_fromtime,1);
@@ -1034,6 +1034,8 @@ public class LeaveActivity extends AppCompatActivity implements View.OnClickList
 
         from_date_str = sdf1.format(new Date());
         ed_fromdate.setText(sdf.format(new Date()));
+        to_date_str = sdf1.format(new Date());
+        edt_todate.setText(sdf.format(new Date()));
       }
     private void callCustom1() {
         Intent intent = new Intent(Intent.ACTION_PICK);

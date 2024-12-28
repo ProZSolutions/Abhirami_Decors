@@ -38,6 +38,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -1235,7 +1237,21 @@ public class AdminNewApprovals extends AppCompatActivity implements View.OnClick
                                             leaveAppModals.add(response.body().getLeaveInnerModal().getDataList().get(i));
                                         }
 
-
+                                        if(leaveAppModals.size()!=0){
+                                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                            Collections.sort(leaveAppModals, new Comparator<LeaveAppModal >() {
+                                                @Override
+                                                public int compare( LeaveAppModal  a, LeaveAppModal  b) {
+                                                    try {
+                                                        Date dateA = sdf.parse(a.getFrom());
+                                                        Date dateB = sdf.parse(b.getFrom());
+                                                        return dateB.compareTo(dateA); // Descending order
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                        return 0;
+                                                    }
+                                                }
+                                            });                                        }
                                         no_data.setVisibility(View.GONE);
                                         updateNotificationChanged();
 
@@ -1280,6 +1296,7 @@ public class AdminNewApprovals extends AppCompatActivity implements View.OnClick
 
 
     }
+
 
 
     private void updateNotificationChanged() {
