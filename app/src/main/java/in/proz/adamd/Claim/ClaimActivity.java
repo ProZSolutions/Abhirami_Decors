@@ -296,6 +296,8 @@ public class ClaimActivity extends AppCompatActivity implements View.OnClickList
         request_layout.setOnClickListener(this);
      }
     private void callDashboard() {
+        Log.d("getCredentials"," as "+commonClass.getSharedPref(getApplicationContext(), "AdminEmpNo")+
+                " pos "+postition+" main "+main_change);
         if(commonPojo!=null){
             BackUI();
         }else {
@@ -306,7 +308,7 @@ public class ClaimActivity extends AppCompatActivity implements View.OnClickList
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
                             Intent intent = new Intent(getApplicationContext(), AdminNewApprovals.class);
-                            intent.putExtra("position", postition);
+                            intent.putExtra("position", 2);
                             startActivity(intent);
                         }
                     }, 2500);
@@ -678,7 +680,11 @@ public class ClaimActivity extends AppCompatActivity implements View.OnClickList
                                     !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminRole")) &&
                                     !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminName"))) {
                                 main_change=1;
-                               callDashboard();
+                                new Handler().postDelayed(new Runnable() {
+                                    public void run() {
+                                        callDashboard();
+                                    }
+                                }, 1000);
                             }else{
                                 getList();
                             }

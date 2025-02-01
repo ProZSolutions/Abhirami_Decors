@@ -283,7 +283,7 @@ public class CalendarActivity extends AppCompatActivity implements   View.OnClic
             Log.d("calHit"," item pos "+spinnerCalendar.getSelectedItemPosition());
             if (spinnerCalendar.getSelectedItemPosition() == 1) {
                 String from_d= year+"-"+month+"-"+"01";
-                String to_d= year+"-"+month+"-"+"30";
+                String to_d= year+"-"+month+"-"+"31";
                 Call<LeaveModal> call1 = apiInterface.getDSRLIST(from_d,to_d);
                 Log.d("calHit"," url  "+call1.request().url());
                 call1.enqueue(new Callback<LeaveModal>() {
@@ -360,6 +360,8 @@ public class CalendarActivity extends AppCompatActivity implements   View.OnClic
                                             for (int i=0;i<getPojoList.size();i++){
                                                 holidayCalendar.insertData(getPojoList.get(i));
                                             }
+                                            customCalendar.removeDecorators();
+                                            updateCalendarData(month, getPojoList, todayDate);
                                         }
                                     }
                                     Log.d("selectedMonth"," pogo siz "+response.body().getCalendarlist());
@@ -501,17 +503,6 @@ public class CalendarActivity extends AppCompatActivity implements   View.OnClic
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void updateCalendarData(String month, List<CalendarSubClass> getPojoList, String getDate) {
-/*        HashMap<Object, Property> mapDescToProp = new HashMap<>();
-        Property propDefault = new Property();
-        propDefault.layoutResource = R.layout.leave_normal;
-        propDefault.enable = false;
-        mapDescToProp.put("normal", propDefault);
-        propDefault.dateTextViewResource=R.id.text_view;
-        Property propUnavailable = new Property();
-        propUnavailable.layoutResource = R.layout.leave_green;
-        propUnavailable.dateTextViewResource=R.id.text_view;
-        mapDescToProp.put("leave", propUnavailable);
-        customCalendar.setMapDescToProp(mapDescToProp);*/
         Set<CalendarDay> dateNormal = new HashSet<>();
         Set<CalendarDay> dateLeave = new HashSet<>();
 

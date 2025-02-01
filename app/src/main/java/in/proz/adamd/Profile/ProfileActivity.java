@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,8 @@ import in.proz.adamd.BuildConfig;
 import in.proz.adamd.DashboardNewActivity;
 import in.proz.adamd.LoginActivity;
 import in.proz.adamd.Map.MapCurrentLocation;
+import in.proz.adamd.ModalClass.PersonalMainModal;
+import in.proz.adamd.ModalClass.PersonalModal;
 import in.proz.adamd.NotesActivity.NotesActivity;
 import in.proz.adamd.R;
 import in.proz.adamd.Retrofit.ApiClient;
@@ -82,6 +85,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(), DashboardNewActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY  | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });
@@ -129,11 +133,77 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent=new Intent(getApplicationContext(), DashboardNewActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY  | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
     private void getList() {
- 
+        loader.setVisibility(View.VISIBLE);
+        ApiInterface apiInterface  = ApiClient.getTokenRetrofit(commonClass.getSharedPref(ProfileActivity.this,"token"),
+                commonClass.getDeviceID(ProfileActivity.this)).create(ApiInterface.class);
+        Call<PersonalMainModal> call = apiInterface.getUserProfile();
+        Log.d("profile_index"," url as "+call.request().url()+"   "+commonClass.getDeviceID(ProfileActivity.this)+
+                " token "+commonClass.getSharedPref(getApplicationContext(),"token"));
+        call.enqueue(new retrofit2.Callback<PersonalMainModal>() {
+            @Override
+            public void onResponse(Call<PersonalMainModal> call, Response<PersonalMainModal> response) {
+                //progressDialog.dismiss();
+                loader.setVisibility(View.GONE);
+                Log.d("profile_index"," ode "+response.code());
+                if(response.isSuccessful()){
+                    if(response.code()==200){
+                        PersonalModal personalModal = response.body().getPersonalModal();
+                        Log.d("profile_index"," name "+response.body().getPersonalModal().getName());
+                        if(!TextUtils.isEmpty(response.body().getPersonalModal().getName())){
+                            Log.d("imagePicker"," response image "+response.body().getPersonalModal().getImage());
+
+                            if(!TextUtils.isEmpty(response.body().getPersonalModal().getImage())){
+                                Picasso.with(ProfileActivity.this).
+                                        load(response.body().getPersonalModal().getImage()).into(profile_img);
+                                commonClass.putSharedPref(getApplicationContext(),"image",null);
+                                commonClass.putSharedPref(getApplicationContext(),"image",response.body().getPersonalModal().getImage());
+                            }
+                            /*
+                             */
+
+
+
+                        }
+                    }else{
+                        Gson gson = new GsonBuilder().create();
+                        CommonPojo mError = new CommonPojo();
+                        try {
+                            mError = gson.fromJson(response.errorBody().string(), CommonPojo.class);
+
+                            commonClass.showError(ProfileActivity.this,mError.getError());
+                            //    Toast.makeText(getApplicationContext(), mError.getError(), Toast.LENGTH_LONG).show();
+                        } catch (IOException e) {
+                            // handle failure to read error
+                            Log.d("thumbnail_url", " exp error  " + e.getMessage());
+                        }
+                    }
+                }else{
+                    Gson gson = new GsonBuilder().create();
+                    CommonPojo mError = new CommonPojo();
+                    try {
+                        mError = gson.fromJson(response.errorBody().string(), CommonPojo.class);
+
+                        commonClass.showError(ProfileActivity.this,mError.getError());
+                        //    Toast.makeText(getApplicationContext(), mError.getError(), Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        // handle failure to read error
+                        Log.d("thumbnail_url", " exp error  " + e.getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PersonalMainModal> call, Throwable t) {
+                //progressDialog.dismiss();
+                loader.setVisibility(View.GONE);
+                commonClass.showError(ProfileActivity.this,t.getMessage());
+            }
+        });
     }
 
     private void initView() {
@@ -288,6 +358,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     if(response.isSuccessful()) {
                         if (response.code() == 200) {
                             if(response.body().getStatus().equals("success")){
+                                getList();
                                 commonClass.showSuccess(ProfileActivity.this,"Image Updated Successfully...");
                             }else{
                                 commonClass.showError(ProfileActivity.this,"Failed to save image");
@@ -346,6 +417,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.nhome_layout:
                 Intent intentabout1 = new Intent(getApplicationContext(), DashboardNewActivity.class);
+                intentabout1.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY  | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentabout1);
                 break;
           /*  case R.id.nabout_layout:

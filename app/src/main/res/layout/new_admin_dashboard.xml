@@ -445,8 +445,7 @@
 
                 <LinearLayout
                     android:id="@+id/linear_onduty_req"
-                    android:visibility="invisible"
-                    android:background="@drawable/elevation"
+                     android:background="@drawable/elevation"
                     android:orientation="vertical"
                     android:padding="5dp"
                     android:layout_marginLeft="10dp"

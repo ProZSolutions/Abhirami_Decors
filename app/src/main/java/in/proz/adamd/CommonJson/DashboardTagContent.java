@@ -7,6 +7,13 @@ import java.util.List;
 public class DashboardTagContent {
     @SerializedName("title")
     String tag_name;
+    @SerializedName("distance")
+    String distance;
+
+    public String getDistance() {
+        return distance;
+    }
+
     @SerializedName("list")
     List<DashboardContent> dashboardContentList;
 

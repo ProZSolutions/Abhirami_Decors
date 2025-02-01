@@ -303,6 +303,9 @@ public class CommonClass {
 
     }
     public void showSuccess(Activity context,String message){
+        if (context == null || context.isFinishing() || context.isDestroyed()) {
+            return; // Prevent showing dialog on a destroyed activity
+        }
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         View view= LayoutInflater.from(context).inflate(R.layout.dlg_success,null);
 
@@ -320,14 +323,17 @@ public class CommonClass {
 
         mDialog.setCancelable(false);
         mDialog.create();
-        mDialog.show();
+        if(mDialog!=null) {
+            mDialog.show();
+        }
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                if(context != null && !context.isFinishing() && !context.isDestroyed()) {
+                if (context != null && !context.isFinishing() && !context.isDestroyed() && mDialog.isShowing()) {
 
                     if (mDialog != null) {
                         if (mDialog.isShowing()) {
                             mDialog.dismiss();
+
 
                         }
                     }

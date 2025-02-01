@@ -178,6 +178,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
     TextView   recognize;
     String language ="ta";
     FaceAuthDB faceAuthDB;
+    int distance_val=0;
 
     private TextToSpeech textToSpeech;
 
@@ -339,7 +340,11 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
         faceAuthDB=new FaceAuthDB(AttendanceActivity.this);
         faceAuthDB.getWritableDatabase();
 
-
+        String letme = commonClass.getSharedPref(getApplicationContext(),"distancee");
+        if(!TextUtils.isEmpty(letme)){
+            distance_val = Integer.parseInt(letme);
+        }
+        Log.d("AttendanceDistance"," distance "+distance_val);
 
       /*  ofz_lat = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"branch_lat"));
         ofz_lng = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"branch_long"));*/
@@ -606,8 +611,8 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
                         Log.d("locationDetails", " lat " + location.getLatitude() + " lng " + location.getLongitude());
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
-                    distance_value = CalculationByDistance(ofz_lat, ofz_lng, latitude, longitude, "10km");
-                       // distance_value = CalculationByDistance(ofz_lat, ofz_lng, 11.2378483, 78.1513483, "10km");
+                        distance_value = CalculationByDistance(ofz_lat, ofz_lng, latitude, longitude, "10km");
+                      //  CalculationByDistance(11.237931, 78.151438,11.2379334,78.1514359,"10km");
                     }
                 }
             });
@@ -1318,7 +1323,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
 
                     Log.d(commonTag, " get work type " + workLocation);
                     if (workLocation.equals("office")) {
-                        if (distance_value <= 20 && distance_value >= 0) {
+                        if (distance_value <= distance_val && distance_value >= 0) {
                             Log.d("CheckInCondition", " condition 1");
                             if(TextUtils.isEmpty(branch_id)){
                                 commonClass.showWarning(AttendanceActivity.this,"You should be along to branch location");
@@ -1372,7 +1377,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
 
 
                     if (workLocation.equals("office")) {
-                        if (distance_value <= 20 && distance_value >= 0) {
+                        if (distance_value <= distance_val && distance_value >= 0) {
                             Log.d("CheckInCondition", " condition 1");
                             if(TextUtils.isEmpty(branch_id)){
                                 commonClass.showWarning(AttendanceActivity.this,"You should be along to branch location");
@@ -2760,17 +2765,13 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
         ///idea 3
         double distance=0;
         double minDis=0;
-        Log.d("attendanceLocation"," alt "+lat2+" lng "+lon2);
+        Log.d("attendanceLocation"," alt "+lat2+" lng "+lon2+" lat1 "+lat1+" long1 "+lon1+" distance "+distance_val);
 
         BranchTable branchTable= new BranchTable(AttendanceActivity.this);
         branchTable.getWritableDatabase();
-
-
         List<LatLng> getBranchDetails = new ArrayList<>();
-        getBranchDetails.add(new in.proz.adamd.ModalClass.LatLng("1","11.236899","78.151472"));
-        getBranchDetails.add(new in.proz.adamd.ModalClass.LatLng("2","11.2379334","78.1514359"));
-       // getBranchDetails = branchTable.getAllNameList();
-        Log.d("getDistance"," get list size "+getBranchDetails.size());
+        getBranchDetails.add(new in.proz.adamd.ModalClass.LatLng("1",String.valueOf(lat1),String.valueOf(lon1)));
+         Log.d("getDistance"," get list size "+getBranchDetails.size());
         if(getBranchDetails.size()!=0){
             for(int i=0;i<getBranchDetails.size();i++){
                 Double lat11 =Double.valueOf(getBranchDetails.get(i).getLatitude());
@@ -2794,12 +2795,6 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
                 }
             }
         }
-
-
-
-
-
-        Log.d("attendanceLocation"," idea 3 distance "+distance+" branch id "+branch_id);
         return (int) minDis;
 
     }

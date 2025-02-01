@@ -14,15 +14,7 @@
         android:layout_height="wrap_content"/>
 
 
-       <!-- <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-            android:layout_width="match_parent"
-            android:id="@+id/btm_nav"
-            android:layout_gravity="bottom"
-            app:mbn_backgroundBottomColor="@color/purple_200"
-            app:mbn_circleColor="@color/black"
-            app:mbn_selectedIconColor="@color/white"
-            app:mbn_defaultIconColor="@color/white"
-            android:layout_height="wrap_content"/>-->
+
         <View
             android:background="@color/n_org"
             android:layout_width="match_parent"

@@ -352,6 +352,7 @@ public class PersonalInformation extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.nhome_layout:
                 Intent intentabout1 = new Intent(getApplicationContext(), DashboardNewActivity.class);
+                intentabout1.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY  | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentabout1);
                 break;
           /*  case R.id.nabout_layout:
@@ -867,6 +868,7 @@ public class PersonalInformation extends AppCompatActivity implements View.OnCli
                     if(response.isSuccessful()) {
                         if (response.code() == 200) {
                             if(response.body().getStatus().equals("success")){
+                                getList();
                                 commonClass.showSuccess(PersonalInformation.this,"Image Updated Successfully...");
                             }else{
                                 commonClass.showError(PersonalInformation.this,"Failed to save image");

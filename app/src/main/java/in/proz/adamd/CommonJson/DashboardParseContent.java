@@ -15,6 +15,12 @@ public class DashboardParseContent {
     DashboardTagContent admin_essentials;
     @SerializedName("admin_middle_card")
     DashboardTagContent admin_middle_card;
+    @SerializedName("radius_distance")
+    DashboardTagContent radius_distance;
+
+    public DashboardTagContent getRadius_distance() {
+        return radius_distance;
+    }
 
     public DashboardTagContent getAdmin_header_card() {
         return admin_header_card;

@@ -821,6 +821,12 @@ public class DashboardNewActivity extends AppCompatActivity implements View.OnCl
                 Log.d("dashboardUIViewTable"," response code "+response.code());
                 if(response.code()==200){
                     if(response.body().getStatus().equals("success")){
+
+                        if(response.body().getDashboardParseContent().getRadius_distance()!=null){
+                            commonClass.putSharedPref(getApplicationContext(),"distancee",response.body().getDashboardParseContent().getRadius_distance().getDistance());
+                        }
+
+
                  if(response.body().getDashboardParseContent().getAdmin_header_card()!=null){
                      Log.d("dashboardUIViewTable"," not null1");
                     if(response.body().getDashboardParseContent().getAdmin_header_card().getDashboardContentList()!=null){

@@ -44,9 +44,13 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -490,26 +494,57 @@ public class DSRActivity extends AppCompatActivity implements View.OnClickListen
         mDialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.n_org));
         mDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.n_org));    }
 
-    public String getCalendarDate(int currentWeek){
+    public String get_52_week(){
+         String date_str=null;
+        Calendar c1 = Calendar.getInstance();
+        c1.set(Calendar.WEEK_OF_YEAR,52);
 
-        Log.d("getList"," current week "+currentWeek);
+        c1.set(Calendar.DAY_OF_WEEK, 7);
+
+        int year7 = c1.get(Calendar.YEAR);
+        int month7 = c1.get(Calendar.MONTH)+1;
+        int day7 = c1.get(Calendar.DAY_OF_MONTH);
+        day7=day7+1;
+
+
+        String mon11="0",day_11="0";
+        if(month7<=9){
+            mon11="0"+String.valueOf(month7);
+        }else{
+            mon11= String.valueOf(month7);
+        }if(day7<=9){
+            day_11="0"+String.valueOf(day7);
+        }else{
+            day_11= String.valueOf(day7);
+        }
+        date_str = year7 +"-"+mon11+"-"+day_11;
+        return date_str ;
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String getCalendarDate(int currentWeek){
+         Log.d("newFunctionality"," current week "+currentWeek);
         Calendar c1 = Calendar.getInstance();
         c1.set(Calendar.WEEK_OF_YEAR,currentWeek);
-
-        //first day of week
         c1.set(Calendar.DAY_OF_WEEK, 2);
-
         int year1 = c1.get(Calendar.YEAR);
         int month1 = c1.get(Calendar.MONTH)+1;
         int day1 = c1.get(Calendar.DAY_OF_MONTH);
-        str_from = year1+"-"+month1+"-"+day1;
-
+        String mon1="0",day_1="0";
         if(month1<=9){
-            str_from = year1+"-0"+month1+"-"+day1;
+            mon1="0"+String.valueOf(month1);
+        }else{
+            mon1= String.valueOf(month1);
         }if(day1<=9){
-            str_from = year1+"-"+month1+"-0"+day1;
-
+            day_1="0"+String.valueOf(day1);
+        }else{
+            day_1= String.valueOf(day1);
         }
+
+        str_from = year1+"-"+mon1+"-"+day_1;
+
+
 
         //last day of week
         c1.set(Calendar.DAY_OF_WEEK, 7);
@@ -517,42 +552,40 @@ public class DSRActivity extends AppCompatActivity implements View.OnClickListen
         int year7 = c1.get(Calendar.YEAR);
         int month7 = c1.get(Calendar.MONTH)+1;
         int day7 = c1.get(Calendar.DAY_OF_MONTH);
-        str_to = year7 +"-"+month7+"-"+day7;
 
+
+        String mon11="0",day_11="0";
         if(month7<=9){
-            str_to = year7 +"-0"+month7+"-"+day7;
+            mon11="0"+String.valueOf(month7);
+        }else{
+            mon11= String.valueOf(month7);
+        }if(day7<=9){
+            day_11="0"+String.valueOf(day7);
+        }else{
+            day_11= String.valueOf(day7);
         }
-        if(day7<=9){
-            str_to = year7 +"-"+month7+"-0"+day7;
+        str_to = year7 +"-"+mon11+"-"+day_11;
 
+        Log.d("newfun"," from "+str_from+" to "+str_to);
+
+
+
+        if(currentWeek==1){
+            Log.d("newfun"," get 52 week "+get_52_week());
+            LocalDate currentDate = LocalDate.now();
+            int currentMonth = currentDate.getMonthValue();
+            if(currentMonth==12){
+                str_from = get_52_week();
+                LocalDate date = LocalDate.parse(str_from);
+                LocalDate saturday = date.plusWeeks(1).with(DayOfWeek.SATURDAY);
+                str_to =saturday.toString();
+                Log.d("newfun","current mon 12 to date as "+str_to+" from date "+str_from);
+            }
         }
 
-        Log.d("currentWeek"," from "+str_from+" to "+str_to);
 
 
 
-      /*  Log.d("currentWeek"," days before "+days);
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        String currentDateandTime = sdf.format(new Date());
-        Date cdate= null;
-        try {
-            cdate = sdf.parse(currentDateandTime);
-            Log.d("currentWeek"," current date obj "+cdate);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        Calendar now2= Calendar.getInstance();
-        now2.add(Calendar.DATE, -days);
-        String beforedate=now2.get(Calendar.YEAR)+"-"+(now2.get(Calendar.MONTH) + 1)+"-"+now2.get(Calendar.DATE);
-        Log.d("currentWeek"," before date "+beforedate);
-        Date BeforeDate1= null;
-        try {
-            BeforeDate1 = sdf.parse(beforedate);
-            Log.d("currentWeek"," before date obj  "+BeforeDate1);
-        } catch (ParseException e) {
-            Log.d("currentWeek"," erro "+e.getMessage());
-            throw new RuntimeException(e);
-        }*/
         String beforedate ="";
         return beforedate;
 
@@ -580,6 +613,7 @@ public class DSRActivity extends AppCompatActivity implements View.OnClickListen
         forward_date = findViewById(R.id.forward_date);
         calendarSpinner = findViewById(R.id.calendarSpinner);
         spinner_layout = findViewById(R.id.spinner_layout);
+        Log.d("newFunctionality"," current week "+currentWeek);
          getCalendarDate(currentWeek);
          forward_date.setOnClickListener(this);
          backward_date.setOnClickListener(this);
@@ -823,7 +857,7 @@ public class DSRActivity extends AppCompatActivity implements View.OnClickListen
                 String week = extractNumbers(SendToName);
                 int weeek =Integer.parseInt(week);
 
-
+                Log.d("newFunctionality"," weei "+weeek);
                 getCalendarDate(weeek);
                 getList();
 
@@ -1522,6 +1556,7 @@ if(listedGit.size()==0){
 
 
 
+
                 // Displaying the selected date range in the TextView
                 date_text.setText(selectedDateRange);
                 getList();
@@ -1685,27 +1720,32 @@ if(listedGit.size()==0){
                             }else{
                                 date_layout.setVisibility(View.GONE);
                             }
-                            Log.d("currentWeek"," wsr "+response.body().getWsr());
+                            Log.d("getDSR"," wsr "+response.body().getDsrSubModals().size());
                              if(response.body().getDsrSubModals().size()!=0){
-                                 
                                  SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                                  SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
                                  String todat_date = df.format(new Date());
 
-                                 String statis="0",sampledate=sdf1.format(new Date());
+                                 String statis="0",sampledate=sdf1.format(new Date()),loop="0";
                                  for(int i=0;i<response.body().getDsrSubModals().size();i++){
-                                     DSRSubModal modal = response.body().getDsrSubModals().get(i);                                          Log.d("getDSR"," get dat "+modal.getDate()+" today "+todat_date);
-                                     Log.d("getDSR"," get dat "+modal.getDate()+" today "+todat_date);
+                                     DSRSubModal modal = response.body().getDsrSubModals().get(i);
+                                     loop="1";
+                                      Log.d("getDSR"," get dat "+modal.getDate()+" today "+todat_date);
                                     if(modal.getDate().equals(todat_date)){
                                           statis="1";
                                           break;
                                      }
                                  }
-                                 if(statis.equals("1")){
-                                     btnplanned_work.setVisibility(View.GONE);
+                                 Log.d("getDSR"," loop "+loop);
+                                 if(loop.equals("1")) {
+                                     if (statis.equals("1")) {
+                                         btnplanned_work.setVisibility(View.GONE);
+                                     } else {
+                                         callCalendarWeek();
+                                         //btnplanned_work.setVisibility(View.VISIBLE);
+                                     }
                                  }else{
-                                     callCalendarWeek();
-                                     //btnplanned_work.setVisibility(View.VISIBLE);
+                                     btnplanned_work.setVisibility(View.VISIBLE);
                                  }
                                  
                                  no_data.setVisibility(View.GONE);
@@ -1713,7 +1753,7 @@ if(listedGit.size()==0){
                                          frame_layout);
                                  recyclerView.setAdapter(adapter);
                              }else{
-                               //  btnplanned_work.setVisibility(View.VISIBLE);
+                                //btnplanned_work.setVisibility(View.VISIBLE);
                                  callCalendarWeek();
 
                                  no_data.setVisibility(View.VISIBLE);
@@ -1774,6 +1814,9 @@ if(listedGit.size()==0){
 
         LocalDate date = LocalDate.of(year, month, day);;
         int weekOfYear = date.get(WeekFields.of(Locale.getDefault()).weekOfYear());
+        if(weekOfYear>52){
+            weekOfYear=1;
+        }
         Log.d("getDSR","week of yr "+weekOfYear);
         String rp = calendarSpinner.getText().toString().replace("Calendar Week ","");
         int rpi = Integer.parseInt(rp);

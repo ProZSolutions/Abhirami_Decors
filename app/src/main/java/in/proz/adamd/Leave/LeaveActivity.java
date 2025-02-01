@@ -840,7 +840,7 @@ public class LeaveActivity extends AppCompatActivity implements View.OnClickList
                 break;
              
             case R.id.ed_fromdate:
-                datePicker(ed_fromdate,2);
+                datePicker(ed_fromdate,1);
                 break;
             case R.id.edt_todate:
                 datePicker(edt_todate,2);
@@ -852,7 +852,7 @@ public class LeaveActivity extends AppCompatActivity implements View.OnClickList
                 timePicker(edt_totime,2);
                 break;
             case R.id.from_picker:
-                datePicker(ed_fromdate,2);
+                datePicker(ed_fromdate,1);
                 break;
             case R.id.fromtime_picker:
                 timePicker(edt_fromtime,1);
@@ -1252,7 +1252,7 @@ public class LeaveActivity extends AppCompatActivity implements View.OnClickList
                     str_time_from,str_time_to,String.valueOf(alternativespinner.getSelectedItemPosition()));
         }
         Log.d("claim_url"," url "+call.request().url()+" from time "+str_time_from+"  to time "+
-                str_time_to);
+                str_time_to+" from date "+from_date_str+" to date "+to_date_str);
 
         call.enqueue(new Callback<CommonPojo>() {
             @Override
@@ -1260,8 +1260,8 @@ public class LeaveActivity extends AppCompatActivity implements View.OnClickList
               //  progressDialog.dismiss();
                 apply_leave_request.setEnabled(true);
                 loader.setVisibility(View.GONE);
+                Log.d("claim_url"," res[onse "+response.code());
                 if(response.isSuccessful()){
-                    Log.d("claim_url"," res[onse "+response.code());
                     if(response.code()==200){
                         Log.d("claim_url"," respone "+response.body().getStatus());
                         if(response.body().getStatus().equals("success")){
@@ -1699,6 +1699,7 @@ public class LeaveActivity extends AppCompatActivity implements View.OnClickList
     }
 
      private void callDashboard() {
+
         Log.d("getPosition"," as "+position);
         if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
                 !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminRole")) &&
@@ -1707,7 +1708,7 @@ public class LeaveActivity extends AppCompatActivity implements View.OnClickList
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
                             Intent intent = new Intent(getApplicationContext(), AdminNewApprovals.class);
-                            intent.putExtra("position",position);
+                            intent.putExtra("position",0);
                             startActivity(intent);
                        }
                     }, 2500);

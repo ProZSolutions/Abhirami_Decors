@@ -25,8 +25,11 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -75,6 +78,7 @@ import java.util.List;
 import in.proz.adamd.Adapter.ClaimAdapter;
 import in.proz.adamd.AdminModule.AdminNewApprovals;
 import in.proz.adamd.AdminModule.AdminNewDashboard;
+import in.proz.adamd.Claim.ClaimActivity;
 import in.proz.adamd.DashboardNewActivity;
 import in.proz.adamd.Map.MapCurrentLocation;
 import in.proz.adamd.ModalClass.ClaimModal;
@@ -340,6 +344,8 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
                 !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminName"))){
             updateAdminUI();
         }
+
+         //callAlert("AlertCalling",1);
     }
     public void BackUI(){
         title.setText("Loan List");
@@ -352,26 +358,33 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
         getList();
     }
     private void callDashboard() {
+        Log.d("AlertCalling","AdminEmpNo"+commonClass.getSharedPref(getApplicationContext(), "AdminEmpNo")+
+                " pos "+position+" main "+main_change);
         if(commonPojo!=null){
+            Log.d("AlertCalling"," con1");
             BackUI();
         }else {
             if (!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(), "AdminEmpNo")) &&
                     !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(), "AdminRole")) &&
                     !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(), "AdminName"))) {
+                Log.d("AlertCalling"," con2");
                 if (position != 0 && main_change==1) {
+                    Log.d("AlertCalling"," con3");
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
                             Intent intent = new Intent(getApplicationContext(), AdminNewApprovals.class);
-                            intent.putExtra("position", position);
+                            intent.putExtra("position", 1);
                             startActivity(intent);
                         }
                     }, 2500);
 
                 } else {
+                    Log.d("AlertCalling"," con4");
                     Intent intent = new Intent(getApplicationContext(), DashboardNewActivity.class);
                     startActivity(intent);
                 }
             } else {
+                Log.d("AlertCalling"," con5");
                 Intent intent = new Intent(getApplicationContext(), DashboardNewActivity.class);
                 startActivity(intent);
             }
@@ -700,23 +713,29 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
                     if(response.code()==200){
                         Log.d("claim_url"," respone "+response.body().getStatus());
                         if(response.body().getStatus().equals("success")){
-                            commonClass.showSuccess(LoanActivity.this,response.body().getData());
-                            frame_tag.setText("Apply Loan");
+                             frame_tag.setText("Apply Loan");
                             frame_icon.setImageDrawable(getResources().getDrawable(R.drawable.add_circle_white));
-                           // apply_leave_layout.setVisibility(View.GONE);
-                            //bottom_request_layout.setVisibility(View.GONE);
-                            //listLayout.setVisibility(View.VISIBLE);
+                              //  commonClass.showSuccess(LoanActivity.this,response.body().getData());
+
                             callReset();
                             commonPojo =null;
+
+                            position=1;
                             if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminEmpNo")) &&
                                     !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminRole")) &&
                                     !TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"AdminName"))){
                                 main_change=1;
-                                callDashboard();
+                                new Handler().postDelayed(new Runnable() {
+                                    public void run() {
+                                        callAlert(response.body().getData(),1);
+                                        //callDashboard();
+                                    }
+                                }, 100);
+
                                // updateAdminUI();
                             }else {
-
-                                getList();
+                                callAlert(response.body().getData(),2);
+                                //getList();
                             }
                         }else{
                             commonClass.showError(LoanActivity.this,response.body().getData());
@@ -759,6 +778,50 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
+    private void callAlert(String data, int i) {
+        Log.d("AlertCalling"," call aler "+i);
+        AlertDialog.Builder builder=new AlertDialog.Builder(LoanActivity.this);
+        View view= LayoutInflater.from(LoanActivity.this).inflate(R.layout.dlg_success,null);
+
+        TextView text = (TextView) view.findViewById(R.id.msg_text);
+        text.setText(data);
+        builder.setView(view);
+        final AlertDialog mDialog = builder.create();
+        mDialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
+
+        Window window = mDialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        wlp.gravity = Gravity.CENTER;
+        wlp.width = LinearLayout.LayoutParams.MATCH_PARENT;
+        window.setAttributes(wlp);
+
+        mDialog.setCancelable(false);
+        mDialog.create();
+        if(mDialog!=null) {
+            mDialog.show();
+        }
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+
+                    if (mDialog != null) {
+                        if (mDialog.isShowing()) {
+                            mDialog.dismiss();
+                        }
+                    }
+
+                    Log.d("AlertCalling"," i "+i);
+                    if(i==1){
+                        callDashboard();
+                    }else{
+                        getList();
+                    }
+
+
+            }
+        }, 2500);
+    }
+
     private void callCustom1() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

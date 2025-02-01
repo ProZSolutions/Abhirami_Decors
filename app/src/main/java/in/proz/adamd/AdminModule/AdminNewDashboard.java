@@ -1187,6 +1187,10 @@ public class AdminNewDashboard extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
+            case R.id.linear_onduty_req:
+                callIntentMethod("9","onduty","Onduty List","1");
+
+                break;
 
             case R.id.nprofile_layout:
                 Intent intentabout1 = new Intent(getApplicationContext(), ProfileActivity.class);

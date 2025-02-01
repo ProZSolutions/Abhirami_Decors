@@ -6,8 +6,8 @@
 <!--    <string name="serverUrl">http://tnwda.proz.in/api/</string>-->
     <!--<string name="serverUrl">http://tnapi.proz.in/api/</string>-->
     <!-- should change the url in commonclass also -->
-    <string name="build_no">Build No : 2</string>
-    <string name="version_Code">1.0.2</string>
+    <string name="build_no">Build No : 4</string>
+    <string name="version_Code">1.0.4</string>
     <string name="n_org">#f5b24a</string>
     <string name="nleave">#F44336</string>
     <string name="npresnet">#4CAF50</string>

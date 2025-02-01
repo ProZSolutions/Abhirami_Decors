@@ -179,6 +179,7 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
     private MapView mapView;
     EditText edt_planned_work;
     String branch_id = null;
+    int distance_val=0;
     double ofz_lat = 11.2391346, ofz_lng = 78.1654629;
     List<String> projectNameList = new ArrayList<>();
     boolean[] selectedProjects;
@@ -270,7 +271,14 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             SendPushNotification();
         }
-      //  Toast.makeText(getApplicationContext(), "Flow1", Toast.LENGTH_SHORT).show();
+
+        String letme = commonClass.getSharedPref(getApplicationContext(),"distancee");
+        if(!TextUtils.isEmpty(letme)){
+            distance_val = Integer.parseInt(letme);
+        }
+        Log.d("AttendanceDistance"," distance "+distance_val);
+
+        //  Toast.makeText(getApplicationContext(), "Flow1", Toast.LENGTH_SHORT).show();
         faceAuthDB = new FaceAuthDB(MapCurrentLocation.this);
         faceAuthDB.getWritableDatabase();
         isLowNetwork(MapCurrentLocation.this);
@@ -635,7 +643,7 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
                             distance_value = CalculationByDistance(ofz_lat, ofz_lng, latitude, longitude, "10km");
-                            //  distance_value = CalculationByDistance(ofz_lat,ofz_lng,11.2378483,78.1513483,"10km");
+                         //   CalculationByDistance(11.2369154,78.1514318,11.2379334,78.1514359,"10km");
 
                             LatLng latLng1 = new LatLng(latitude, longitude);
                             Log.d("mapFunction", " location " + latitude + " lon " + longitude);
@@ -1103,28 +1111,15 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
     }
 
     public int CalculationByDistance(double lat1, double lon1, double lat2, double lon2, String actual_distance) {
-        Log.d("getDistance", " current lat lng " + lat2 + " " + lon2);
-        ///idea 3
-      /*  double distance;
-        Location locationA = new Location("");
-        locationA.setLatitude(lat1);
-        locationA.setLongitude(lon1);
-        Location locationB = new Location("");
-        locationB.setLatitude(lat2);
-        locationB.setLongitude(lon2);
-        distance = locationA.distanceTo(locationB);
-        Log.d("distance_calculation"," idea 3 distance "+distance);
-        return (int) distance;
-*/
+        Log.d("attendanceLocation"," alt "+lat2+" lng "+lon2+" lat1 "+lat1+" long1 "+lon1+" distance "+distance_val);
+
         double distance = 0;
         double minDis = 0;
 
         BranchTable branchTable = new BranchTable(MapCurrentLocation.this);
         branchTable.getWritableDatabase();
-
-
         List<in.proz.adamd.ModalClass.LatLng> getBranchDetails = new ArrayList<>();
-        getBranchDetails = branchTable.getAllNameList();
+        getBranchDetails.add(new in.proz.adamd.ModalClass.LatLng("1",String.valueOf(lat1),String.valueOf(lon1)));
         Log.d("getDistance", " get list size " + getBranchDetails.size());
         if (getBranchDetails.size() != 0) {
 
@@ -1426,7 +1421,7 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
                 if (latitude != 0) {
                     Log.d("commonTag"," get work type "+workLocation);
                     if(workLocation.equals("office")){
-                        if(distance_value<=20 && distance_value>=0){
+                        if(distance_value<=distance_val && distance_value>=0){
                             check_in.setEnabled(false);
                              if(TextUtils.isEmpty(branch_id)){
                                 commonClass.showWarning(MapCurrentLocation.this,"You should be along to branch location");
@@ -1467,7 +1462,7 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
                 if(latitude!=0){
 
                     if (workLocation.equals("office")) {
-                        if (distance_value <= 20 && distance_value >= 0) {
+                        if (distance_value <= distance_val && distance_value >= 0) {
                             Log.d("CheckInCondition", " condition 1");
                             if(TextUtils.isEmpty(branch_id)){
                                 commonClass.showWarning(MapCurrentLocation.this,"You should be along to branch location");
@@ -1993,6 +1988,8 @@ private void checkInAttendance() {
 
 
                             }else{
+                                previewView.setVisibility(View.GONE);
+                                mapView.setVisibility(View.VISIBLE);
                                 commonClass.showError(MapCurrentLocation.this,"Register Face for punch attendance");
                             }
                         }else{
