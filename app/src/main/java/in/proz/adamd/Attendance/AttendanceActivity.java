@@ -42,6 +42,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -72,6 +73,7 @@ import androidx.recyclerview.widget.RecyclerView;
  import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationListener;
@@ -118,6 +120,7 @@ import java.nio.channels.FileChannel;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -153,6 +156,7 @@ import in.proz.adamd.Map.MapCurrentLocation;
 import in.proz.adamd.ModalClass.AttendanceListSubModal;
 import in.proz.adamd.ModalClass.AttendanceMain;
 import in.proz.adamd.ModalClass.LatLng;
+import in.proz.adamd.ModalClass.LatLngBranch;
 import in.proz.adamd.ModalClass.ProjectListModal;
 import in.proz.adamd.ModalClass.PunchModal;
 import in.proz.adamd.ModalClass.TodayModal;
@@ -177,8 +181,9 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
     EditText edt_planned_work;
     TextView   recognize;
     String language ="ta";
+
     FaceAuthDB faceAuthDB;
-    int distance_val=0;
+    int distance_val=0,currentDistance=0,minimumdistance=0;
 
     private TextToSpeech textToSpeech;
 
@@ -191,8 +196,8 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
     ProjectDetails projectDetails;
     AttendanceListDB attendanceListDB;
     ArrayList<Integer> projectListID = new ArrayList<>();
-
-    // face detector
+    private LocationRequest locationRequest;
+     // face detector
     FaceDetector detector;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     PreviewView previewView;
@@ -245,6 +250,8 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
 
     CommonClass commonClass = new CommonClass();
     private final static int ID_NOTIFICATION = 4;
+    private GeofencingClient geofencingClient;
+
     ScrollView scrollView;
     public static final String[] MONTHS = {"January", "February", "March", "April", "May", "June", "July",
             "Augest", "September", "October", "November", "December"};
@@ -264,7 +271,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
     String requestDateFormat;
 
 
-    double latitude = 0, longitude = 0;
+    double latitude = 0, longitude = 0 ,nlatitude = 0, nlongitude = 0;
 
     FusedLocationProviderClient client;
 
@@ -275,6 +282,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
     // ProgressDialog progressDialog;
     RecyclerView todayRV, listRV;
     TextView att_tag;
+    int geoFenLoc=1;
     String att_tag_status="0";
     Map<CalendarDay, Integer> dateColorMap = new HashMap<>();
 
@@ -300,8 +308,9 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
             UPDATE_INTERVAL_IN_MILLISECONDS / 2;
-    private LocationCallback locationCallback;
+        private LocationCallback locationCallback;
     private LocationRequest mLocationRequest;
+    FusedLocationProviderClient fusedLocationClient;
 
     int distance_value = 0;
     String branch_id=null;
@@ -340,16 +349,17 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
         faceAuthDB=new FaceAuthDB(AttendanceActivity.this);
         faceAuthDB.getWritableDatabase();
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
         String letme = commonClass.getSharedPref(getApplicationContext(),"distancee");
         if(!TextUtils.isEmpty(letme)){
             distance_val = Integer.parseInt(letme);
         }
         Log.d("AttendanceDistance"," distance "+distance_val);
 
-      /*  ofz_lat = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"branch_lat"));
-        ofz_lng = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"branch_long"));*/
-        Log.d("office_location"," lat "+ofz_lat+" lng "+ofz_lng
-        +commonClass.getDeviceID(AttendanceActivity.this));
+        ofz_lat = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"off_lat"));
+        ofz_lng = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"off_lng"));
+
 
 
         commonClass.putSharedPref(getApplicationContext(),"location_not_logged","0");
@@ -371,6 +381,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
 
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         getLastKnownLocation();
+        getCurrentLocationChange();
         initView();
 
         textToSpeech = new TextToSpeech(this, status -> {
@@ -491,8 +502,10 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
 
 
         getLocationdetails();
-    }
 
+
+        geofencingClient = LocationServices.getGeofencingClient(this);
+     }
 
 
     public void callAllTheTodayRecords() {
@@ -611,8 +624,25 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
                         Log.d("locationDetails", " lat " + location.getLatitude() + " lng " + location.getLongitude());
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
-                        distance_value = CalculationByDistance(ofz_lat, ofz_lng, latitude, longitude, "10km");
-                      //  CalculationByDistance(11.237931, 78.151438,11.2379334,78.1514359,"10km");
+                        distance_value = CalculationByDistanceNew(ofz_lat, ofz_lng, latitude, longitude, "10km");
+
+                        CalculationByDistance(  11.2370618,78.1515399,  11.2369489,78.1493104 ,"Show Room Back ");
+                        CalculationByDistance( 11.2370485,78.1489314,  11.2369489,78.1493104 , "Show Room Back Sit-up");
+                        CalculationByDistance(  11.2369489,78.1493104, 11.2369489,78.1493104 , "Show Room Mid ");
+                        CalculationByDistance( 11.236743,78.149143,  11.2369489,78.1493104 , "Show Room Front Door ");
+                        CalculationByDistance( 11.2367571,78.1490669, 11.2369489,78.1493104 ,  "Show Room Outer (Front Door Steps)");
+                        CalculationByDistance( 11.2368137,78.1488765,  11.2369489,78.1493104 , "Show Room Outer ( Left Side Road )");
+
+
+       /*                 CalculationByDistance(  11.2379882,78.1488137, 11.2378676,78.1487496,"Tailoring Unit Outer Gate");
+                        CalculationByDistance(  11.2379882,78.1488137, 11.2379281,78.1487608,"Tailoring Unit Inside (near to gate ) ");
+                        CalculationByDistance(  11.2379882,78.1488137, 11.2380163,78.1488167,"Tailoring Unit Sofa");
+                        CalculationByDistance(  11.2379882,78.1488137, 11.2380278,78.1488475,"Tailoring Unit most left corner");
+                        CalculationByDistance(  11.2379882,78.1488137, 11.2380418,78.1488456,"Tailoring Unit Corridor");*/
+
+                         Log.d("getActia"," dis "+distance_value);
+
+                        //  CalculationByDistance(11.237931, 78.151438,11.2379334,78.1514359,"10km");
                     }
                 }
             });
@@ -1128,10 +1158,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
         projectNameList.clear();
         projectNameList = projectDetails.getAllProjectList(null);
         projectNameList.add("Others");
-        // Collections.sort(projectNameList);
-        /*ArrayAdapter<String> adapter = new ArrayAdapter<>(DSRActivity.this, android.R.layout.simple_dropdown_item_1line,
-                projectNameList);
-        nachoTextView.setAdapter(adapter);*/
+
     }
 
 
@@ -1313,52 +1340,30 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
                         getLastLocation();
                     }
                 }
+                callLocationCalling();
 
-                if(latitude==0){
-                   /* latitude =ofz_lat;
-                    longitude =ofz_lng;*/
-                }
-                if (latitude != 0) {
+               /* if (latitude != 0) {
                     commonClass.putSharedPref(getApplicationContext(),"location_not_logged","0");
-
-                    Log.d(commonTag, " get work type " + workLocation);
+                     Log.d(commonTag, " get work type " + workLocation+" distamce "+distance_value+" distanve val "+distance_val);
                     if (workLocation.equals("office")) {
                         if (distance_value <= distance_val && distance_value >= 0) {
-                            Log.d("CheckInCondition", " condition 1");
-                            if(TextUtils.isEmpty(branch_id)){
-                                commonClass.showWarning(AttendanceActivity.this,"You should be along to branch location");
-                            }else {
-                                if(branch_id.equals("null")){
-                                    commonClass.showWarning(AttendanceActivity.this,"You should be along to branch location");
-                                }else{
-                                    checkInConditionMethod();
-                                }
-                            }
-
+                             checkInConditionMethod();
                         } else {
-                            commonClass.showWarning(AttendanceActivity.this, "You should be along to office location  ");
+                            commonClass.showWarning(AttendanceActivity.this, "You should be along to office location  "+distance_value);
                         }
                     } else {
-                        Log.d("CheckInCondition", " condition 2");
-
                         checkInConditionMethod();
                     }
 
-                    //commonClass.putSharedPref(getApplicationContext(),"dsr_date","2024-04-16");
-
-
-                    // checkInAttendance();
-
                 } else {
                     location_not_logged="1";
-                    Log.d("checkoutIn"," con1");
-                    commonClass.putSharedPref(getApplicationContext(),"location_not_logged","1");
+                     commonClass.putSharedPref(getApplicationContext(),"location_not_logged","1");
                     commonClass.showWarning(AttendanceActivity.this, "Cannot access current location.");
-                }
+                }*/
                 break;
             case R.id.checkout:
                 updateCheckHeader(2);
-                if(commonClass.isOnline(AttendanceActivity.this)){
+                 if(commonClass.isOnline(AttendanceActivity.this)){
                     if(latitude==0){
                         commonClass.showWarning(AttendanceActivity.this, "Cannot Access Current Location");
                     }
@@ -1367,42 +1372,25 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
                         getLastLocation();
                     }
                 }
-                if(latitude==0){
-                    /*latitude =ofz_lat;
-                    longitude =ofz_lng;*/
-                }
+                 callLocationCalling();
 
-
-                if (latitude != 0) {
-
-
+               /* if (latitude != 0) {
                     if (workLocation.equals("office")) {
                         if (distance_value <= distance_val && distance_value >= 0) {
                             Log.d("CheckInCondition", " condition 1");
-                            if(TextUtils.isEmpty(branch_id)){
-                                commonClass.showWarning(AttendanceActivity.this,"You should be along to branch location");
-                            }else {
-                                if(branch_id.equals("null")){
-                                    commonClass.showWarning(AttendanceActivity.this,"You should be along to branch location");
+
+                            if(commonClass.isOnline(AttendanceActivity.this)){
+                                if(commonClass.isLocationEnabled(AttendanceActivity.this)){
+                                    checkOutAttendance();
                                 }else{
-                                    if(commonClass.isOnline(AttendanceActivity.this)){
-                                        Log.d("checkoutIn"," loc "+commonClass.getSharedPref(getApplicationContext(),"location_not_logged"));
-                                        if(commonClass.isLocationEnabled(AttendanceActivity.this)){
-                                            Log.d("checkoutIn"," one ");
-                                            checkOutAttendance();
-                                        }else{
-                                            commonClass.showWarning(AttendanceActivity.this,"Enable Location and then try");
-                                        }
-                                    }else{
-                                        Log.d("checkoutIn"," teo ");
-                                        checkOutAttendance();
-                                    }
+                                    commonClass.showWarning(AttendanceActivity.this,"Enable Location and then try");
                                 }
+                            }else {
+                                checkOutAttendance();
                             }
 
-
                         } else {
-                            commonClass.showWarning(AttendanceActivity.this, "You should be along to office location  ");
+                            commonClass.showWarning(AttendanceActivity.this, "You should be along to office location  "+distance_value);
                         }
                     } else {
                         Log.d("CheckInCondition", " condition 2");
@@ -1428,7 +1416,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
                     Log.d("checkoutIn"," con2");
                     commonClass.putSharedPref(getApplicationContext(),"location_not_logged","1");
                     commonClass.showWarning(AttendanceActivity.this, "Cannot access current location.");
-                }
+                }*/
                 break;
         }
     }
@@ -2761,42 +2749,32 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
                 }).check();
     }
 
-    public int CalculationByDistance(double lat1,double lon1,double lat2,double lon2,String actual_distance ) {
-        ///idea 3
-        double distance=0;
-        double minDis=0;
-        Log.d("attendanceLocation"," alt "+lat2+" lng "+lon2+" lat1 "+lat1+" long1 "+lon1+" distance "+distance_val);
+    public int CalculationByDistanceNew(double lat1,double lon1,double lat2,double lon2,String actual_distance ) {
+        Log.d("getActia"," location "+lat1+" "+lon1+" lat "+lat2+" "+lon2
+        +" Location Type "+actual_distance);
 
-        BranchTable branchTable= new BranchTable(AttendanceActivity.this);
-        branchTable.getWritableDatabase();
-        List<LatLng> getBranchDetails = new ArrayList<>();
-        getBranchDetails.add(new in.proz.adamd.ModalClass.LatLng("1",String.valueOf(lat1),String.valueOf(lon1)));
-         Log.d("getDistance"," get list size "+getBranchDetails.size());
-        if(getBranchDetails.size()!=0){
-            for(int i=0;i<getBranchDetails.size();i++){
-                Double lat11 =Double.valueOf(getBranchDetails.get(i).getLatitude());
-                Double lng11 =Double.valueOf(getBranchDetails.get(i).getLongitude());
-                Location locationA = new Location("");
-                locationA.setLatitude(lat11);
-                locationA.setLongitude(lng11);
-                Location locationB = new Location("");
-                locationB.setLatitude(lat2);
-                locationB.setLongitude(lon2);
-                distance = locationA.distanceTo(locationB);
-                Log.d("getDistance"," as "+minDis);
-                if(i==0){
-                    minDis = distance;
-                    branch_id = getBranchDetails.get(i).getId();
-                }else{
-                    if(minDis>distance){
-                        branch_id = getBranchDetails.get(i).getId();
-                        minDis=distance;
-                    }
-                }
-            }
-        }
-        return (int) minDis;
+        double distance;
+        Location locationA = new Location("");
+        locationA.setLatitude(lat1);
+        locationA.setLongitude(lon1);
+        Location locationB = new Location("");
+        locationB.setLatitude(lat2);
+        locationB.setLongitude(lon2);
+        distance = locationA.distanceTo(locationB);
+        Log.d("getActia"," calculwted dis "+distance);
+        return (int) distance;
 
+
+    }
+
+    public void CalculationByDistance(double lat1,double lng1,double lat2,double lng2,String actual_distance ) {
+       Log.d("MainDistance"," Fetch Part "+actual_distance);
+         float[] results = new float[1];
+        Location.distanceBetween(lat1, lng1, lat2, lng2, results);
+        Log.d("MainDistance"," as "+results[0]);
+
+        // Output distance in meters
+        System.out.println("Distance: " + results[0] + " meters");
     }
 
         @RequiresApi(api = Build.VERSION_CODES.M)
@@ -2909,6 +2887,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onDestroy() {
         //stopService(mServiceIntent);
+        super.onDestroy();
         Log.d("FuseService"," onDestroy "
                 +" uuid "+commonClass.getSharedPref(getApplicationContext(),"uuid")+
                 " sync id "+commonClass.getSharedPref(getApplicationContext(),"sync_id"));        if(!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(),"uuid")) &&
@@ -2918,7 +2897,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
             broadcastIntent.setClass(this, Restarter.class);
             this.sendBroadcast(broadcastIntent);
         }
-        super.onDestroy();
+
     }
 
 
@@ -3241,40 +3220,25 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
 
         //Compare new face with saved Faces.
         if (registered.size() > 0) {
+            Log.d("FaceReg", "Model output embeddings: " + Arrays.toString(embeedings[0]));
 
             final List<Pair<String, Float>> nearest = findNearest(embeedings[0]);//Find 2 closest matching face
-            final List<Pair<String, Float>> nearestNew = findNearestNew(embeedings[0]);//Find 2 closest matching face
+            Log.d("FaceReg","near se "+nearest.get(0).second);
 
-
-            if (nearest.get(0) != null) {
+            if (nearest.get(0) != null  ) {
 
                 final String name = nearest.get(0).first; //get name and distance of closest matching face\
                 Log.d("getName"," name "+name);
                 // label = name;
                 distance_local = nearest.get(0).second;
 
+            Log.d("getName"," get distance "+distance_local+" dis "+distance);
 
 
-                if (developerMode)
-                {
+                    Log.d("getName"," face id "+distance_local+" dis "+distance);
+                   // if(distance_local<distance){
 
-                    if(distance_local<distance){
-                        Log.d("getName"," registerc ");
-                        start=false;
-                        commonClass.showSuccess(AttendanceActivity.this,"Face Authentication Success");
-                        callLogin();
-                    }else {
-                        Log.d("getName"," un registered ");
-                        start=false;
-                        att_tag.setText("Face Id Mismatched . Kindly register first");
-                        recognize.setVisibility(View.VISIBLE);
-                        commonClass.showError(AttendanceActivity.this,"Face Authentication Failed");
-                    }
-//                    System.out.println("nearest: " + name + " - distance: " + distance_local);
-                }
-                else
-                {
-                    if(distance_local<distance){
+                        if(distance_local<0.85){
                         Log.d("getName"," registerc ");
                         start=false;
                         commonClass.showSuccess(AttendanceActivity.this,"Face Authentication Success");
@@ -3288,7 +3252,6 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
                     }
 
 //                    System.out.println("nearest: " + name + " - distance: " + distance_local);
-                }
 
 
 
@@ -3322,6 +3285,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+/*
     private List<Pair<String, Float>> findNearestNew(float[] emb) {
         Log.d("getNameLisr"," find nearedt "+emb);
         List<Pair<String, Float>> neighbour_list = new ArrayList<Pair<String, Float>>();
@@ -3359,6 +3323,7 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
 
         return neighbour_list;
     }
+*/
 
 
     private List<Pair<String, Float>> findNearest(float[] emb) {
@@ -3570,5 +3535,194 @@ public class AttendanceActivity extends AppCompatActivity implements View.OnClic
         parcelFileDescriptor.close();
         return image;
     }
+    private void addGeofence() {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+            return;
+        }
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(location -> {
+                    if (location != null) {
+                        double userLat = location.getLatitude();
+                        double userLng = location.getLongitude();
+                        if(nlatitude==0.0 && nlongitude==0.0) {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                        }
+                        Log.d("AttendanceLocation", "User Location Lst Known : Lat " + userLat + " Lng " + userLng);
+                       // checkAttendanceEligibility(userLat, userLng);
+
+                        getCurrentLocationChange();
+                        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+                        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+
+                    } else {
+                        Log.d("AttendanceLocation", "Failed to get location");
+                        Toast.makeText(this, "Unable to get location. Try again.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> Log.d("AttendanceLocation", "Location Error: " + e.getMessage()));
+
+
+        android.app.AlertDialog.Builder builder=new android.app.AlertDialog.Builder(this);
+        View view= LayoutInflater.from(this).inflate(R.layout.location_check,null);
+        ImageView close = view.findViewById(R.id.close);
+        CheckBox use_current_location =view.findViewById(R.id.use_current_location);
+        EditText edlatitude =view.findViewById(R.id.latitude);
+        EditText edlongitude =view.findViewById(R.id.longitude);
+        TextView current_distance =view.findViewById(R.id.current_distance);
+        TextView submit =view.findViewById(R.id.submit);
+
+
+        builder.setView(view);
+        final AlertDialog mDialog = builder.create();
+        mDialog.create();
+        mDialog.show();
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(edlatitude.getText().toString()) && !use_current_location.isChecked()){
+                    Toast.makeText(getApplicationContext(),"Enter latitude",Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(edlongitude.getText().toString())  && !use_current_location.isChecked()){
+                    Toast.makeText(getApplicationContext(),"Enter Longitude",Toast.LENGTH_SHORT).show();
+                }else{
+                    int dist =0;
+                    String location;
+                    if(use_current_location.isChecked()){
+                        dist =checkAttendanceEligibility(nlatitude,nlongitude);
+                        location =" User Location "+latitude+","+longitude;
+                    }else{
+                        dist=checkAttendanceEligibility(Double.valueOf(edlatitude.getText().toString()),
+                                Double.valueOf(edlongitude.getText().toString()));
+                        location =" User Location "+edlatitude.getText().toString()+","+edlongitude.getText().toString();
+                    }
+
+                    if(branch_id.equals("-1")){
+                        Toast.makeText(getApplicationContext(),"No Branch Present",Toast.LENGTH_SHORT).show();
+                    }else{
+                        BranchTable  branchTable =new BranchTable(AttendanceActivity.this);
+                        branchTable.getWritableDatabase();
+                        LatLngBranch latLngBranch = branchTable.selectRow(branch_id);
+                        current_distance.setText("Current Location Distance : "+dist+"\n"+location+"\n Work Location : "+
+                                latLngBranch.getLatitude()+","+latLngBranch.getLongitude()+"(Radius : "+latLngBranch.getBranchdistance()+")");
+                    }
+
+
+
+                }
+            }
+        });
+
+
+
+
+
+    }
+    private int checkAttendanceEligibility(double userLat, double userLng) {
+        Log.d("AttendanceLocation"," lat lng "+userLat+" lng "+userLng);
+        float[] results = new float[1];
+        BranchTable branchTable =new BranchTable(AttendanceActivity.this);
+        branchTable.getWritableDatabase();
+        List<LatLngBranch> getBranch = new ArrayList<>();
+        getBranch = branchTable.getAllNameList();
+        if(getBranch.size()!=0){
+            for(int i=0;i<getBranch.size();i++){
+                double officeLat = Double.parseDouble(getBranch.get(i).getLatitude());
+                double officeLng = Double.parseDouble(getBranch.get(i).getLongitude());
+                int allowedRadius = Integer.parseInt(getBranch.get(i).getBranchdistance());
+                Location.distanceBetween(officeLat, officeLng, userLat, userLng, results);
+                float distanceInMeters = results[0];
+                Log.d("AttendanceLocation"," distance meter "+distanceInMeters);
+                int roundedDistance;
+                double decimalPart = distanceInMeters - (int) distanceInMeters;
+
+                if (decimalPart > 0.60) {
+                    roundedDistance = (int) distanceInMeters + 1; // Round up
+                } else {
+                    roundedDistance = (int) distanceInMeters; // Normal truncation
+                }
+                Log.d("AttendanceLocation"," office lat "+officeLat+" officelng "+officeLng+" ofz radius "+
+                        allowedRadius);
+
+                Log.d("AttendanceLocation"," round of distance "+roundedDistance+" current distance "+currentDistance);
+
+
+                if(i==0){
+                    currentDistance = roundedDistance;
+                    branch_id = getBranch.get(i).getBranchid();
+                    if (roundedDistance <= allowedRadius) {
+                        geoFenLoc=0;
+                    }else{
+                        geoFenLoc=1;
+                    }
+                }else{
+                    if(roundedDistance<currentDistance){
+                        currentDistance = roundedDistance;
+                        branch_id = getBranch.get(i).getBranchid();
+                        if (roundedDistance <= allowedRadius) {
+                            geoFenLoc=0;
+                        }else{
+                            geoFenLoc=1;
+                        }
+                    }
+                }
+
+            Log.d("AttendanceLocation"," current distance "+currentDistance+"  branch id "+branch_id+" allowede radius "+
+                    geoFenLoc);
+            }
+        }else{
+            commonClass.showWarning(AttendanceActivity.this,"No Branch List Found");
+        }
+        return  currentDistance;
+   }
+    private void callLocationCalling() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED  ) {
+            Log.d("AttendanceLocation"," on request");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION }, 2000);
+        } else {
+            Log.d("AttendanceLocation"," ad geo");
+            addGeofence();
+        }
+    }
+
+    private void getCurrentLocationChange() {
+        Log.d("AttendanceLocation"," location change called ");
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+            Log.d("AttendanceLocation","permission not enabled ");
+            return;
+        }
+        locationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(2000)
+                .setFastestInterval(1000)
+                .setNumUpdates(1); // Request only one update
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) return;
+                for (Location location : locationResult.getLocations()) {
+                    nlatitude = location.getLatitude();
+                    nlongitude = location.getLongitude();
+                    Log.d("AttendanceLocation"," on location changed call back "+latitude+","+longitude);
+                }
+            }
+
+        };
+
+    }
+
+
+
 
 }

@@ -115,10 +115,14 @@ String approve_name;
     // admin module
     String total_employee,total_present_count,total_absent_count,total_leave_count,total_late_count,
             total_permission_count,bio_login,mobile_login,req_leave,req_loan,req_claim,req_assets,
-            req_tickets,req_onduty,latitude,longitude;
+            req_tickets,req_onduty,latitude,longitude,radius;
 
     public String getExtra() {
         return extra;
+    }
+
+    public String getRadius() {
+        return radius;
     }
 
     public String getLatitude() {

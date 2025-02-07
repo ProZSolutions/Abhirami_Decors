@@ -36,6 +36,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.ParcelFileDescriptor;
 import android.speech.RecognizerIntent;
 import android.telephony.TelephonyManager;
@@ -48,6 +49,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -77,6 +79,10 @@ import com.codebyashish.googledirectionapi.RouteDrawing;
 import com.codebyashish.googledirectionapi.RouteInfoModel;
 import com.codebyashish.googledirectionapi.RouteListener;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationAvailability;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -112,6 +118,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.squareup.picasso.Picasso;
 import com.tuyenmonkey.mkloader.MKLoader;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.tensorflow.lite.Interpreter;
 
@@ -159,6 +166,7 @@ import in.proz.adamd.Face.FaceModal;
 import in.proz.adamd.Face.SQLFaceModal;
 import in.proz.adamd.FaceAuth.SimilarityClassifier;
 import in.proz.adamd.Map.Modal.DataParser;
+import in.proz.adamd.ModalClass.LatLngBranch;
 import in.proz.adamd.ModalClass.ProjectListModal;
 import in.proz.adamd.ModalClass.PunchModal;
 import in.proz.adamd.NotesActivity.NotesActivity;
@@ -189,7 +197,7 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
     TextView recognize;
 
 
-    int other_status = 0;
+    int other_status = 0,geoFenLoc=1,currentDistance=0;
 
     MapRipple mapRipple;
     int distance_value = 0;
@@ -206,7 +214,7 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
 
     private FusedLocationProviderClient fusedLocationClient;
     private GoogleMap googleMap;
-    double latitude, longitude;
+    double latitude, longitude,nlatitude,nlongitude;
     ProjectDetails projectDetails;
     AttendanceListDB attendanceListDB;
     PunchINOUTDB punchINOUTDB;
@@ -218,6 +226,10 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
     DecimalFormat decimalFormat = new DecimalFormat("00");
     MKLoader loader;
     Intent mServiceIntent, lIntent, lUIntent;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
+
+
 
     LinearLayout nhome_layout, nprofile_layout, nreports_layout, nlocation_layout;
     ImageView iimgnotes;
@@ -282,10 +294,8 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
         faceAuthDB = new FaceAuthDB(MapCurrentLocation.this);
         faceAuthDB.getWritableDatabase();
         isLowNetwork(MapCurrentLocation.this);
-       /* ofz_lat = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"branch_lat"));
-        ofz_lng = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"branch_long"));
-
-*/
+        ofz_lat = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"off_lat"));
+        ofz_lng = Double.valueOf(commonClass.getSharedPref(getApplicationContext(),"off_lng"));
         Log.d("office_location", " lat " + ofz_lat + " lng " + ofz_lng);
         Bundle b = getIntent().getExtras();
         if (b != null) {
@@ -310,6 +320,22 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
         loader = findViewById(R.id.loader);
         title = findViewById(R.id.title);
         title.setText("Current Location");
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull @NotNull LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                getCurrentLocationChange();
+                 //Toast.makeText(getActivity(), "Location Result" + locationResult.getLocations(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLocationAvailability(@NonNull @NotNull LocationAvailability locationAvailability) {
+                super.onLocationAvailability(locationAvailability);
+            }
+        };
+
+
+
         initView();
         getProjectList();
 
@@ -382,6 +408,7 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+        Log.d("LocationOnCheckLis","1");
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         if (!TextUtils.isEmpty(commonClass.getSharedPref(getApplicationContext(), "punch_in"))) {
@@ -416,6 +443,7 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
         }
         if (commonClass.isOnline(MapCurrentLocation.this)) {
             checkAttendancePunchOrNot();
+            getLastLocation();
         } else {
             Log.d("checkinHeader", " already punch " + commonClass.getSharedPref(getApplicationContext(), "sync_id") +
                     " ppun " + commonClass.getSharedPref(getApplicationContext(), "punch_in"));
@@ -620,6 +648,7 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
          //   Toast.makeText(getApplicationContext(), "Access fine location not given", Toast.LENGTH_SHORT).show();
+            Log.d("LocationOnCheckLis","2");
 
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -637,13 +666,16 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
                     @Override
                     public void onSuccess(Location location) {
                         if (location != null) {
-                       //     Toast.makeText(getApplicationContext(), "Flow4", Toast.LENGTH_SHORT).show();
+                            Log.d("LocationOnCheckLis","3");
+
+                            //     Toast.makeText(getApplicationContext(), "Flow4", Toast.LENGTH_SHORT).show();
 
                             // Use the location to update the map
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
-                            distance_value = CalculationByDistance(ofz_lat, ofz_lng, latitude, longitude, "10km");
+                            distance_value = CalculationByDistanceNew(ofz_lat, ofz_lng, latitude, longitude, "10km");
                          //   CalculationByDistance(11.2369154,78.1514318,11.2379334,78.1514359,"10km");
+                            Log.d("getActia"," dis "+distance_value);
 
                             LatLng latLng1 = new LatLng(latitude, longitude);
                             Log.d("mapFunction", " location " + latitude + " lon " + longitude);
@@ -652,6 +684,7 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
                             // Add code to update the map with the current location
                         } else {
                           //  Toast.makeText(getApplicationContext(), "Flow5", Toast.LENGTH_SHORT).show();
+                            Log.d("LocationOnCheckLis","4");
 
                         }
                     }
@@ -1109,6 +1142,20 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
             }
         }
     }
+    public int CalculationByDistanceNew(double lat1,double lon1,double lat2,double lon2,String actual_distance ) {
+        Log.d("getActia"," location "+lat1+" "+lon1+" lat "+lat2+" "+lon2);
+        double distance;
+        Location locationA = new Location("");
+        locationA.setLatitude(lat1);
+        locationA.setLongitude(lon1);
+        Location locationB = new Location("");
+        locationB.setLatitude(lat2);
+        locationB.setLongitude(lon2);
+        distance = locationA.distanceTo(locationB);
+        return (int) distance;
+
+    }
+
 
     public int CalculationByDistance(double lat1, double lon1, double lat2, double lon2, String actual_distance) {
         Log.d("attendanceLocation"," alt "+lat2+" lng "+lon2+" lat1 "+lat1+" long1 "+lon1+" distance "+distance_val);
@@ -1154,24 +1201,32 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("LocationOnCheckLis","9");
+
         mapView.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d("LocationOnCheckLis","10");
+
         mapView.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.d("LocationOnCheckLis","11");
+
         mapView.onDestroy();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
+        Log.d("LocationOnCheckLis","12");
+
         mapView.onLowMemory();
     }
 
@@ -1189,7 +1244,9 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
     public void onMapReady(@NonNull GoogleMap googleMap) {
         //  getLastLocation();
         googleMap = googleMap;
-     //   Toast.makeText(getApplicationContext(), "Flow7", Toast.LENGTH_SHORT).show();
+        Log.d("LocationOnCheckLis","8");
+
+        //   Toast.makeText(getApplicationContext(), "Flow7", Toast.LENGTH_SHORT).show();
 
         if (loader.getVisibility() == View.VISIBLE) {
             loader.setVisibility(View.GONE);
@@ -1215,6 +1272,7 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
         Log.d("mapFunction"," lat "+latitude+" lng "+longitude);
         LatLng defaultLocation = new LatLng(latitude, longitude); // San Francisco, USA
        // LatLng defaultLocation1 = new LatLng(ofz_lat, ofz_lng); // San Francisco, USA
+        Log.d("LocationOnCheckLis","6");
 
 
         // Move the camera to the default location and set a zoom level
@@ -1398,89 +1456,70 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
                 break;
             case R.id.check_in:
                 updateCheckHeader(1);
-               /* if(latitude!=0){
-                    checkInAttendance();
 
-                }else{
-                    commonClass.showWarning(MapCurrentLocation.this,"Cannot access current location.");
-                }*/
 
-                if(commonClass.isOnline(MapCurrentLocation.this)){
-                    if(latitude==0){
+               /* if(commonClass.isOnline(MapCurrentLocation.this)){
+                    if(nlatitude==0){
                         commonClass.showWarning(MapCurrentLocation.this, "Cannot Access Current Location");
                     }
                 }else{
-                    if (latitude == 0) {
-                        getLastLocation();
+                    if (nlatitude == 0) {
+                      //  getLastLocation();
+                        callLocationCalling();
                     }
-                }
-                if(latitude==0){
-                    /*latitude =ofz_lat;
-                    longitude =ofz_lng;*/
-                }
-                if (latitude != 0) {
-                    Log.d("commonTag"," get work type "+workLocation);
-                    if(workLocation.equals("office")){
-                        if(distance_value<=distance_val && distance_value>=0){
-                            check_in.setEnabled(false);
-                             if(TextUtils.isEmpty(branch_id)){
-                                commonClass.showWarning(MapCurrentLocation.this,"You should be along to branch location");
-                            }else {
-                                if(branch_id.equals("null")){
-                                    commonClass.showWarning(MapCurrentLocation.this,"You should be along to branch location");
-                                }else{
-                                    checkInConditionMethod();
-                                }
+                }*/
+                callLocationCalling();
+                if(nlatitude==0.0){
+                    commonClass.showWarning(MapCurrentLocation.this, "Cannot Access Current Location");
+                }else{
+                    if (nlatitude != 0) {
+                        Log.d("commonTag"," get work type "+workLocation);
+                        if(workLocation.equals("office")){
+                            if(distance_value<=distance_val && distance_value>=0){
+                                check_in.setEnabled(false);
+                                checkInConditionMethod();
+                            }else{
+                                commonClass.showWarning(MapCurrentLocation.this, "You should be along to office location  ");
                             }
                         }else{
-                            commonClass.showWarning(MapCurrentLocation.this, "You should be along to office location  ");
+                            check_in.setEnabled(false);
+                            checkInConditionMethod();
                         }
-                    }else{
-                        check_in.setEnabled(false);
-                        checkInConditionMethod();
-                    }
 
-                } else {
-                    commonClass.showWarning(MapCurrentLocation.this, "Cannot access current location.");
+                    } else {
+                        commonClass.showWarning(MapCurrentLocation.this, "Cannot access current location.");
+                    }
                 }
+
+
                 break;
             case R.id.checkout:
                 updateCheckHeader(2);
                 if(commonClass.isOnline(MapCurrentLocation.this)){
-                    if(latitude==0){
+                    if(nlatitude==0){
                         commonClass.showWarning(MapCurrentLocation.this, "Cannot Access Current Location");
                     }
                 }else{
-                    if (latitude == 0) {
+                    if (nlatitude == 0) {
                         getLastLocation();
                     }
                 }
-                if(latitude==0){
-                    /*latitude =ofz_lat;
-                    longitude =ofz_lng;*/
-                }
-                if(latitude!=0){
-
+                callLocationCalling();
+             /*   if(nlatitude!=0){
                     if (workLocation.equals("office")) {
                         if (distance_value <= distance_val && distance_value >= 0) {
                             Log.d("CheckInCondition", " condition 1");
-                            if(TextUtils.isEmpty(branch_id)){
-                                commonClass.showWarning(MapCurrentLocation.this,"You should be along to branch location");
-                            }else {
-                                if(branch_id.equals("null")){
-                                    commonClass.showWarning(MapCurrentLocation.this,"You should be along to branch location");
+
+                            if(commonClass.isOnline(MapCurrentLocation.this)){
+                                if(commonClass.isLocationEnabled(MapCurrentLocation.this)){
+                                    checkOutAttendance();
                                 }else{
-                                    if(commonClass.isOnline(MapCurrentLocation.this)){
-                                        if(commonClass.isLocationEnabled(MapCurrentLocation.this)){
-                                            checkOutAttendance();
-                                        }else{
-                                            commonClass.showWarning(MapCurrentLocation.this,"Enable Location and then try");
-                                        }
-                                    }else {
-                                        checkOutAttendance();
-                                    }
+                                    commonClass.showWarning(MapCurrentLocation.this,"Enable Location and then try");
                                 }
+                            }else {
+                                checkOutAttendance();
                             }
+
 
                         } else {
                             commonClass.showWarning(MapCurrentLocation.this, "You should be along to office location  ");
@@ -1502,66 +1541,11 @@ public class MapCurrentLocation extends AppCompatActivity implements OnMapReadyC
 
                 }else{
                     commonClass.showWarning(MapCurrentLocation.this,"Cannot access current location.");
-                }
+                }*/
                 break;
         }
     }
-/*
-    private void checkInAttendance() {
-       // progressDialog.show();
-        loader.setVisibility(View.VISIBLE);
-        ApiInterface apiInterface  = ApiClient.getTokenRetrofit(commonClass.getSharedPref(MapCurrentLocation.this,"token"),
-                commonClass.getDeviceID(MapCurrentLocation.this)).create(ApiInterface.class);
-        Call<CommonPojo> call = apiInterface.callPunchIn(latitude,longitude,workLocation);
-        Log.d("attendance_punch"," url "+call.request().url());
-        call.enqueue(new Callback<CommonPojo>() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onResponse(Call<CommonPojo> call, Response<CommonPojo> response) {
-               // progressDialog.dismiss();
-                loader.setVisibility(View.GONE);
-                Log.d("attendance_punch"," response code "+response.code());
-                if (response.code()==200){
-                    if(response.body().getStatus().equals("success")){
-                        commonClass.showSuccess(MapCurrentLocation.this,response.body().getData());
-                        check_in.setEnabled(false);
-                        checkout.setEnabled(true);
-                        Log.d("attendance_punch"," date "+today_date+" sync id "+
-                                response.body().getPunchInModal().getSync_id());
-                        commonClass.putSharedPref(getApplicationContext(),"punch_in",today_date);
-                        commonClass.putSharedPref(getApplicationContext(),"uuid",response.body().getPunchInModal().getUuid());
-                        commonClass.putSharedPref(getApplicationContext(),"sync_id",response.body().getPunchInModal().getSync_id());
-                        Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-                        startActivity(intent);
-                    }else{
-                        commonClass.showError(MapCurrentLocation.this,response.body().getData());
-                    }
-                }else{
-                    Gson gson = new GsonBuilder().create();
-                    CommonPojo mError = new CommonPojo();
-                    try {
-                        mError = gson.fromJson(response.errorBody().string(), CommonPojo.class);
-
-                        commonClass.showError(MapCurrentLocation.this,mError.getError());
-                        //    Toast.makeText(getApplicationContext(), mError.getError(), Toast.LENGTH_LONG).show();
-                    } catch (IOException e) {
-                        // handle failure to read error
-                        Log.d("thumbnail_url", " exp error  " + e.getMessage());
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CommonPojo> call, Throwable t) {
-               // progressDialog.dismiss();
-                loader.setVisibility(View.GONE);
-                commonClass.showError(MapCurrentLocation.this,t.getMessage());
-            }
-        });
-
-    }
-*/
-private void checkInAttendance() {
+ private void checkInAttendance() {
     String id = UUID.randomUUID().toString();
     Log.d("dashboard_id","device "+id);
 
@@ -1573,7 +1557,7 @@ private void checkInAttendance() {
         loader.setVisibility(View.VISIBLE);
         ApiInterface apiInterface = ApiClient.getTokenRetrofit(commonClass.getSharedPref(MapCurrentLocation.this, "token"),
                 commonClass.getDeviceID(MapCurrentLocation.this)).create(ApiInterface.class);
-        Call<CommonPojo> call = apiInterface.callPunchIn(latitude, longitude, workLocation,branch_id);
+        Call<CommonPojo> call = apiInterface.callPunchIn(nlatitude, nlongitude, workLocation,branch_id);
         Log.d("work_locatoin", " url " + call.request().url());
         call.enqueue(new Callback<CommonPojo>() {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -1813,7 +1797,7 @@ private void checkInAttendance() {
                     commonClass.getDeviceID(MapCurrentLocation.this)).create(ApiInterface.class);
             Call<CommonPojo> call = apiInterface.callPunchOut(
                     commonClass.getSharedPref(getApplicationContext(), "sync_id"),
-                    latitude, longitude, workLocation,branch_id);
+                    nlatitude, nlongitude, workLocation,branch_id);
             Log.d("work_locatoin","check out "+call.request().url());
             call.enqueue(new Callback<CommonPojo>() {
                 @Override
@@ -2250,25 +2234,8 @@ private void checkInAttendance() {
 
 
 
-                if (developerMode)
-                {
 
-                    if(distance_local<distance){
-                        Log.d("getName"," registerc ");
-                        start=false;
-                        commonClass.showSuccess(MapCurrentLocation.this,"Face Authentication Success");
-                        callLogin();
-                    }else {
-                        Log.d("getName"," un registered ");
-                        start=false;
-                         recognize.setVisibility(View.VISIBLE);
-                        commonClass.showError(MapCurrentLocation.this,"Face Authentication Failed");
-                    }
-//                    System.out.println("nearest: " + name + " - distance: " + distance_local);
-                }
-                else
-                {
-                    if(distance_local<distance){
+                    if(distance_local<0.95){
                         Log.d("getName"," registerc ");
                         start=false;
                         commonClass.showSuccess(MapCurrentLocation.this,"Face Authentication Success");
@@ -2281,7 +2248,7 @@ private void checkInAttendance() {
                     }
 
 //                    System.out.println("nearest: " + name + " - distance: " + distance_local);
-                }
+
 
 
 
@@ -2546,21 +2513,194 @@ private void checkInAttendance() {
     }
 
 
+    private void addGeofence() {
 
-    //Load Photo from phone storage
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+            return;
+        }
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(location -> {
+                    if (location != null) {
+                        double userLat = location.getLatitude();
+                        double userLng = location.getLongitude();
+                        if(nlatitude==0.0 && nlongitude==0.0) {
+                            nlatitude = location.getLatitude();
+                            nlongitude = location.getLongitude();
+                        }
+                        Log.d("AttendanceLocation", "User Location Lst Known : Lat " + userLat + " Lng " + userLng);
+
+                        getCurrentLocationChange();
+                        // checkAttendanceEligibility(nlatitude, nlongitude);
+
+                        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+                        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+
+                    } else {
+                        Log.d("AttendanceLocation", "Failed to get location");
+                        Toast.makeText(this, "Unable to get location. Try again.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> Log.d("AttendanceLocation", "Location Error: " + e.getMessage()));
 
 
-    //Similar Analyzing Procedure
+        android.app.AlertDialog.Builder builder=new android.app.AlertDialog.Builder(this);
+        View view= LayoutInflater.from(this).inflate(R.layout.location_check,null);
+        ImageView close = view.findViewById(R.id.close);
+        CheckBox use_current_location =view.findViewById(R.id.use_current_location);
+        EditText edlatitude =view.findViewById(R.id.latitude);
+        EditText edlongitude =view.findViewById(R.id.longitude);
+        TextView current_distance =view.findViewById(R.id.current_distance);
+        TextView submit =view.findViewById(R.id.submit);
 
 
-    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
-        ParcelFileDescriptor parcelFileDescriptor =
-                getContentResolver().openFileDescriptor(uri, "r");
-        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-        parcelFileDescriptor.close();
-        return image;
+        builder.setView(view);
+        final AlertDialog mDialog = builder.create();
+        mDialog.create();
+        mDialog.show();
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(edlatitude.getText().toString()) && !use_current_location.isChecked()){
+                    Toast.makeText(getApplicationContext(),"Enter latitude",Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(edlongitude.getText().toString())  && !use_current_location.isChecked()){
+                    Toast.makeText(getApplicationContext(),"Enter Longitude",Toast.LENGTH_SHORT).show();
+                }else{
+                    int dist =0;
+                    String location;
+                    if(use_current_location.isChecked()){
+                        dist =checkAttendanceEligibility(nlatitude,nlongitude);
+                        location =" User Location "+latitude+","+longitude;
+                    }else{
+                        dist=checkAttendanceEligibility(Double.valueOf(edlatitude.getText().toString()),
+                                Double.valueOf(edlongitude.getText().toString()));
+                        location =" User Location "+edlatitude.getText().toString()+","+edlongitude.getText().toString();
+                    }
+
+                    if(branch_id.equals("-1")){
+                        Toast.makeText(getApplicationContext(),"No Branch Present",Toast.LENGTH_SHORT).show();
+                    }else{
+                        BranchTable  branchTable =new BranchTable(MapCurrentLocation.this);
+                        branchTable.getWritableDatabase();
+                        LatLngBranch latLngBranch = branchTable.selectRow(branch_id);
+                        current_distance.setText("Current Location Distance : "+dist+"\n"+location+"\n Work Location : "+
+                                latLngBranch.getLatitude()+","+latLngBranch.getLongitude()+"(Radius : "+latLngBranch.getBranchdistance()+")");
+                    }
+
+
+
+                }
+            }
+        });
+
+
+
+
+
     }
+    private int checkAttendanceEligibility(double userLat, double userLng) {
+        Log.d("AttendanceLocation"," lat lng "+userLat+" lng "+userLng);
+        float[] results = new float[1];
+        BranchTable branchTable =new BranchTable(MapCurrentLocation.this);
+        branchTable.getWritableDatabase();
+        List<LatLngBranch> getBranch = new ArrayList<>();
+        getBranch = branchTable.getAllNameList();
+        if(getBranch.size()!=0){
+            for(int i=0;i<getBranch.size();i++){
+                double officeLat = Double.parseDouble(getBranch.get(i).getLatitude());
+                double officeLng = Double.parseDouble(getBranch.get(i).getLongitude());
+                int allowedRadius = Integer.parseInt(getBranch.get(i).getBranchdistance());
+                Location.distanceBetween(officeLat, officeLng, userLat, userLng, results);
+                float distanceInMeters = results[0];
+                Log.d("AttendanceLocation"," distance meter "+distanceInMeters);
+                int roundedDistance;
+                double decimalPart = distanceInMeters - (int) distanceInMeters;
+
+                if (decimalPart > 0.60) {
+                    roundedDistance = (int) distanceInMeters + 1; // Round up
+                } else {
+                    roundedDistance = (int) distanceInMeters; // Normal truncation
+                }
+                Log.d("AttendanceLocation"," office lat "+officeLat+" officelng "+officeLng+" ofz radius "+
+                        allowedRadius);
+
+                Log.d("AttendanceLocation"," round of distance "+roundedDistance+" current distance "+currentDistance);
+
+
+                if(i==0){
+                    currentDistance = roundedDistance;
+                    branch_id = getBranch.get(i).getBranchid();
+                    if (roundedDistance <= allowedRadius) {
+                        geoFenLoc=0;
+                    }else{
+                        geoFenLoc=1;
+                    }
+                }else{
+                    if(roundedDistance<currentDistance){
+                        currentDistance = roundedDistance;
+                        branch_id = getBranch.get(i).getBranchid();
+                        if (roundedDistance <= allowedRadius) {
+                            geoFenLoc=0;
+                        }else{
+                            geoFenLoc=1;
+                        }
+                    }
+                }
+
+                Log.d("AttendanceLocation"," current distance "+currentDistance+"  branch id "+branch_id+" allowede radius "+
+                        geoFenLoc);
+            }
+        }else{
+            commonClass.showWarning(MapCurrentLocation.this,"No Branch List Found");
+        }
+        return  currentDistance;
+    }
+    private void callLocationCalling() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED  ) {
+            Log.d("AttendanceLocation"," on request");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION }, 2000);
+        } else {
+            Log.d("AttendanceLocation"," ad geo");
+            addGeofence();
+        }
+    }
+
+    private void getCurrentLocationChange() {
+        Log.d("AttendanceLocation"," location change called ");
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+            Log.d("AttendanceLocation","permission not enabled ");
+            return;
+        }
+        locationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(2000)
+                .setFastestInterval(1000)
+                .setNumUpdates(1); // Request only one update
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) return;
+                for (Location location : locationResult.getLocations()) {
+                    nlatitude = location.getLatitude();
+                    nlongitude = location.getLongitude();
+                    Log.d("AttendanceLocation"," on location changed call back "+latitude+","+longitude);
+                }
+            }
+
+        };
+
+    }
+
 
 
 }

@@ -331,7 +331,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                             for (int i=0;i<response.body().getGetBranchDetails().size();i++){
                                                 CommonPojo commonPojo = response.body().getGetBranchDetails().get(i);
-                                                branchTable.insertData(commonPojo.getBranch_id(),commonPojo.getLatitude(),commonPojo.getLongitude());
+                                                Log.d("getBranchDet"," bara "+commonPojo.getLatitude()+" lng "+commonPojo.getLongitude());
+                                                    commonClass.putSharedPref(getApplicationContext(),"off_lat",commonPojo.getLatitude());
+                                                commonClass.putSharedPref(getApplicationContext(),"off_lng",commonPojo.getLongitude());
+                                              //  branchTable.insertData(commonPojo.getBranch_id(),commonPojo.getLatitude(),commonPojo.getLongitude());
                                             }
                                         }
                                     }

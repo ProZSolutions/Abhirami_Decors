@@ -822,10 +822,22 @@ public class DashboardNewActivity extends AppCompatActivity implements View.OnCl
                 if(response.code()==200){
                     if(response.body().getStatus().equals("success")){
 
-                        if(response.body().getDashboardParseContent().getRadius_distance()!=null){
+                       /* if(response.body().getDashboardParseContent().getRadius_distance()!=null){
                             commonClass.putSharedPref(getApplicationContext(),"distancee",response.body().getDashboardParseContent().getRadius_distance().getDistance());
                         }
-
+*/
+                        BranchTable branchTable =new BranchTable(DashboardNewActivity.this);
+                        branchTable.getWritableDatabase();
+                        if(response.body().getDashboardParseContent().getBranchDetails()!=null){
+                            if(response.body().getDashboardParseContent().getBranchDetails().getGetBranchDetails()!=null){
+                                Log.d("AttendanceLocation"," branch details not null ");
+                                branchTable.deleteAll(DashboardNewActivity.this);
+                                for(int i=0;i<response.body().getDashboardParseContent().getBranchDetails().getGetBranchDetails().size();i++){
+                                    CommonPojo commonPojo =response.body().getDashboardParseContent().getBranchDetails().getGetBranchDetails().get(i);
+                                    branchTable.insertData(commonPojo.getBranch_id(),commonPojo.getLatitude(),commonPojo.getLongitude(),commonPojo.getRadius());
+                                }
+                            }
+                        }
 
                  if(response.body().getDashboardParseContent().getAdmin_header_card()!=null){
                      Log.d("dashboardUIViewTable"," not null1");

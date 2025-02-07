@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.proz.adamd.ModalClass.LatLng;
+import in.proz.adamd.ModalClass.LatLngBranch;
 import in.proz.adamd.Retrofit.CommonPojo;
 
 public class BranchTable  extends SQLiteOpenHelper {
@@ -54,14 +55,34 @@ public class BranchTable  extends SQLiteOpenHelper {
         }
     }
 
+    public LatLngBranch selectRow(String id ){
+        int count=0;
+        LatLngBranch latLngBranch=null;
+        SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
+        String sql="SELECT * FROM "+DB_Table_name+" WHERE "+ID+" LIKE '"+id +"'  ";
+        Log.d("Area_Sample"," sq "+sql);
+        Cursor c=sqLiteDatabase.rawQuery(sql,null);
+        if (c != null) {
+            if (c.getCount() != 0) {
+                Log.d("get_nw", " count not present  ");
+                if (c.moveToFirst()) {
+                    do {
+                        latLngBranch = new LatLngBranch(c.getString(c.getColumnIndex("id")),
+                                c.getString(c.getColumnIndex("branch_lat"))
+                                , c.getString(c.getColumnIndex("branch_lng"))
+                                , c.getString(c.getColumnIndex("distance"))
+                        );
+                    } while (c.moveToNext());
+                }
+            }
+        }
+        Log.d("area_fragment1"," select row "+sql+ " present count as "+count);
 
+        return latLngBranch;
+    }
 
-
-
-
-
-
-    public long insertData(String  id_value ,String branch_lat,String branch_lng){
+    public long insertData(String  id_value ,String branch_lat,String branch_lng,String distance){
+        Log.d("AttendanceLocation"," insert lat "+branch_lat+" insert lng "+branch_lng);
         ContentValues contentValues=new ContentValues();
         SQLiteDatabase db=this.getWritableDatabase();
         long id=0;
@@ -69,80 +90,26 @@ public class BranchTable  extends SQLiteOpenHelper {
         contentValues.put(ID,id_value);
         contentValues.put(Branch_Lat,branch_lat);
         contentValues.put(Branch_Lng,branch_lng);
+        contentValues.put(Distance,distance);
         id=db.insert(DB_Table_name,null,contentValues);
 
         db.close();
-        Log.d("mainDropList"," insert id "+id);
+        Log.d("AttendanceLocation"," insert id "+id);
         return  id;
 
     }
 
-    public List<String> selectAllMainCat(){
-        List<String> getMainList=new ArrayList<>();
-        getMainList.add(0,"Select");
-        ContentValues contentValues=new ContentValues();
-        SQLiteDatabase db=this.getWritableDatabase();
-        Cursor c = db.rawQuery("select distinct(Cat_name) from "+DB_Table_name
-                ,null);
-        int count =0;
-        if(c!=null){
-            if(c.getCount()!=0){
-                if (c.moveToFirst()) {
-                    do {
-                        getMainList.add(c.getString(c.getColumnIndex("Cat_name")));
-                    } while (c.moveToNext());
-                }
-            }
-        }
-        return getMainList;
-    }
-    public  List<String> selectSubCat(String cat_id){
-        List<String> getMainList=new ArrayList<>();
-        getMainList.add(0,"Select");
-        ContentValues contentValues=new ContentValues();
-        SQLiteDatabase db=this.getWritableDatabase();
-        Cursor c = db.rawQuery("select distinct(SCat_Name) from "+DB_Table_name+" where Cat_name=?"
-                ,new String[]{cat_id});
-        int count =0;
-        if(c!=null){
-            if(c.getCount()!=0){
-                if (c.moveToFirst()) {
-                    do {
-                        getMainList.add(c.getString(c.getColumnIndex("SCat_Name")));
-                    } while (c.moveToNext());
-                }
-            }
-        }
-        return getMainList;
-    }
-    public List<String> selectAllAssetNames(String cat_name,String sub_cat_name){
-        List<String> getMainList=new ArrayList<>();
-        getMainList.add(0,"Select");
-        ContentValues contentValues=new ContentValues();
-        SQLiteDatabase db=this.getWritableDatabase();
-        Cursor c = db.rawQuery("select distinct(Ass_Name) from "+DB_Table_name+" where Cat_name=? and SCat_Name=?"
-                ,new String[]{cat_name,sub_cat_name});
-        int count =0;
-        if(c!=null){
-            if(c.getCount()!=0){
-                if (c.moveToFirst()) {
-                    do {
-                        getMainList.add(c.getString(c.getColumnIndex("Ass_Name")));
-                    } while (c.moveToNext());
-                }
-            }
-        }
-        return getMainList;
-    }
+
     public void DropTable(){
+        Log.d("AttendanceLocation","Drop Table ");
         SQLiteDatabase db=this.getWritableDatabase();
         // db.execSQL("DROP TABLE "+DB_Table_name);
         //db.execSQL("DELETE FROM "+DB_Table_name);
         db.delete(DB_Table_name,null,null);
     }
-    public List<LatLng> getAllNameList(){
+    public List<LatLngBranch> getAllNameList(){
         SQLiteDatabase db=this.getWritableDatabase();
-        List<LatLng> arrayList = new ArrayList<>();
+        List<LatLngBranch> arrayList = new ArrayList<>();
 
         Cursor c = db.rawQuery("select  * from " + DB_Table_name ,null);
         if (c != null) {
@@ -150,9 +117,11 @@ public class BranchTable  extends SQLiteOpenHelper {
                 Log.d("get_nw"," count not present  ");
                 if (c.moveToFirst()) {
                     do {
-                        arrayList.add(new LatLng(c.getString(c.getColumnIndex("id")),
+                        arrayList.add(new LatLngBranch(c.getString(c.getColumnIndex("id")),
                                 c.getString(c.getColumnIndex("branch_lat"))
-                                ,c.getString(c.getColumnIndex("branch_lng"))));
+                                ,c.getString(c.getColumnIndex("branch_lng"))
+                                ,c.getString(c.getColumnIndex("distance"))
+                                ));
                      } while (c.moveToNext());
                 }
             }

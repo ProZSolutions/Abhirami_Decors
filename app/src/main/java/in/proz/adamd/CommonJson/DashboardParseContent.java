@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.proz.adamd.ModalClass.BranchDetails;
+
 public class DashboardParseContent {
     //main title
     @SerializedName("admin_header_card")
@@ -17,6 +19,12 @@ public class DashboardParseContent {
     DashboardTagContent admin_middle_card;
     @SerializedName("radius_distance")
     DashboardTagContent radius_distance;
+    @SerializedName("branch_details")
+    BranchDetails branchDetails;
+
+    public BranchDetails getBranchDetails() {
+        return branchDetails;
+    }
 
     public DashboardTagContent getRadius_distance() {
         return radius_distance;
